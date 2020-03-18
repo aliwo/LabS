@@ -1,0 +1,17 @@
+user:
+    get:
+      description: get a user info
+      operationId: rest.user.get
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  okay:
+                    type: boolean
+                    example: true
+                  magazine:
+                    type: array

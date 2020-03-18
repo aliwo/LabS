@@ -1,0 +1,18 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: 'Laboratory S'
+  description: 'Laboratory S API'
+
+servers:
+  - description: Local
+    url: http://localhost:8080/1.0
+
+paths:
+  /hi:
+    $ref: 'rest/health.yaml#/hi'
+
+components:
+  schemas:
+    $ref: 'models/user.yaml#/User'
