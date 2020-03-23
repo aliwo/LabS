@@ -2,30 +2,49 @@ import hashlib
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
-from sqlalchemy.dialects.mysql import TEXT, BOOLEAN, DATETIME, CHAR
+from sqlalchemy.dialects.mysql import TEXT, BOOLEAN, DATETIME, CHAR, INTEGER
 from sqlalchemy.orm import relationship
 
-from libs.database import Base
+from libs.database import Base, LaboratoryTypes
 from libs.datetime_helper import DateTimeHelper
 
 
 class User(Base):
     __tablename__ = 'users'
-    email = Column(TEXT) # 독자적으로도 로그인 할 수 있도록 email 란이 필요.
-    password = Column(TEXT)
-    nick_name = Column(CHAR(50), unique=True)
-    picture = Column(TEXT)
-    background_image = Column(TEXT)
+    email = Column(TEXT)
+    password = Column(TEXT) # TODO: 일반 회원가입 없으면 지울 것.
+
+    # 신상정보
+    occupation = Column(TEXT)
+    name = Column(CHAR(50), unique=True)
+    pictures = Column(LaboratoryTypes.TextTuple)
     bio = Column(TEXT)
-    fcm_token = Column(TEXT)
     phone = Column(CHAR(20), unique=True, nullable=True)
+    location = Column(TEXT)
+    body_shape = Column(TEXT) # 마른체형...?
+    religion = Column(TEXT)
+    hobby = Column(TEXT)
+    speciality = Column(TEXT) # 특기
+    interest = Column(TEXT) # 관심사
+    drink = Column(TEXT) # 음주
+    cigarette = Column(TEXT) # 흡연
+
+    # points
+    hp = Column(INTEGER) # TODO: MP 와 HP 는 증감할때 Lock 을 걸어야 하므로 다른 테이블로 빼도 좋겠네.
+    mp = Column(INTEGER)
+
+    # statistics
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
-    # oauth_google_id = Column(Integer, ForeignKey('oauth_google.id', ondelete='CASCADE'))
-    # oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id', ondelete='CASCADE'))
-    # oauth_facebook_id = Column(Integer, ForeignKey('oauth_facebook.id', ondelete='CASCADE'))
-    # oauth_apple_id = Column(Integer, ForeignKey('oauth_apple.id', ondelete='CASCADE'))
+    # fcm
+    fcm_token = Column(TEXT)
+
+    # oauth
+    oauth_google_id = Column(Integer, ForeignKey('oauth_google.id', ondelete='CASCADE'))
+    oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id', ondelete='CASCADE'))
+    oauth_naver_id = Column(Integer, ForeignKey('oauth_naver.id', ondelete='CASCADE'))
+    oauth_apple_id = Column(Integer, ForeignKey('oauth_apple.id', ondelete='CASCADE'))
 
     # 다음 backref 가 존재합니다.
     # oauth_google
@@ -33,16 +52,16 @@ class User(Base):
     # oauth_facebook
     # oauth_apple
 
-    # @property
-    # def oauth(self):
-    #     if self.oauth_google_id:
-    #         return self.oauth_google
-    #     if self.oauth_kakao_id:
-    #         return self.oauth_kakao
-    #     if self.oauth_facebook_id:
-    #         return self.oauth_facebook
-    #     if self.oauth_apple_id:
-    #         return self.oauth_apple
+    @property
+    def oauth(self):
+        if self.oauth_google_id:
+            return self.oauth_google
+        if self.oauth_kakao_id:
+            return self.oauth_kakao
+        if self.oauth_naver_id:
+            return self.oauth_naver_id
+        if self.oauth_apple_id:
+            return self.oauth_apple
 
     def __init__(self, **kwargs):
         '''

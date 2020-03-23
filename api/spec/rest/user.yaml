@@ -1,17 +1,19 @@
-user:
-    get:
-      description: get a user info
-      operationId: rest.user.get
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  okay:
-                    type: boolean
-                    example: true
-                  magazine:
-                    type: array
+profile:
+  get:
+    description: get a user info
+    operationId: rest.user.get_user_profile
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '../models/user.yaml#/user'

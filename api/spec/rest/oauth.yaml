@@ -1,0 +1,29 @@
+kakao:
+  post:
+    description: ''
+    operationId: rest.oauth.kakao.kakao_login
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 3
+

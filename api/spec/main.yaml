@@ -13,6 +13,25 @@ paths:
   /hi:
     $ref: 'rest/health.yaml#/hi'
 
+  # Oauth
+#  /oauth/google:
+#    $ref: 'rest/oauth.yaml#/google'
+#  /oauth/naver:
+#    $ref: 'rest/oauth.yaml#/naver'
+  /oauth/kakao:
+    $ref: 'rest/oauth.yaml#/kakao'
+#  /oauth/apple:
+#    $ref: 'rest/oauth.yaml#/apple'
+
+  # Users
+  /users/{id}:
+    $ref: 'rest/user.yaml#/profile'
+
+  # Magazines
+#  /magazines:
+#    $ref: 'rest/magazine.yaml#/magazines'
+
 components:
   schemas:
-    $ref: 'models/user.yaml#/User'
+    user:
+      $ref: 'models/user.yaml#/user'
