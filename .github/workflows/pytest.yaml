@@ -1,7 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: Pytest
+name: Test & Publish Docker
 
 on:
   push:
@@ -11,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -24,7 +19,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
     - name: Test with pytest
       run: |
         pytest
+
+    # 2020-03-24 SW: 현재 github action 은 한 workflow 가 성공했을 때  다른 workflow 들이 trigger 되도록 지원하지
+    # 않는 모양입니다. 따라서 pytest 가 성공할때만 docker image 를 만들도록 yaml 파일을 합칩니다.
+
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: triumph1/lab_s
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
