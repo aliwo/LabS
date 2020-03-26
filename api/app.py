@@ -14,7 +14,7 @@ def get_bundled_specs(main_file: Path) -> Dict[str, Any]:
     return parser.specification
 
 
-app.add_api(get_bundled_specs(Path("api/spec/main.yaml")),
+app.add_api(get_bundled_specs(Path("spec/main.yaml")),
             resolver = connexion.RestyResolver("cms_rest_api"))
 
 
