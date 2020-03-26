@@ -5,4 +5,4 @@ COPY . /LabS
 WORKDIR /LabS
 RUN pip install -r requirements.txt
 EXPOSE 8080
-CMD ["gunicorn", "--workers=4", "'run:api'"]
+CMD ["gunicorn", "-w", "4", "--chdir", "/LabS/api", "app:app"]
