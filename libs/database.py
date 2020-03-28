@@ -5,10 +5,10 @@ from sqlalchemy import create_engine, types, Integer, Column
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# TODO: docker file의 ENV 를 kubernetes 가 덮어쓰는지 알아볼 것
+# 어짜피 database 주소는 도커 파일에서 넣을 수가 없다... 다른 컨테이너에서 돌기 때문.
 # conn_args = { 'ssl_args': os.environ.get('SSL_CA_PATH') } if os.environ.get('STAGE') == 'PRODUCTION' else {}
-# engine = create_engine(os.environ.get('SQLALCHEMY_DATABASE_URI'), pool_recycle=300)
-# SessionMaker = sessionmaker(bind=engine)
+engine = create_engine(os.environ.get('SQLALCHEMY_DATABASE_URI'), pool_recycle=300)
+SessionMaker = sessionmaker(bind=engine)
 
 
 def set_session_destroyer(app):
