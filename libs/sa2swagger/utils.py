@@ -1,5 +1,5 @@
 import sqlalchemy.sql.sqltypes as sqltypes
-from datetime import datetime, date, time
+from libs.database.types import LaboratoryTypes
 import yaml
 
 
@@ -16,8 +16,10 @@ def map_sqltypes(column_type):
         return 'string'
     elif isinstance(column_type, sqltypes.Time):
         return 'string'
+    elif isinstance(column_type, LaboratoryTypes.TextTuple):
+        return 'string'
     else:
-        raise TypeError('Mapping failed: Unknown Column Type')
+        raise TypeError(f'Mapping failed: Unknown Column Type: {column_type}')
 
 
 def map_model(sa_model):

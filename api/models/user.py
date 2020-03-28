@@ -2,10 +2,10 @@ import hashlib
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
-from sqlalchemy.dialects.mysql import TEXT, BOOLEAN, DATETIME, CHAR, INTEGER
-from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER
 
-from libs.database import Base, LaboratoryTypes
+from libs.database.types import LaboratoryTypes
+from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 
