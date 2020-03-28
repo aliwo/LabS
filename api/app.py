@@ -19,4 +19,4 @@ app.add_api(get_bundled_specs(Path("spec/main.yaml")),
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8000)
