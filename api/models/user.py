@@ -59,7 +59,7 @@ class User(Base):
         if self.oauth_kakao_id:
             return self.oauth_kakao
         if self.oauth_naver_id:
-            return self.oauth_naver_id
+            return self.oauth_naver
         if self.oauth_apple_id:
             return self.oauth_apple
 
