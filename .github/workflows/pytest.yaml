@@ -34,6 +34,8 @@ jobs:
       run: |
         pytest
 
+  # retry: 2020-04-26 temp
+
   # 2020-03-24 SW: 현재 github action 은 한 workflow 가 성공했을 때  다른 workflow 들이 trigger 되도록 지원하지
   # 않는 모양입니다. 따라서 pytest 가 성공할때만 docker image 를 만들도록 yaml 파일을 합칩니다.
   setup-build-publish-deploy:
