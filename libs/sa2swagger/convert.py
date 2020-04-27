@@ -2,16 +2,17 @@ from .utils import map_model, to_yaml
 
 
 def convert(model, filepath, template=None):
+    model_name = model.__name__.lower()
     if template is None:
-        template = {'description': '', 'properties':{}}
+        template = {model_name: {'description': '', 'properties':{}}}
 
     map = map_model(model)
     for key, val in map.items():
-        if key in template['properties']:
-            template['properties'][key]['type'] = val['type']
+        if key in template[model_name]['properties']:
+            template[model_name]['properties'][key]['type'] = val['type']
             continue
 
-        template['properties'][key] = {
+        template[model_name]['properties'][key] = {
             'type': val['type']
         }
 

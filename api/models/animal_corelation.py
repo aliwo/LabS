@@ -9,5 +9,6 @@ from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 
-class Notification(Base):
-    __tablename__ = 'notifications'
+class AnimalCorelation(Base):
+    __tablename__ = 'animal_corelations'
+
