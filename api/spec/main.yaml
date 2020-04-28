@@ -7,10 +7,10 @@ info:
 
 servers:
   - description: Local
-    url: http://localhost:8080/1.0
+    url: http://localhost:8000/
 
 paths:
-  /hi:
+  /:
     $ref: 'rest/health.yaml#/hi'
 
   # Oauth
