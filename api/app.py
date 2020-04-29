@@ -4,6 +4,7 @@ import prance
 from typing import Any, Dict
 from pathlib import Path
 
+
 app = connexion.App(__name__, specification_dir='spec/', options={'swagger_path': swagger_ui_3_path})
 
 
