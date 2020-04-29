@@ -41,10 +41,10 @@ class User(Base):
     fcm_token = Column(TEXT)
 
     # oauth
-    oauth_google_id = Column(Integer, ForeignKey('oauth_google.id', ondelete='CASCADE'))
-    oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id', ondelete='CASCADE'))
-    oauth_naver_id = Column(Integer, ForeignKey('oauth_naver.id', ondelete='CASCADE'))
-    oauth_apple_id = Column(Integer, ForeignKey('oauth_apple.id', ondelete='CASCADE'))
+    # oauth_google_id = Column(Integer, ForeignKey('oauth_google.id', ondelete='CASCADE'))
+    # oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id', ondelete='CASCADE'))
+    # oauth_naver_id = Column(Integer, ForeignKey('oauth_naver.id', ondelete='CASCADE'))
+    # oauth_apple_id = Column(Integer, ForeignKey('oauth_apple.id', ondelete='CASCADE'))
 
     # 다음 backref 가 존재합니다.
     # oauth_google

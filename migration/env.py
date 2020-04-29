@@ -17,7 +17,20 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+import sys
+sys.path.append('.')
+from libs.database.types import Base
+from api.models import animal
+from api.models import animal_corelation
+from api.models import announcements
+from api.models import heart
+from api.models import magazine_category
+from api.models import notifications
+from api.models import report
+from api.models import star
+from api.models import user
+from api.models import user_point
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -64,7 +77,7 @@ def run_migrations_online():
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, target_metadata=target_metadata, user_module_prefix='LaboratoryTypes.'
         )
 
         with context.begin_transaction():
