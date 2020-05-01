@@ -7,5 +7,5 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 RUN chmod +x /LabS/entrypoint.sh
-ENTRYPOINT ["gunicorn"]
+ENTRYPOINT ["/LabS/entrypoint.sh"]
 CMD ["-w", "4", "-b", "0.0.0.0:8000", "--chdir", "/LabS/api", "app:app"]
