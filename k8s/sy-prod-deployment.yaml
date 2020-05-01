@@ -25,7 +25,7 @@ spec:
             - containerPort: 8000
           volumeMounts:
             - name: alembic
-              mountPath: "/LabS"
+              mountPath: "/LabS/hi"
               readOnly: true
           envFrom:
             - secretRef:
