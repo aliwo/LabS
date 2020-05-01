@@ -19,13 +19,16 @@ spec:
         - name: alembic
           secret:
             secretName: sy-prod-alembic
+            items:
+              - key: alembic.ini
+                path: ../
       containers:
         - name: sy-prod
           ports:
             - containerPort: 8000
           volumeMounts:
             - name: alembic
-              mountPath: "/LabS/hi"
+              mountPath: "/LabS/temp"
               readOnly: true
           envFrom:
             - secretRef:
