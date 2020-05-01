@@ -15,10 +15,18 @@ spec:
       labels:
         run: sy-prod
     spec:
+      volumes:
+        - name: alembic
+          secret:
+            secretName: sy-prod-alembic
       containers:
         - name: sy-prod
           ports:
             - containerPort: 8000
+          volumeMounts:
+            - name: alembic
+              mountPath: "/LabS"
+              readOnly: true
           envFrom:
             - secretRef:
                 name: sy-prod

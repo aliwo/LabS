@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 ENTRYPOINT ["gunicorn"]
-CMD ["-w", "4", "-b", "0.0.0.0:8000", "--preload", "run:api_app"]
+CMD ["-w", "4", "-b", "0.0.0.0:8000", "--preload", "run:dummy_app"]
