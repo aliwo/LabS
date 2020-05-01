@@ -1,4 +1,4 @@
-name: GCP publish
+name: GCP publish production
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
   GKE_CLUSTER: sy-cluster
   IMAGE: sy-image
   REGISTRY_HOSTNAME: gcr.io
-  DEPLOYMENT_NAME: s-lab
+  DEPLOYMENT_NAME: sy-prod
 
 jobs:
   build:
@@ -73,16 +73,17 @@ jobs:
         docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
 
 #    # Set up kustomize
-#    - name: Set up Kustomize
-#      run: |
-#        curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-#        chmod u+x ./kustomize
-#
-#    # Deploy the Docker image to the GKE cluster
-#    - name: Deploy
-#      run: |
-#        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-#        ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
-#        ./kustomize build . | kubectl apply -f -
-#        kubectl rollout status deployment/$DEPLOYMENT_NAME
-#        kubectl get services -o wide
+    - name: Set up Kustomize
+      run: |
+        cd k8s
+        curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+        ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
+        ./kustomize build . | kubectl apply -f -
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
+        kubectl get services -o wide

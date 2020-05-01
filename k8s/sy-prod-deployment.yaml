@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: sy-prod
+  name: sy-prod
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: sy-prod
+  template:
+    metadata:
+      labels:
+        run: sy-prod
+    spec:
+      containers:
+        - name: sy-prod
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: sy-prod
+          image: gcr.io/soyeon-275107/sy-image:e54b161705bcbbb14ba87b25e8e5b19372ec0f8d
+          imagePullPolicy: IfNotPresent
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /
