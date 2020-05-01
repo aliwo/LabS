@@ -19,9 +19,6 @@ spec:
         - name: alembic
           secret:
             secretName: sy-prod-alembic
-            items:
-              - key: alembic.ini
-                path: ../
       containers:
         - name: sy-prod
           ports:
@@ -34,6 +31,13 @@ spec:
             - secretRef:
                 name: sy-prod
           image: gcr.io/soyeon-275107/sy-image:e54b161705bcbbb14ba87b25e8e5b19372ec0f8d
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - cp /LabS/temp/alembic.ini /LabS/alembic.ini
           imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
