@@ -1,7 +1,7 @@
 kakao:
   post:
     description: ''
-    operationId: rest.oauth.kakao.kakao_login
+    operationId: api.rest.oauth.kakao.kakao_login
     requestBody:
       required: true
       content:

@@ -1,7 +1,7 @@
 profile:
   get:
     description: get a user info
-    operationId: rest.user.get_user_profile
+    operationId: api.rest.user.get_user_profile
     parameters:
       - in: path
         name: id

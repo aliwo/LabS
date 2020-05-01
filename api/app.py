@@ -5,7 +5,7 @@ from typing import Any, Dict
 from pathlib import Path
 from migration import migrate
 
-app = connexion.App(__name__, specification_dir='spec/', options={'swagger_path': swagger_ui_3_path})
+app = connexion.App(__name__, specification_dir='api/spec/', options={'swagger_path': swagger_ui_3_path})
 
 
 def get_bundled_specs(main_file: Path) -> Dict[str, Any]:
@@ -15,9 +15,7 @@ def get_bundled_specs(main_file: Path) -> Dict[str, Any]:
     return parser.specification
 
 
-app.add_api(get_bundled_specs(Path("spec/main.yaml")),
+app.add_api(get_bundled_specs(Path("api/spec/main.yaml")),
             resolver = connexion.RestyResolver("cms_rest_api"))
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)

@@ -1,7 +1,7 @@
 magazines:
     get:
       description: health check
-      operationId: rest.magazine.get
+      operationId: api.rest.magazine.get
       responses:
         "200":
           description: Success
