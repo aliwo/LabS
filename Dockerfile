@@ -6,6 +6,7 @@ WORKDIR /LabS
 RUN pip install -r requirements.txt
 EXPOSE 8000
 
-RUN chmod +x /LabS/entrypoint.sh
-ENTRYPOINT ["/LabS/entrypoint.sh"]
+COPY entrypoint.sh /usr/local/bin/
+RUN ln -s /usr/local/bin/entrypoint.sh /
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["-w", "4", "-b", "0.0.0.0:8000", "--chdir", "/LabS/api", "app:app"]
