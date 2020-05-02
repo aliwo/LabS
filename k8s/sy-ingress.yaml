@@ -4,6 +4,7 @@ metadata:
   name: sy-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "sy-ip"
+    networking.gke.io/managed-certificates: sy-certificate
 spec:
   backend:
     serviceName: sy-prod
