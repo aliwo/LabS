@@ -5,4 +5,4 @@ metadata:
 spec:
   domains:
     - service.soyeonlab.com
-    - qa.soyeonlab.com
+    - qa.soyeonlab.com 
