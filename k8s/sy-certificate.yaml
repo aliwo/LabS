@@ -1,8 +1,8 @@
-apiVersion: networking.gke.io/v1beta2
+apiVersion: networking.gke.io/v1beta1
 kind: ManagedCertificate
 metadata:
   name: sy-certificate
 spec:
   domains:
     - service.soyeonlab.com
-    - qa.soyeonlab.com 
+    - qa.soyeonlab.com
