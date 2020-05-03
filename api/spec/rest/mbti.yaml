@@ -1,4 +1,35 @@
 mbti:
   post:
-    description: mbti 검사를 제출합니다.
+    description: mbti 검사를 제출합니다. 결과 동물 id 가 리턴됩니다.
     operationId: api.rest.mbti.post_test_result
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                mbti_id:
+                  type: integer
+                  example: 1
+                point:
+                  type: integer
+                  example: 3
+
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+                animal_id:
+                  type: integer
+                  example: 3
