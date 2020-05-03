@@ -1,10 +1,10 @@
 profile:
   get:
-    description: get a user info
+    description: 유저정보를 가져옵니다.
     operationId: api.rest.user.get_user_profile
     parameters:
       - in: path
-        name: id
+        name: user_id
         required: true
         schema:
           type: integer

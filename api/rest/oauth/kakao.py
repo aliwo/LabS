@@ -1,5 +1,5 @@
 
 
-def kakao_login():
+def login_kakao():
     pass
 

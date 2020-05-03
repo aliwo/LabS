@@ -1,0 +1,4 @@
+mbti:
+  post:
+    description: mbti 검사를 제출합니다.
+    operationId: api.rest.mbti.post_test_result

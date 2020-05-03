@@ -24,7 +24,7 @@ paths:
 #    $ref: 'rest/oauth.yaml#/apple'
 
   # Users
-  /users/{id}:
+  /users/{user_id}:
     $ref: 'rest/user.yaml#/profile'
 
   # Magazines
