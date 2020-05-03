@@ -27,6 +27,10 @@ paths:
   /users/{user_id}:
     $ref: 'rest/user.yaml#/profile'
 
+  # Me
+  /users/me:
+    $ref: 'rest/user.yaml#/me'
+
   # Mbti
   /mbti:
     $ref: 'rest/mbti.yaml#/mbti'
