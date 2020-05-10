@@ -10,8 +10,8 @@ from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 
-class MbtiTest(Base):
-    __tablename__ = 'mbti_tests'
+class Mbti(Base):
+    __tablename__ = 'mbtis'
 
     question = Column(TEXT)
     determinant = Column(CHAR(5)) # EI, SN, TF, JP 가 있다.
