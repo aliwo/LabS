@@ -30,10 +30,6 @@ class User(Base):
     drink = Column(TEXT) # 음주
     cigarette = Column(TEXT) # 흡연
 
-    # points
-    hp = Column(INTEGER) # TODO: MP 와 HP 는 증감할때 Lock 을 걸어야 하므로 다른 테이블로 빼도 좋겠네.
-    mp = Column(INTEGER)
-
     # statistics
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용

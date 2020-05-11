@@ -11,3 +11,5 @@ from libs.datetime_helper import DateTimeHelper
 
 class Animal(Base):
     __tablename__ = 'animals'
+    mbti = Column(CHAR(50))
+    name = Column(CHAR(50))

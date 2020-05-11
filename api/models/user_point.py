@@ -15,7 +15,8 @@ class UserPointTx(Base):
 
 
 class UserPoint(Base):
+    # MP 와 HP 는 증감할때 Lock 을 걸어야 하므로 다른 테이블로 뺐다.
     __tablename__ = 'user_points'
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'))
-    hp = Column(INTEGER)  # TODO: MP 와 HP 는 증감할때 Lock 을 걸어야 하므로 다른 테이블로 빼도 좋겠네.
+    hp = Column(INTEGER)
     mp = Column(INTEGER)
