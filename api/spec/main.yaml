@@ -14,8 +14,8 @@ paths:
     $ref: 'rest/health.yaml#/hi'
 
   # Oauth
-#  /oauth/google:
-#    $ref: 'rest/oauth.yaml#/google'
+  /oauth/google:
+    $ref: 'rest/oauth.yaml#/google'
 #  /oauth/naver:
 #    $ref: 'rest/oauth.yaml#/naver'
   /oauth/kakao:
