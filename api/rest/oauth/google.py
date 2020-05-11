@@ -2,6 +2,7 @@
 from flask import request, g
 
 from api.models.oauth.google import OauthGoogle
+from api.models.prerequisites.user_prerequisites import UserPrerequisites
 from api.models.user import User
 from api.models.user_session import UserSession
 from libs.database.engine import Session, afr
@@ -15,7 +16,7 @@ def login_google():
     is_new = True if oauth is None else False
 
     if is_new:
-        user = afr(User(email=g.info.get('email'), picture=g.info.get('picture')))
+        user = afr(User(email=g.info.get('email')))
         oauth = afr(OauthGoogle(user, g.info))
         user.oauth_google_id = oauth.id
 

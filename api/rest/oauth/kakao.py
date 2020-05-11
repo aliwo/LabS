@@ -15,7 +15,7 @@ def login_kakao():
     is_new = True if oauth is None else False
 
     if is_new:
-        user = afr(User(email=g.info['kakao_account'].get('email'), picture=g.info['properties'].get('profile_image')))
+        user = afr(User(email=g.info['kakao_account'].get('email')))
         oauth = afr(OauthKakao(user, g.info))
         user.oauth_kakao_id = oauth.id
 

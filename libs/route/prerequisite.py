@@ -1,5 +1,8 @@
 from functools import wraps
 
+from flask import g
+
+
 class prerequisites:
 
     def __init__(self, inspector, func_name):
