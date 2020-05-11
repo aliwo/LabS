@@ -7,6 +7,7 @@ click==7.1.1
 clickclick==1.2.2
 colorama==0.4.3
 connexion==2.6.0
+elasticsearch==7.6.0
 Flask==1.1.1
 gunicorn==20.0.4
 idna==2.9
