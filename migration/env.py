@@ -24,12 +24,17 @@ from api.models import animal
 from api.models import animal_corelation
 from api.models import announcements
 from api.models import heart
+from api.models import blacklist
 from api.models import magazine_category
 from api.models import notifications
 from api.models import report
 from api.models import star
 from api.models import user
 from api.models import user_point
+from api.models.oauth import google
+from api.models.oauth import apple
+from api.models.oauth import kakao
+from api.models.oauth import facebook
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
