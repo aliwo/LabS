@@ -5,7 +5,6 @@ from sqlalchemy.orm import sessionmaker
 
 # 어짜피 database 주소는 도커 파일에서 넣을 수가 없다... 다른 컨테이너에서 돌기 때문.
 # conn_args = { 'ssl_args': os.environ.get('SY_SSL_CA_PATH') } if os.environ.get('SY_STAGE') == 'PRODUCTION' else {}
-from libs.database.types import Base
 
 engine = create_engine(os.environ.get('SY_DATABASE_URI'), pool_recycle=300)
 SessionMaker = sessionmaker(bind=engine)

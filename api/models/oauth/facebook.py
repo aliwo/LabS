@@ -4,7 +4,7 @@ from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, BOOLEAN, DATETIME, CHAR
 from sqlalchemy.orm import relationship, backref
 
-from libs.database.engine import Base
+from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 

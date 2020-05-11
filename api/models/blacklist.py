@@ -4,7 +4,7 @@ from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, BOOLEAN, DATETIME, CHAR, DATE
 from sqlalchemy.orm import relationship
 
-from libs.database.engine import Base
+from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 class Blacklist(Base):

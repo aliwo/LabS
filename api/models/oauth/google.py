@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, BOOLEAN, DATETIME, CHAR
 from sqlalchemy.orm import relationship, backref
-from libs.database.engine import Base
+from libs.database.types import Base
 
 
 # google 로 부터 오는 user_info 는 다음과 같이 생겼습니다.
