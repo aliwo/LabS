@@ -5,6 +5,8 @@ from typing import Any, Dict
 from pathlib import Path
 import sentry_sdk
 import os
+
+from libs.database.engine import set_session_destroyer
 from migration import migrate # 지우지마
 
 
@@ -13,6 +15,7 @@ if os.environ.get('SY_STAGE', '') == 'PRODUCTION':
 
 
 app = connexion.App(__name__, specification_dir='api/spec/', options={'swagger_path': swagger_ui_3_path})
+set_session_destroyer(app.app)
 
 
 def get_bundled_specs(main_file: Path) -> Dict[str, Any]:

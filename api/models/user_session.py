@@ -8,8 +8,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 
 from libs.database.types import Base
-from libs.database.engine import Session
-
 
 
 class UserSession(Base):
@@ -37,6 +35,8 @@ class UserSession(Base):
 
     @classmethod
     def get_session(cls, token):
+        from libs.database.engine import Session
+
         try:
             return Session().query(UserSession).filter((UserSession.token == token)).one()
         except NoResultFound:

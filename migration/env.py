@@ -30,6 +30,7 @@ from api.models import notifications
 from api.models import report
 from api.models import star
 from api.models import user
+from api.models import user_session
 from api.models import user_point
 from api.models.oauth import google
 from api.models.oauth import apple

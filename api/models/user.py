@@ -16,7 +16,8 @@ class User(Base):
 
     # 신상정보
     occupation = Column(TEXT)
-    name = Column(CHAR(50), unique=True)
+    name = Column(CHAR(50))
+    nick_name = Column(CHAR(50), unique=True)
     pictures = Column(LaboratoryTypes.TextTuple)
     bio = Column(TEXT)
     phone = Column(CHAR(20), unique=True, nullable=True)
@@ -70,7 +71,6 @@ class User(Base):
         super().__init__(**kwargs)
         self.registered_at = datetime.now()
         self.last_access = datetime.now()
-        self.nick_name = self.nick_name
 
     def set_password(self, password):
         self.password = hashlib.sha256(password.encode('utf-8')).hexdigest()
@@ -79,9 +79,7 @@ class User(Base):
         result = {
             'id': self.id,
             'email': self.email,
-            'picture': self.picture,
-            'background_image': self.background_image,
-            'name': self.nick_name if self.nick_name else '',
+            'pictures': self.pictures,
             'bio': self.bio,
             'fcm_token': self.fcm_token,
             'last_access': DateTimeHelper.full_datetime(self.last_access),
