@@ -1,0 +1,9 @@
+term:
+  description: ''
+  properties:
+    body:
+      type: string
+    id:
+      type: integer
+    title:
+      type: string

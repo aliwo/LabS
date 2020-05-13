@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import request
+from flask import request, g
 from libs.route.errors import ClientError
 from libs.status import Status
 from libs.database.engine import Session

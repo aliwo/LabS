@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from libs.database.types import Base
 
 
-class Terms(Base):
+class Term(Base):
     __tablename__ = 'terms'
     title = Column(TEXT)
     body = Column(TEXT)

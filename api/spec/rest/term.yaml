@@ -1,0 +1,19 @@
+term:
+  get:
+    description: 이용약관의 리스트를 요청합니다.
+    operationId: api.rest.term.show_terms
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+                terms:
+                  type: object
+                  properties:
+                    # Term object 추가해서 넣기
