@@ -28,7 +28,10 @@ from api.models import blacklist
 from api.models import magazine_category
 from api.models import notifications
 from api.models import report
+from api.models import mbti_questions
 from api.models import star
+from api.models import terms
+from api.models import terms_agreement
 from api.models import user
 from api.models import user_session
 from api.models import user_point
