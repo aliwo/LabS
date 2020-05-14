@@ -14,7 +14,7 @@ class MbtiQuestion(Base):
     __tablename__ = 'mbti_questions'
 
     question = Column(TEXT)
-    determinant = Column(CHAR(5)) # E, I, N, S, T, F, J, P
+    trait = Column(CHAR(5)) # E, I, N, S, T, F, J, P
 
     # determinant 별로 합산 한뒤 E - I 를 하는 방식으로 산출하면 됨.
 
@@ -22,6 +22,6 @@ class MbtiQuestion(Base):
         return {
             'id': self.id,
             'question': self.question,
-            'determinant': self.determinant,
+            'trait': self.trait,
         }
 
