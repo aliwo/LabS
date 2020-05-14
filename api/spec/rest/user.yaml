@@ -16,7 +16,13 @@ profile:
         content:
           application/json:
             schema:
-              $ref: '../models/user.yaml#/user'
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+                user:
+                  $ref: '../models/user.yaml#/user'
 
 
 me:
@@ -42,4 +48,10 @@ me:
         content:
           application/json:
             schema:
-              $ref: '../models/user.yaml#/user'
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+                user:
+                  $ref: '../models/user.yaml#/user'

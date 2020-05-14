@@ -13,7 +13,6 @@ term:
                 okay:
                   type: boolean
                   example: true
-                terms:
-                  type: object
-                  properties:
+                term:
+                  $ref: '../models/term.yaml#/term'
                     # Term object 추가해서 넣기

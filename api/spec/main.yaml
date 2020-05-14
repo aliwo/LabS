@@ -35,6 +35,10 @@ paths:
   /mbti:
     $ref: 'rest/mbti.yaml#/mbti'
 
+  # Term
+  /terms:
+    $ref: 'rest/term.yaml#/term'
+
   # Magazines
 #  /magazines:
 #    $ref: 'rest/magazine.yaml#/magazines'
