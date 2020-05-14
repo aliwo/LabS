@@ -1,5 +1,5 @@
-from flask import jsonify
+from libs.status import Status
 
 
 def get():
-    return jsonify({'magazine':[]})
+    return {'magazine':[]}, Status.HTTP_200_OK

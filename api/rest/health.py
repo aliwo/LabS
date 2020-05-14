@@ -1,5 +1,5 @@
-from flask import jsonify
+from libs.status import Status
 
 
 def hi():
-    return jsonify({'okay':True})
+    return {'okay':True}, Status.HTTP_200_OK
