@@ -16,7 +16,7 @@ INSERT INTO mbti_questions(id, question, determinant) VALUES (7, '업무를 유�
 INSERT INTO mbti_questions(id, question, determinant) VALUES (8, '여행 계획을 구체적으로 짜기 보다는 상황에 맞춰서 여행하는 편 인가요?', 'P');
 
 -- 동물들 --
-INSERT INTO animals(id, mbti, name) VALUES ();
+# INSERT INTO animals(id, mbti, name) VALUES ();
 
 
 

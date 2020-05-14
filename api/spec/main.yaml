@@ -39,9 +39,11 @@ paths:
   /sms/auth:
     $ref: 'rest/sms.yaml#/sms_auth'
 
-  # Mbti
-  /mbti:
-    $ref: 'rest/mbti.yaml#/mbti'
+  # Questions
+  /questions/mbti:
+    $ref: 'rest/question.yaml#/mbti'
+#  /questions/love:
+#    $ref: 'rest/question.yaml#/mbti'
 
   # Term
   /terms:

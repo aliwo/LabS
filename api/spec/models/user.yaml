@@ -23,6 +23,19 @@ user:
       type: string
     id:
       type: integer
+    ideal_age_end:
+      type: integer
+    ideal_age_start:
+      type: integer
+    ideal_body_shape:
+      type: string
+    ideal_height_end:
+      type: integer
+    ideal_height_start:
+      type: integer
+    ideal_type_groups:
+      description: (comma separated)list of integers
+      type: string
     interest:
       type: string
     last_access:
@@ -43,6 +56,8 @@ user:
       type: string
     password:
       type: string
+    personality:
+      type: integer
     phone:
       type: string
     phone_registered:
@@ -51,7 +66,15 @@ user:
       type: string
     registered_at:
       type: string
+    registration_confirmed:
+      type: boolean
+    registration_confirmed_at:
+      type: string
+    registration_phase:
+      type: string
     religion:
       type: string
     speciality:
       type: string
+    type_group:
+      type: integer

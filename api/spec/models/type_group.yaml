@@ -1,0 +1,9 @@
+type_group:
+  description: ''
+  properties:
+    acronym:
+      type: string
+    id:
+      type: integer
+    title:
+      type: string
