@@ -8,9 +8,11 @@ from libs.status import Status
 from api.models.terms import Term
 from api.models.terms_agreement import TermsAgreement
 
+
 @route
 def show_terms():
     return {'term': [x.json() for x in Session().query(Term).all()]}, Status.HTTP_200_OK
+
 
 @route
 def settle_contract():

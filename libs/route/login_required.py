@@ -1,8 +1,4 @@
-from functools import wraps
-from flask import request, g
-from libs.route.errors import ClientError
-from libs.status import Status
-from libs.database.engine import Session
+from flask import g
 from datetime import datetime
 from api.models.user_session import UserSession
 from werkzeug.exceptions import Unauthorized
