@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
@@ -21,6 +21,7 @@ class User(Base):
     pictures = Column(LaboratoryTypes.TextTuple)
     bio = Column(TEXT)
     phone = Column(CHAR(20), unique=True, nullable=True)
+    phone_registered = Column(BOOLEAN)
     location = Column(TEXT)
     body_shape = Column(TEXT) # 마른체형...?
     religion = Column(TEXT)
@@ -50,7 +51,7 @@ class User(Base):
     # oauth_apple
 
     # put 으로 변경할 수 없는 컬럼 들입니다.
-    sensitives = {'email', 'password', 'fcm_token', 'registered_at', 'last_access'}
+    sensitives = {'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access'}
 
     @property
     def oauth(self):

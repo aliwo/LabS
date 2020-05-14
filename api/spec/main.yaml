@@ -31,6 +31,12 @@ paths:
   /users/nickname/{nick_name}:
     $ref: 'rest/user.yaml#/nickname'
 
+  # Sms
+  /sms:
+    $ref: 'rest/sms.yaml#/sms'
+  /sms/auth:
+    $ref: 'rest/sms.yaml#/sms_auth'
+
   # Mbti
   /mbti:
     $ref: 'rest/mbti.yaml#/mbti'
