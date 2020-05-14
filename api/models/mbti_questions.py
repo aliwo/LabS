@@ -14,6 +14,6 @@ class MbtiQuestions(Base):
     __tablename__ = 'mbti_questions'
 
     question = Column(TEXT)
-    determinant = Column(CHAR(5)) # EI, SN, TF, JP 가 있다.
-    positive = Column(BOOLEAN) # positive 가 true 라면 오른쪽으로, false 라면 왼쪽으로
+    determinant = Column(CHAR(5)) # E, I, N, S, T, F, J, P
 
+    # determinant 별로 합산 한뒤 E - I 를 하는 방식으로 산출하면 됨.
