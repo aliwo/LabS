@@ -45,6 +45,10 @@ paths:
   /terms:
     $ref: 'rest/term.yaml#/term'
 
+  # Image
+  /image:
+    $ref: 'rest/image.yaml#/image'
+
   # Magazines
 #  /magazines:
 #    $ref: 'rest/magazine.yaml#/magazines'
