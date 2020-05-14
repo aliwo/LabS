@@ -1,3 +1,4 @@
+from flask import request, g
 from sqlalchemy.orm.exc import NoResultFound
 
 from api.models.user import User
@@ -19,4 +20,16 @@ def get_user_profile(user_id):
 
 @route
 def put_user_profile():
-    pass
+    for key, value in request.json:
+        if key in User.sensitives:
+            continue
+        setattr(g.user_session.user, key, value)
+        Session(changed=True)
+    Session().commit()
+    return {'user': g.user_session.user.json()}, Status.HTTP_200_OK
+
+
+@route
+def check_nick_name(nick_name):
+    duplicate = Session().query(User).filter((User.nick_name == nick_name)).one_or_none()
+    return {'duplicate': False if duplicate is None else True}, Status.HTTP_200_OK

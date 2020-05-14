@@ -28,6 +28,8 @@ paths:
     $ref: 'rest/user.yaml#/profile'
   /users/me:
     $ref: 'rest/user.yaml#/me'
+  /users/nickname/{nick_name}:
+    $ref: 'rest/user.yaml#/nickname'
 
   # Mbti
   /mbti:

@@ -49,3 +49,26 @@ me:
               properties:
                 user:
                   $ref: '../models/user.yaml#/user'
+
+
+nickname:
+  get:
+    description: 닉네임 중복을 체크합니다.
+    operationId: api.rest.user.check_nick_name
+    parameters:
+      - in: path
+        name: nick_name
+        required: true
+        schema:
+          type: string
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '../models/user.yaml#/user'

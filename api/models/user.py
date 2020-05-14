@@ -49,6 +49,9 @@ class User(Base):
     # oauth_facebook
     # oauth_apple
 
+    # put 으로 변경할 수 없는 컬럼 들입니다.
+    sensitives = {'email', 'password', 'fcm_token', 'registered_at', 'last_access'}
+
     @property
     def oauth(self):
         if self.oauth_google_id:
