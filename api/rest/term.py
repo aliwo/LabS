@@ -9,7 +9,7 @@ from api.models.terms_agreement import TermsAgreement
 
 
 def show_terms():
-    return {'okay': True, 'term': [x.json() for x in Session().query(Term).all()]}, Status.HTTP_200_OK
+    return {'term': [x.json() for x in Session().query(Term).all()]}, Status.HTTP_200_OK
 
 
 @login_required
@@ -20,8 +20,8 @@ def settle_contract(id_):
     try:
         term = Session().query(Term).filter((Term.id == id_)).one()
     except NoResultFound as e:
-        return {'okay': False, 'msg': f'No Term found #: {id_}'}, Status.HTTP_404_NOT_FOUND
+        return {'msg': f'No Term found #: {id_}'}, Status.HTTP_404_NOT_FOUND
 
     Session(changed=True).add(TermsAgreement(term_id=term.id, user_id=g.user_session.user.id))
     Session().commit()
-    return {'okay': True}, Status.HTTP_200_OK
+    return {}, Status.HTTP_200_OK

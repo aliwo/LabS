@@ -22,5 +22,5 @@ def login_kakao():
     user_session = UserSession(oauth.user, third_party_token=request.json.get('token'))
     Session(changed=True).add(user_session)
 
-    return {'okay':True, 'user_id':oauth.user.id, 'token': user_session.token, 'is_new': is_new}, Status.HTTP_200_OK
+    return {'user_id':oauth.user.id, 'token': user_session.token, 'is_new': is_new}, Status.HTTP_200_OK
 
