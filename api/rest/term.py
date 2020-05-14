@@ -3,15 +3,16 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from libs.database.engine import Session
 from libs.route.login_required import login_required
+from libs.route.router import route
 from libs.status import Status
 from api.models.terms import Term
 from api.models.terms_agreement import TermsAgreement
 
-
+@route
 def show_terms():
     return {'term': [x.json() for x in Session().query(Term).all()]}, Status.HTTP_200_OK
 
-
+@route
 @login_required
 def settle_contract(id_):
     '''
