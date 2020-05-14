@@ -5,33 +5,19 @@ from libs.status import Status
 from libs.database.engine import Session
 from datetime import datetime
 from api.models.user_session import UserSession
+from werkzeug.exceptions import Unauthorized
 
-def login_required(func):
+
+def login_required(token):
     '''
     주의! 반드시 @route 아래에 설치해야 합니다.
     '''
-    @wraps(func)
-    def decorated(*args, **kwargs):
-        token = request.headers.get('Authorization', None)
+    user_session = UserSession.get_session(token)
+    if user_session is None:
+        raise Unauthorized()
 
-        if token is None or len(token.split()) < 2:
-            raise ClientError('Authorization: Bearer <token> not found')
+    g.user_session = user_session
+    g.user_session.user.last_access = datetime.now()
+    return {'active': True}
 
-        token = token.split()[1]
-
-        user_session = UserSession.get_session(token)
-        if user_session is None:
-            return {'okay': False, 'msg': 'Access Denied'}, Status.HTTP_401_UNAUTHORIZED
-
-        if user_session.is_expired():
-            return {'okay':False, 'msg':'Session Expired'}, Status.HTTP_401_UNAUTHORIZED
-
-        g.user_session = user_session
-        g.user_session.user.last_access = datetime.now()
-        Session(changed=True)
-
-        ret = func(*args, **kwargs)
-        return ret
-
-    return decorated
 

@@ -44,6 +44,11 @@ paths:
 #    $ref: 'rest/magazine.yaml#/magazines'
 
 components:
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+      x-bearerInfoFunc: libs.route.login_required.login_required
   schemas:
     user:
       $ref: 'models/user.yaml#/user'

@@ -14,18 +14,10 @@ term:
                   $ref: '../models/term.yaml#/term'
 
   put:
+    security:
+      - Authorization: []
     description: n 개의 이용약관에 동의합니다. term 의 id 를 request_body 에 넣어주세요.
     operationId: api.rest.term.settle_contract
-    parameters:
-      - in: header
-        name: Authorization
-        required: true
-        schema:
-          type: string
-          description: 토큰
-          example:
-            Bearer eobhibupiadvakbn380y57239rit42vdv
-
     requestBody:
       required: true
       content:

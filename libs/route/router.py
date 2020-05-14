@@ -1,6 +1,5 @@
 from functools import wraps
 from libs.route.errors import BaseError
-from libs.route.login_required import login_required
 from flask import jsonify
 from flask import Response
 import json
