@@ -11,7 +11,7 @@ def route(func):
         try:
             response_msg, status_code = func(*args, **kwargs)
         except BaseError as e:
-            response_msg, status_code = e.json(), e.code
+            response_msg, status_code = e.json(), e.status_code
         return response_msg, status_code
     return wrapper
 
