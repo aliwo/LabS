@@ -23,7 +23,7 @@ def get_trait_template():
 
 
 class MbtiResult(Base):
-    __tablename__ = 'mbti_questions'
+    __tablename__ = 'mbti_results'
 
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     raw = Column(JSON) # 테스트 결과 json 을 raw 로 저장합니다.

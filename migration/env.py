@@ -30,6 +30,7 @@ from api.models import notifications
 from api.models import occupation_auth
 from api.models import report
 from api.models import mbti_questions
+from api.models import mbti_result
 from api.models import sms_auth
 from api.models import star
 from api.models import terms

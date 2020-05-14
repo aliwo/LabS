@@ -1,3 +1,4 @@
+from api.models.animal import Animal
 from api.models.user import User
 from api.models.user_point import UserPoint
 from api.models.sms_auth import SmsAuth
@@ -6,7 +7,7 @@ from api.models.mbti_questions import MbtiQuestion
 from api.models.terms_agreement import TermsAgreement
 from api.models.type_group import TypeGroup
 from libs.sa2swagger.convert import convert
-
+animal = convert(Animal, 'animal.yaml')
 user = convert(User, 'user.yaml', {'user':{
         'description': 'end users',
         'properties': {

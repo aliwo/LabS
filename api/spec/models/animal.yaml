@@ -1,0 +1,19 @@
+animal:
+  description: ''
+  properties:
+    id:
+      type: integer
+    main_profile:
+      type: string
+    mbti:
+      type: string
+    name:
+      type: string
+    prefix:
+      type: string
+    romance_profile:
+      type: string
+    so_profile:
+      type: string
+    tags:
+      type: string
