@@ -62,3 +62,5 @@ components:
       $ref: 'models/term.yaml#/term'
     terms_agreement:
       $ref: 'models/terms_agreement.yaml#/terms_agreement'
+    sms:
+      $ref: 'models/sms_auth.yaml#/sms_auth'

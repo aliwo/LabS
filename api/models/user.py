@@ -15,15 +15,21 @@ class User(Base):
     password = Column(TEXT) # TODO: 일반 회원가입 없으면 지울 것.
 
     # 신상정보
-    occupation = Column(TEXT)
     name = Column(CHAR(50))
     nick_name = Column(CHAR(50), unique=True)
+    education = Column(TEXT) # 학력
+    occupation = Column(TEXT) # 직업
+    occupation_confirmed = Column(BOOLEAN)
+    occupation_confirmed_at = Column(DATETIME)
+    company = Column(TEXT) # 직장
     pictures = Column(LaboratoryTypes.TextTuple)
-    bio = Column(TEXT)
+    bio = Column(TEXT) # 인삿말
     phone = Column(CHAR(20), unique=True, nullable=True)
     phone_registered = Column(BOOLEAN)
-    location = Column(TEXT)
-    body_shape = Column(TEXT) # 마른체형...?
+    location1 = Column(TEXT)
+    location2 = Column(TEXT)
+    height = Column(INTEGER)
+    body_shape = Column(TEXT) # 체형
     religion = Column(TEXT)
     hobby = Column(TEXT)
     speciality = Column(TEXT) # 특기

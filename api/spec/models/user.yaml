@@ -7,12 +7,18 @@ user:
       type: string
     cigarette:
       type: string
+    company:
+      type: string
     drink:
+      type: string
+    education:
       type: string
     email:
       type: string
     fcm_token:
       type: string
+    height:
+      type: integer
     hobby:
       type: string
     id:
@@ -21,7 +27,9 @@ user:
       type: string
     last_access:
       type: string
-    location:
+    location1:
+      type: string
+    location2:
       type: string
     name:
       type: string
@@ -29,10 +37,16 @@ user:
       type: string
     occupation:
       type: string
+    occupation_confirmed:
+      type: boolean
+    occupation_confirmed_at:
+      type: string
     password:
       type: string
     phone:
       type: string
+    phone_registered:
+      type: boolean
     pictures:
       type: string
     registered_at:
