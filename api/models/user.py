@@ -36,6 +36,21 @@ class User(Base):
     interest = Column(TEXT) # 관심사
     drink = Column(TEXT) # 음주
     cigarette = Column(TEXT) # 흡연
+    type_group = Column(Integer, ForeignKey('type_groups.id'))
+    personality = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'))
+
+    # 이상형 정보
+    ideal_age_start = Column(INTEGER)
+    ideal_age_end = Column(INTEGER)
+    ideal_body_shape = Column(TEXT)
+    ideal_type_groups = Column(LaboratoryTypes.IntTuple)
+    ideal_height_start = Column(INTEGER)
+    ideal_height_end = Column(INTEGER)
+
+    # 회원가입 전 까지 쓸 정보
+    registration_phase = Column(CHAR(10)) # 회원가입 중간에 껐다가 다시 할 수 있도록 만들어야 할 듯.
+    registration_confirmed = Column(BOOLEAN, server_default='0')
+    registration_confirmed_at = Column(DATETIME) # 최종 승인!
 
     # statistics
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
@@ -51,6 +66,7 @@ class User(Base):
     # oauth_apple_id = Column(Integer, ForeignKey('oauth_apple.id', ondelete='CASCADE'))
 
     # 다음 backref 가 존재합니다.
+    # point
     # oauth_google
     # oauth_kakao
     # oauth_facebook
@@ -85,14 +101,41 @@ class User(Base):
         result = {
             'id': self.id,
             'email': self.email,
+
+            # 신상 정보
+            'name': self.name,
+            'nick_name': self.nick_name,
+            'education': self.education,
+            'occupation': self.occupation,
+            'occupation_confirmed': self.occupation_confirmed,
+            'occupation_confirmed_at': self.occupation_confirmed_at,
+            'company': self.company,
             'pictures': self.pictures,
             'bio': self.bio,
-            'fcm_token': self.fcm_token,
+            'phone': self.phone,
+            'phone_registered': self.phone_registered,
+            'location1': self.location1,
+            'location2': self.location2,
+            'height': self.height,
+            'body_shape': self.body_shape,
+            'religion': self.religion,
+            'hobby': self.hobby,
+            'speciality': self.speciality,
+            'interest': self.interest,
+            'drink': self.drink,
+            'cigarette': self.cigarette,
+
+
+            # 통계 정보
             'last_access': DateTimeHelper.full_datetime(self.last_access),
             'registered_at': DateTimeHelper.full_datetime(self.registered_at),
         }
 
         if self.phone:
             result['phone'] = self.phone
+
+        if kwargs.get('with_point'):
+            result['hp'] = self.point.hp
+            result['mp'] = self.point.mp
 
         return result

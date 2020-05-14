@@ -1,6 +1,7 @@
 from flask import g, request
 
 from api.models.oauth.kakao import OauthKakao
+from api.models.user_point import UserPoint
 from api.models.prerequisites.user_prerequisites import UserPrerequisites
 from api.models.user import User
 from api.models.user_session import UserSession
@@ -17,6 +18,7 @@ def login_kakao():
     if is_new:
         user = afr(User(email=g.info['kakao_account'].get('email')))
         oauth = afr(OauthKakao(user, g.info))
+        afr(UserPoint(user_id=user.id))
         user.oauth_kakao_id = oauth.id
 
     user_session = UserSession(oauth.user, third_party_token=request.json.get('token'))

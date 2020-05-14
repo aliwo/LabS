@@ -33,6 +33,7 @@ from api.models import sms_auth
 from api.models import star
 from api.models import terms
 from api.models import terms_agreement
+from api.models import type_group
 from api.models import user
 from api.models import user_session
 from api.models import user_point
