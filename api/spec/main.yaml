@@ -43,3 +43,7 @@ components:
   schemas:
     user:
       $ref: 'models/user.yaml#/user'
+    term:
+      $ref: 'models/term.yaml#/term'
+    terms_agreement:
+      $ref: 'models/terms_agreement.yaml#/terms_agreement'

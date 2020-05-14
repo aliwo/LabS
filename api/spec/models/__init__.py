@@ -9,8 +9,6 @@ user = convert(User, 'user.yaml', {'user':{
         }
     }
 })
-
 term = convert(Term, 'term.yaml')
-
 terms_agreement = convert(TermsAgreement, 'terms_agreement.yaml')
 

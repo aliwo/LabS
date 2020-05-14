@@ -1,4 +1,4 @@
-termsagreement:
+terms_agreement:
   description: ''
   properties:
     agreed_at:
