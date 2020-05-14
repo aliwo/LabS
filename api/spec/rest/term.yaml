@@ -10,9 +10,6 @@ term:
             schema:
               type: object
               properties:
-                okay:
-                  type: boolean
-                  example: true
                 term:
                   $ref: '../models/term.yaml#/term'
                     # Term object 추가해서 넣기

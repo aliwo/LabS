@@ -11,7 +11,6 @@ kakao:
             properties:
               token:
                 type: string
-
     responses:
       "200":
         description: Success
@@ -20,9 +19,6 @@ kakao:
             schema:
               type: object
               properties:
-                okay:
-                  type: boolean
-                  example: true
                 user_id:
                   type: integer
                   example: 3
@@ -48,7 +44,6 @@ google:
             properties:
               token:
                 type: string
-
     responses:
       "200":
         description: Success
@@ -57,9 +52,6 @@ google:
             schema:
               type: object
               properties:
-                okay:
-                  type: boolean
-                  example: true
                 user_id:
                   type: integer
                   example: 3

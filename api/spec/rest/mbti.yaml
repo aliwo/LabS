@@ -17,8 +17,6 @@ mbti:
                 point:
                   type: integer
                   example: 3
-
-
     responses:
       "200":
         description: Success
@@ -27,9 +25,6 @@ mbti:
             schema:
               type: object
               properties:
-                okay:
-                  type: boolean
-                  example: true
-                animal_id:
+                animal_id: # TODO: animal 정보를 같이 반환하도록 수정할 것
                   type: integer
                   example: 3

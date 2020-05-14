@@ -18,9 +18,6 @@ profile:
             schema:
               type: object
               properties:
-                okay:
-                  type: boolean
-                  example: true
                 user:
                   $ref: '../models/user.yaml#/user'
 
@@ -50,8 +47,5 @@ me:
             schema:
               type: object
               properties:
-                okay:
-                  type: boolean
-                  example: true
                 user:
                   $ref: '../models/user.yaml#/user'

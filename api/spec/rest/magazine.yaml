@@ -10,8 +10,5 @@ magazines:
               schema:
                 type: object
                 properties:
-                  okay:
-                    type: boolean
-                    example: true
                   magazine:
                     type: array
