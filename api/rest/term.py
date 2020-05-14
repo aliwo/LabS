@@ -14,14 +14,14 @@ def show_terms():
 
 @route
 @login_required
-def settle_contract(id_):
+def settle_contract(term_ids):
     '''
-    약관에 동의합니다.
+    약관'들'에 동의합니다.
     '''
     try:
-        term = Session().query(Term).filter((Term.id == id_)).one()
+        term = Session().query(Term).filter((Term.id.in_(term_ids))).all()
     except NoResultFound as e:
-        return {'msg': f'No Term found #: {id_}'}, Status.HTTP_404_NOT_FOUND
+        return {'msg': f'No Term found #: {term_ids}'}, Status.HTTP_404_NOT_FOUND
 
     Session(changed=True).add(TermsAgreement(term_id=term.id, user_id=g.user_session.user.id))
     Session().commit()
