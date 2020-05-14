@@ -5,4 +5,4 @@ from flask import request
 
 def upload_image():
     file = request.files.get('image')
-    return {'URL': gcs.upload_file(file.read(), file.filename, file.content_type)}, Status.HTTP_200_OK
+    return {'url': gcs.upload_file(file.read(), file.filename, file.content_type)}, Status.HTTP_200_OK

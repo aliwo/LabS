@@ -72,3 +72,35 @@ nickname:
               properties:
                 user:
                   $ref: '../models/user.yaml#/user'
+
+
+occupation:
+  post:
+    security:
+      - Authorization: []
+    description: 직업 인증을 업로드 합니다.
+    operationId: api.rest.user.upload_auth_occupation
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              occupation_type:
+                type: string
+                example: work
+              url:
+                type: string
+                example: https://storage.googleapis.com/soyeonlab/dog-2020-05-14-201910.png
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                auth_key:
+                  type: string
+                  example: abnuobn=av341a-bkerjhjloqe

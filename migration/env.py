@@ -27,6 +27,7 @@ from api.models import heart
 from api.models import blacklist
 from api.models import magazine_category
 from api.models import notifications
+from api.models import occupation_auth
 from api.models import report
 from api.models import mbti_questions
 from api.models import sms_auth

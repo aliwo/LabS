@@ -1,8 +1,9 @@
 from flask import request, g
 from sqlalchemy.orm.exc import NoResultFound
 
+from api.models.occupation_auth import OccupationAuth
 from api.models.user import User
-from libs.database.engine import Session
+from libs.database.engine import Session, afr
 from libs.route.errors import ClientError
 from libs.route.router import route
 from libs.status import Status
@@ -33,6 +34,17 @@ def put_user_profile():
 def check_nick_name(nick_name):
     duplicate = Session().query(User).filter((User.nick_name == nick_name)).one_or_none()
     return {'duplicate': False if duplicate is None else True}, Status.HTTP_200_OK
+
+
+@route
+def upload_auth_occupation(nick_name):
+    occupation_auth = afr(OccupationAuth(
+        user_id=g.user_session.user.id,
+        occupation_type=request.json.get('occupation_type'),
+        url=request.json.get('url')
+    ))
+    Session().commit()
+    return {'okay': True}, Status.HTTP_200_OK
 
 
 # FM 대로 하자면, 이상형 정보를 입력하는 라우트를 만들어야 함. (put_user 와 똑같이)

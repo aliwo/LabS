@@ -30,6 +30,8 @@ paths:
     $ref: 'rest/user.yaml#/me'
   /users/nickname/{nick_name}:
     $ref: 'rest/user.yaml#/nickname'
+  /users/occupation:
+    $ref: 'rest/user.yaml#/occupation'
 
   # Sms
   /sms:

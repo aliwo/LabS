@@ -1,7 +1,7 @@
 image:
   post:
-#    security:
-#      - Authorization: []
+    security:
+      - Authorization: []
     description: imgae 를 cloud storage 에 업로드 한 뒤, url 을 전달 받습니다.
     operationId: api.rest.image.upload_image
     requestBody:
@@ -22,7 +22,7 @@ image:
             schema:
               type: object
               properties:
-                URL:
+                url:
                   type: string
                   example: https://storage.googleapis.com/soyeonlab/dog-2020-05-14-201910.png
 
