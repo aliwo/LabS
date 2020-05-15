@@ -21,7 +21,7 @@ def get_user_profile(user_id):
 
 @route
 def put_user_profile():
-    for key, value in request.json:
+    for key, value in request.json.items():
         if key in User.sensitives:
             continue
         setattr(g.user_session.user, key, value)
