@@ -24,6 +24,8 @@ profile:
 
 me:
   put:
+    security:
+      - Authorization: []
     description: key, value 로 유저정보를 수정합니다. 핸드폰 번호등의 중요 정보는 해당 API 로 수정할 수 없습니다.
     operationId: api.rest.user.put_user_profile
     requestBody:
