@@ -40,6 +40,7 @@ from api.models import user
 from api.models import user_session
 from api.models import user_point
 from api.models.oauth import google
+from api.models.oauth import naver
 from api.models.oauth import apple
 from api.models.oauth import kakao
 from api.models.oauth import facebook

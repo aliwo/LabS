@@ -16,8 +16,8 @@ paths:
   # Oauth
   /oauth/google:
     $ref: 'rest/oauth.yaml#/google'
-#  /oauth/naver:
-#    $ref: 'rest/oauth.yaml#/naver'
+  /oauth/naver:
+    $ref: 'rest/oauth.yaml#/naver'
   /oauth/kakao:
     $ref: 'rest/oauth.yaml#/kakao'
 #  /oauth/apple:

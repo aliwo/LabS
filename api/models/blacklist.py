@@ -12,6 +12,7 @@ class Blacklist(Base):
 
     PARTY_GOOGLE = 'GOOGLE'
     PARTY_KAKAO = 'KAKAO'
+    PARTY_NAVER = 'NAVER'
     PARTY_FACEBOOK = 'FACEBOOK'
 
     KIND_BAN = 'BAN'
@@ -25,6 +26,8 @@ class Blacklist(Base):
             self.party_name = self.PARTY_KAKAO
         elif oauth.__tablename__.endswith('facebook'):
             self.party_name = self.PARTY_FACEBOOK
+        elif oauth.__tablename__.endswith('naver'):
+            self.party_name = self.PARTY_NAVER
 
         self.party_id = oauth.party_id
         self.created_at = datetime.now()
