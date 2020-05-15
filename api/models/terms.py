@@ -9,10 +9,12 @@ class Term(Base):
     __tablename__ = 'terms'
     title = Column(TEXT)
     body = Column(TEXT)
+    required = Column(BOOLEAN)
 
     def json(self):
         return {
             'id': self.id,
             'title': self.title,
             'body': self.body,
+            'required': self.required
         }
