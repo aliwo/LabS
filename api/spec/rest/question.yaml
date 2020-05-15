@@ -16,9 +16,7 @@ mbti:
                     $ref: '../models/mbti_question.yaml#/mbti_question'
 
   post:
-    description: mbti 검사를 제출합니다. 중간에 빠지는 문제 없이,
-    모든 문제에 대한 답을 제출해야 합니다. 검사 결과 동물 id 가 리턴됩니다.
-    (테스트 필요)
+    description: mbti 검사를 제출합니다. 중간에 빠지는 문제 없이, 모든 문제에 대한 답을 제출해야 합니다. 검사 결과 동물 id 가 리턴됩니다. (테스트 필요)
     operationId: api.rest.question.post_mbti_results
     requestBody:
       required: true

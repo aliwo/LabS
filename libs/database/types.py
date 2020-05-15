@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import types
@@ -36,7 +38,7 @@ class LaboratoryTypes:
             return ','.join(map(str, value)) if value else ''
 
         def process_result_value(self, value, dialect):
-            return tuple((item for item in value.split(',')) if value else () )
+            return tuple(item for item in value.split(',')) if value else ()
 
 
     class IntTuple(types.TypeDecorator):
@@ -49,7 +51,7 @@ class LaboratoryTypes:
             return ','.join(map(str, value)) if value else ''
 
         def process_result_value(self, value, dialect):
-            return tuple((int(item) for item in value.split(',') if value))
+            return tuple(int(item) for item in value.split(',')) if value else ()
 
 
     class TextDate(types.TypeDecorator):
