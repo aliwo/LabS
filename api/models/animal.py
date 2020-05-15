@@ -23,7 +23,14 @@ class Animal(Base):
 
     def json(self):
         return {
-
+            'id': self.id,
+            'mbti': self.mbti,
+            'prefix': self.prefix,
+            'name': self.name,
+            'tags': self.tags,
+            'main_profile': self.main_profile,
+            'romance_profile': self.romance_profile,
+            'so_profile': self.so_profile
         }
 
 

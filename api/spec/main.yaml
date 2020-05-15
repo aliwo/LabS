@@ -39,6 +39,10 @@ paths:
   /sms/auth:
     $ref: 'rest/sms.yaml#/sms_auth'
 
+  # Animals
+  /animals/{animal_id}:
+    $ref: 'rest/animal.yaml#/animal'
+
   # Questions
   /questions/mbti:
     $ref: 'rest/question.yaml#/mbti'
