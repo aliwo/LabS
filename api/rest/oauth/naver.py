@@ -12,11 +12,12 @@ from libs.status import Status
 
 @prerequisites(UserPrerequisites, 'naver')
 def login_naver():
+    g.info = g.info.get('response')
     oauth = Session().query(OauthNaver).filter(OauthNaver.party_id == g.info.get('id')).first()
     is_new = True if oauth is None else False
 
     if is_new:
-        user = afr(User(email=g.info['kakao_account'].get('email')))
+        user = afr(User(email=g.info.get('email')))
         oauth = afr(OauthNaver(user, g.info))
         afr(UserPoint(user_id=user.id))
 

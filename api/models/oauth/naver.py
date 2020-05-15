@@ -21,4 +21,4 @@ class OauthNaver(Base):
         self.user = user
         self.user_id = user.id
         self.party_id = info.get('id')
-        self.party_email = info['kakao_account'].get('email')
+        self.party_email = info.get('email')
