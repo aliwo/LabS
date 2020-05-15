@@ -16,8 +16,8 @@ paths:
   # Oauth
   /oauth/google:
     $ref: 'rest/oauth.yaml#/google'
-#  /oauth/naver:
-#    $ref: 'rest/oauth.yaml#/naver'
+  /oauth/naver:
+    $ref: 'rest/oauth.yaml#/naver'
   /oauth/kakao:
     $ref: 'rest/oauth.yaml#/kakao'
 #  /oauth/apple:
@@ -38,6 +38,10 @@ paths:
     $ref: 'rest/sms.yaml#/sms'
   /sms/auth:
     $ref: 'rest/sms.yaml#/sms_auth'
+
+  # Animals
+  /animals/{animal_id}:
+    $ref: 'rest/animal.yaml#/animal'
 
   # Questions
   /questions/mbti:
@@ -64,6 +68,8 @@ components:
       scheme: bearer
       x-bearerInfoFunc: libs.route.login_required.login_required
   schemas:
+    animal:
+      $ref: 'models/animal.yaml#/animal'
     user:
       $ref: 'models/user.yaml#/user'
     term:

@@ -19,7 +19,6 @@ def login_kakao():
         user = afr(User(email=g.info['kakao_account'].get('email')))
         oauth = afr(OauthKakao(user, g.info))
         afr(UserPoint(user_id=user.id))
-        user.oauth_kakao_id = oauth.id
 
     user_session = UserSession(oauth.user, third_party_token=request.json.get('token'))
     Session(changed=True).add(user_session)

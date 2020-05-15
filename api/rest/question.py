@@ -1,5 +1,9 @@
+from flask import request, g
+
+from api.models.animal import Animal
 from api.models.mbti_questions import MbtiQuestion
-from libs.database.engine import Session
+from api.models.mbti_result import MbtiResult
+from libs.database.engine import Session, afr
 from libs.status import Status
 
 
@@ -17,5 +21,6 @@ def get_love_questions():
 
 
 def post_mbti_results():
-    pass
+    mbti_result = afr(MbtiResult(request.json.get('result'), user_id=g.user_session.user.id))
+    return {'animal': mbti_result.animal.json()}, Status.HTTP_200_OK
 

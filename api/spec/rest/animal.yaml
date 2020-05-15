@@ -1,0 +1,23 @@
+animal:
+  get:
+    description: 동물 정보를 조회합니다.
+    operationId: api.rest.animal.get_animal
+    parameters:
+      - in: path
+        name: animal_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '../models/animal.yaml#/animal'
+

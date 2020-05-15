@@ -4,7 +4,7 @@ from flask import request, g
 from api.models.prerequisites.sms_prerequisites import SmsPrerequisites
 from api.models.sms_auth import SmsAuth
 from api.models.user import User
-from libs.database.engine import Session
+from libs.database.engine import Session, afr
 from libs.route.errors import ServerError, ClientError
 from libs.route.prerequisite import prerequisites
 from libs.route.router import route
@@ -18,17 +18,16 @@ sms_helper = SmsHelper(os.environ.get('SY_TOAST_APP_KEY', ''), os.environ.get('S
 @route
 def send_sms():
     '''
-    TODO: 아직 테스트 안 해봄. 2020-05-14 토스트 계정 만들기
+    TODO: 토스트 계정 만들기
     문자 인증을 보냅니다.
     '''
-    auth = SmsAuth(g.user_session.user.id, request.json.get('phone_num'))
+    auth = afr(SmsAuth(g.user_session.user.id, request.json.get('phone_num')))
     result = sms_helper.send_auth_sms(auth)
 
     if not result.get('header').get('isSuccessful'):
-        raise ServerError('cou;d not send sms')
+        raise ServerError('could not send sms')
 
-    Session().add(auth)
-    Session().flush()
+    Session().commit()
     return {'auth_key':str(auth.auth_key)}, Status.HTTP_200_OK
 
 

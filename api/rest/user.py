@@ -38,7 +38,7 @@ def check_nick_name(nick_name):
 
 @route
 def upload_auth_occupation(nick_name):
-    occupation_auth = afr(OccupationAuth(
+    afr(OccupationAuth(
         user_id=g.user_session.user.id,
         occupation_type=request.json.get('occupation_type'),
         url=request.json.get('url')

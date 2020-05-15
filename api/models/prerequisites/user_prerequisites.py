@@ -19,7 +19,8 @@ class UserPrerequisites(Prerequisites):
 
     OAUTH_PARTIES = {
         'google': 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
-        'kakao': 'https://kapi.kakao.com/v2/user/me'
+        'kakao': 'https://kapi.kakao.com/v2/user/me',
+        'naver': 'https://openapi.naver.com/v1/nid/me'
     }
 
     def kakao(self):
@@ -28,6 +29,16 @@ class UserPrerequisites(Prerequisites):
         blacklist = Session().query(Blacklist).filter(
             (Blacklist.party_id == g.info.get('id'))
         & (Blacklist.party_name == Blacklist.PARTY_KAKAO)
+        & (Blacklist.until >= datetime.now()) ).first()
+        if blacklist:
+            raise ClientError('black list', Status.HTTP_480_BLACKLIST)
+
+    def naver(self):
+        self._on_create('naver')
+
+        blacklist = Session().query(Blacklist).filter(
+            (Blacklist.party_id == g.info.get('id'))
+        & (Blacklist.party_name == Blacklist.PARTY_NAVER)
         & (Blacklist.until >= datetime.now()) ).first()
         if blacklist:
             raise ClientError('black list', Status.HTTP_480_BLACKLIST)

@@ -23,7 +23,7 @@ class SmsAuth(Base):
         super().__init__(**kwargs)
         self.user_id = user_id
         self.phone_num = phone_num
-        self.auth_key = uuid.uuid4()
+        self.auth_key = str(uuid.uuid4())
         self.auth_value = ''.join([str(randint(0, 9)) for x in range(0, 6)])
         self.expiration = datetime.now() +timedelta(minutes=10)
 
