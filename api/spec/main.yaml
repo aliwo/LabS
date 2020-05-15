@@ -64,6 +64,8 @@ components:
       scheme: bearer
       x-bearerInfoFunc: libs.route.login_required.login_required
   schemas:
+    animal:
+      $ref: 'models/animal.yaml#/animal'
     user:
       $ref: 'models/user.yaml#/user'
     term:

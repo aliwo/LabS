@@ -39,21 +39,22 @@ class MbtiResult(Base):
 
         '''
         super().__init__(**kwargs)
+        self.raw = test_results
         self.result_mbti = self.calc_mbti(test_results)
-        self.animal_id = self.get_animal_id(self.result_mbti)
+        self.animal_id = self.animal.id
         self.created_at = datetime.now()
 
     def calc_mind(self, E, I):
-        return 'E' if E - I > 4 else 'I'
+        return 'E' if E - I > 2 else 'I'
 
     def calc_energy(self, S, N):
-        return 'S' if S - N > 4 else 'N'
+        return 'S' if S - N > 2 else 'N'
 
     def calc_nature(self, T, F):
-        return 'T' if T - F > 4 else 'F'
+        return 'T' if T - F > 2 else 'F'
 
     def calc_identity(self, J, P):
-        return 'J' if J - P > 4 else 'P'
+        return 'J' if J - P > 2 else 'P'
 
     def calc_mbti(self, test_results):
         '''
@@ -66,7 +67,8 @@ class MbtiResult(Base):
         template = get_trait_template()
 
         questions = Session().query(MbtiQuestion).all()
-        for result, question in zip(sorted(test_results, key=lambda x: x.get('mbti_id')), questions):
+        results = sorted(test_results, key=lambda x: x.get('mbti_id'))
+        for result, question in zip(results, questions):
             if result.get('mbti_id') != question.id:
                 raise ClientError(f'invalid question_id: client:{result.get("mbti_id")} server:{question.id}')
             template[question.trait] += result.get('point')
@@ -76,12 +78,13 @@ class MbtiResult(Base):
                f'{self.calc_nature(template["T"], template["F"])}' \
                f'{self.calc_identity(template["J"], template["P"])}'
 
-    @classmethod
-    def get_animal_id(self, mbti):
-        from libs.database.engine import Session
-        from api.models.animal import Animal
-        # one 의 결과가 안 나올 수가 없음
-        return Session().query(Animal).filter((Animal.mbti ==  mbti)).one().id
+    @property
+    def animal(self):
+        if not hasattr(self, '_animal'):
+            from libs.database.engine import Session
+            from api.models.animal import Animal
+            self._animal = Session().query(Animal).filter((Animal.mbti ==  self.result_mbti)).one()
+        return self._animal
 
     def json(self):
         return {

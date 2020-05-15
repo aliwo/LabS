@@ -17,28 +17,27 @@ mbti:
 
   post:
     description: mbti 검사를 제출합니다. 중간에 빠지는 문제 없이, 모든 문제에 대한 답을 제출해야 합니다. 검사 결과 동물 id 가 리턴됩니다. (테스트 필요) (테스트 끝나면 로그인이 필요하도록 바꾸기)
-    #    security:
-    #      - Authorization: []
+    security:
+      - Authorization: []
     operationId: api.rest.question.post_mbti_results
     requestBody:
       required: true
       content:
         application/json:
           schema:
-            items:
-              type: object
-              properties:
-                result:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      mbti_id:
-                        type: integer
-                        example: 1
-                      point:
-                        type: integer
-                        example: 3
+            type: object
+            properties:
+              result:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    mbti_id:
+                      type: integer
+                      example: 1
+                    point:
+                      type: integer
+                      example: 3
     responses:
       "200":
         description: Success
@@ -47,6 +46,6 @@ mbti:
             schema:
               type: object
               properties:
-                animal_id: # TODO: animal 정보를 같이 반환하도록 수정할 것
+                animal:
                   type: integer
                   example: 3

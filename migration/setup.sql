@@ -17,7 +17,46 @@ INSERT INTO mbti_questions(id, question, trait) VALUES (8, '여행 계획을 구
 
 -- 동물들 --
 INSERT INTO animals(id, mbti, prefix, name) VALUES (1, 'ESFJ', '사교적인 여왕', '공작새');
-INSERT INTO animals(id, mbti, prefix, name) VALUES (1, 'ESTJ', '무리를 이끄는 우두머리', '늑대');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (2, 'ESTJ', '무리를 이끄는 우두머리', '늑대');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (3, 'ESFP', '애교 넘치는', '강아지');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (4, 'ESTP', '만능 엔터테이너', '원숭이');
+
+INSERT INTO animals(id, mbti, prefix, name) VALUES (5, 'ISFJ',  '배려심 가득한 간호사', '사슴');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (6, 'ISTJ',  '질서를 쌓는 반장', '비버');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (7, 'ISFP',  '포근한 귀염둥이', '코알라');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (8, 'ISTP',  '센스있는 해결사', '고양이');
+
+INSERT INTO animals(id, mbti, prefix, name) VALUES (9, 'ENFJ',  '발랄한 응원단장', '팔색조');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (10, 'ENTJ', '카리스마를 지닌 대장', '독수리');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (11, 'ENFP', '노래부르는 핑크', '돌고래');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (12, 'ENTP', '창의력 넘치는 발명가', '라쿤');
+
+INSERT INTO animals(id, mbti, prefix, name) VALUES (13, 'INFJ', '기품있는 사색가', '유니콘');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (14, 'INTJ', '인텔리한 전문가', '도베르만');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (15, 'INFP', '별을세는 예술가', '햄스터');
+INSERT INTO animals(id, mbti, prefix, name) VALUES (16, 'INTP', '호기심 많은 인텔리', '올빼미');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
