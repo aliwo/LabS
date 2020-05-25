@@ -30,6 +30,10 @@ kakao:
                   type: boolean
                   example: true
                   description: 새로 가입했다면 true, 로그인한 것이라면 false 입니다.
+                expiry:
+                  type: string
+                  example: '2020-08-30 13:30:02'
+                  description: 토큰의 유통기한입니다.
 
 google:
   post:
@@ -63,7 +67,10 @@ google:
                   type: boolean
                   example: true
                   description: 새로 가입했다면 true, 로그인한 것이라면 false 입니다.
-
+                expiry:
+                  type: string
+                  example: '2020-08-30 13:30:02'
+                  description: 토큰의 유통기한입니다.
 naver:
   post:
     description: ''
@@ -96,3 +103,7 @@ naver:
                   type: boolean
                   example: true
                   description: 새로 가입했다면 true, 로그인한 것이라면 false 입니다.
+                expiry:
+                  type: string
+                  example: '2020-08-30 13:30:02'
+                  description: 토큰의 유통기한입니다.
