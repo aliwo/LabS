@@ -6,6 +6,7 @@ from api.models.prerequisites.user_prerequisites import UserPrerequisites
 from api.models.user import User
 from api.models.user_session import UserSession
 from libs.database.engine import Session, afr
+from libs.datetime_helper import DateTimeHelper
 from libs.route.prerequisite import prerequisites
 from libs.status import Status
 
@@ -23,5 +24,5 @@ def login_kakao():
     user_session = UserSession(oauth.user, third_party_token=request.json.get('token'))
     Session(changed=True).add(user_session)
 
-    return {'user_id':oauth.user.id, 'token': user_session.token, 'is_new': is_new}, Status.HTTP_200_OK
+    return {'user_id':oauth.user.id, 'token': user_session.token, 'is_new': is_new, 'expiry': DateTimeHelper.full_datetime(user_session.expiry)}, Status.HTTP_200_OK
 
