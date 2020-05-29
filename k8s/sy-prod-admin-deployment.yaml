@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: sy-prod
+    run: sy-prod-admin
   name: sy-prod-admin
   namespace: default
 spec:
