@@ -12,5 +12,14 @@ servers:
 paths:
   /:
     $ref: 'rest/health.yaml#/hi'
-  /auth:
-    $ref: 'rest/auth.yaml#/auth'
+  /admin/auth:
+    $ref: 'rest/admin.yaml#/auth'
+  /admin/info:
+    $ref: 'rest/admin.yaml#/info'
+
+components:
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+      x-bearerInfoFunc: libs.route.login_required.admin_required

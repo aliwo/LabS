@@ -1,7 +1,7 @@
 auth:
   post:
     description: '관리자 로그인'
-    operationId: admin.rest.auth.login
+    operationId: admin.rest.admin.login
     requestBody:
       required: true
       content:
@@ -29,3 +29,20 @@ auth:
                   type: boolean
                   example: true
                   description: 토큰의 유통기한입니다.
+
+info:
+  get:
+    security:
+      - Authorization: []
+    description: 관리자정보를 가져옵니다.
+    operationId: admin.rest.admin.info
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '../../../api/spec/models/user.yaml#/user'
