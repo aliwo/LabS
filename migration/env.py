@@ -44,6 +44,8 @@ from api.models.oauth import naver
 from api.models.oauth import apple
 from api.models.oauth import kakao
 from api.models.oauth import facebook
+
+from admin.models.admin import Admin
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,

@@ -12,3 +12,5 @@ servers:
 paths:
   /:
     $ref: 'rest/health.yaml#/hi'
+  /auth/:
+    $ref: 'rest/auth.yaml#/auth'
