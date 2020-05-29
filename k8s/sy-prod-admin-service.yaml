@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: sy-prod
+  name: sy-prod-admin
+  namespace: default
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    run: sy-prod-admin
+  type: NodePort

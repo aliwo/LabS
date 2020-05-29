@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: sy-prod
+  name: sy-prod-admin
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: sy-prod-admin
+  template:
+    metadata:
+      labels:
+        run: sy-prod-admin
+    spec:
+      volumes:
+        - name: alembic
+          secret:
+            secretName: sy-prod-alembic
+      containers:
+        - name: sy-prod-admin
+          ports:
+            - containerPort: 8001
+          volumeMounts:
+            - name: alembic
+              mountPath: "/LabS/temp"
+              readOnly: true
+          envFrom:
+            - secretRef:
+                name: sy-prod
+          image: gcr.io/soyeon-275107/sy-image:e54b161705bcbbb14ba87b25e8e5b19372ec0f8d
+          args: ["-w", "4", "-b", "0.0.0.0:8000", "--preload", "run:admin_app"]
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - cp /LabS/temp/alembic.ini /LabS/alembic.ini
+          imagePullPolicy: IfNotPresent
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /

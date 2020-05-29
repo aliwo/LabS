@@ -1,0 +1,14 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: 'Laboratory S Admin'
+  description: 'Laboratory S Admin'
+
+servers:
+  - description: Local
+    url: http://localhost:8000/
+
+paths:
+  /:
+    $ref: 'rest/health.yaml#/hi'

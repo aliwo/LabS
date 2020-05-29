@@ -1,5 +1,7 @@
 resources:
   - sy-prod-deployment.yaml
   - sy-prod-service.yaml
+  - sy-prod-admin-deployment.yaml
+  - sy-prod-admin-service.yaml
   - sy-ingress.yaml
   - sy-certificate.yaml
