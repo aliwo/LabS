@@ -16,6 +16,7 @@ env:
   IMAGE: sy-image
   REGISTRY_HOSTNAME: gcr.io
   DEPLOYMENT_NAME: sy-prod
+  # TODO: sy-prod 뿐 만 아니라 sy-prod-admin 도 rollout 해야 합니다.
 
 jobs:
   build:

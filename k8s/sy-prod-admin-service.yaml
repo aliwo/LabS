@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: sy-prod
+    run: sy-prod-admin
   name: sy-prod-admin
   namespace: default
 spec:
