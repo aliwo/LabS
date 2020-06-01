@@ -28,5 +28,7 @@ def get_bundled_specs(main_file: Path) -> Dict[str, Any]:
 
 app.add_api(get_bundled_specs(Path("admin/spec/main.yaml")),
             resolver = connexion.RestyResolver("cms_rest_api"))
+# base path 를 넣으면 GKE 에서도 제대로 될 거 같음!
+# https://connexion.readthedocs.io/en/latest/routing.html
 
 
