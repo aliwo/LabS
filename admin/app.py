@@ -15,8 +15,7 @@ if os.environ.get('SY_STAGE', '') == 'PRODUCTION':
     sentry_sdk.init("https://ff3db8501cc749f194820a7f4719d689@o390454.ingest.sentry.io/5233605")
 
 
-app = connexion.App(__name__, specification_dir='admin/spec/',
-                    options={'swagger_path': swagger_ui_3_path, 'swagger_url': 'admin_ui'})
+app = connexion.App(__name__, specification_dir='admin/spec/', options={'swagger_path': swagger_ui_3_path})
 set_session_destroyer(app.app)
 CORS(app.app)
 
