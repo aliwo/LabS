@@ -8,9 +8,10 @@ from api.models.user_session import UserSession
 from libs.database.engine import Session, afr
 from libs.datetime_helper import DateTimeHelper
 from libs.route.prerequisite import prerequisites
+from libs.route.router import route
 from libs.status import Status
 
-
+@route
 @prerequisites(UserPrerequisites, 'kakao')
 def login_kakao():
     oauth = Session().query(OauthKakao).filter(OauthKakao.party_id == g.info.get('id')).first()
