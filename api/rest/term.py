@@ -11,7 +11,7 @@ from api.models.terms_agreement import TermsAgreement
 
 @route
 def show_terms():
-    return {'term': [x.json() for x in Session().query(Term).all()]}, Status.HTTP_200_OK
+    return {'terms': [x.json() for x in Session().query(Term).all()]}, Status.HTTP_200_OK
 
 
 @route
