@@ -22,5 +22,11 @@ def convert(model, filepath, template=None):
             'type': val['type']
         }
 
+    for key in template[model_name].get('hidden', {}):
+        del template[model_name]['properties'][key]
+
+    if 'hidden' in template[model_name]:
+        del template[model_name]['hidden']
+
     to_yaml(template, filepath)
     return template

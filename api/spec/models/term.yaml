@@ -5,5 +5,7 @@ term:
       type: string
     id:
       type: integer
+    required:
+      type: boolean
     title:
       type: string

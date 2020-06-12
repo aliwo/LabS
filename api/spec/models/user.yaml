@@ -4,6 +4,7 @@ user:
     bio:
       type: string
     body_shape:
+      description: slim tan tan :)
       type: string
     cigarette:
       type: string
@@ -54,8 +55,6 @@ user:
       type: boolean
     occupation_confirmed_at:
       type: string
-    password:
-      type: string
     personality:
       type: integer
     phone:
@@ -76,5 +75,3 @@ user:
       type: string
     speciality:
       type: string
-    type_group:
-      type: integer

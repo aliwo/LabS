@@ -19,7 +19,8 @@ user = convert(User, 'user.yaml', {'user':{
                 'type': 'string',
                 'description': 'slim tan tan :)'
             }
-        }
+        },
+        'hidden': {'password',}
     }
 })
 mbti_question = convert(MbtiQuestion, 'mbti_question.yaml')
