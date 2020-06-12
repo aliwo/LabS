@@ -1,6 +1,8 @@
 user:
   description: end users
   properties:
+    animal_id:
+      type: integer
     bio:
       type: string
     body_shape:
@@ -55,8 +57,6 @@ user:
       type: boolean
     occupation_confirmed_at:
       type: string
-    personality:
-      type: integer
     phone:
       type: string
     phone_registered:
