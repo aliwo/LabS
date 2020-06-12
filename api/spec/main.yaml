@@ -78,3 +78,7 @@ components:
       $ref: 'models/terms_agreement.yaml#/terms_agreement'
     sms:
       $ref: 'models/sms_auth.yaml#/sms_auth'
+    mbti_question:
+      $ref: 'models/mbti_question.yaml#/mbti_question'
+    type_group:
+      $ref: 'models/type_group.yaml#/type_group'
