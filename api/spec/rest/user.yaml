@@ -86,8 +86,9 @@ nickname:
             schema:
               type: object
               properties:
-                user:
-                  $ref: '../models/user.yaml#/user'
+                duplicate:
+                  type: boolean
+                  example: false
 
 
 occupation:
