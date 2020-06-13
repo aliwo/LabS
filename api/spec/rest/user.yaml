@@ -51,7 +51,21 @@ me:
               properties:
                 user:
                   $ref: '../models/user.yaml#/user'
-
+  get:
+    security:
+      - Authorization: []
+    description: 자기 자신을 조회합니다.
+    operationId: api.rest.user.get_my_profile
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '../models/user.yaml#/user'
 
 nickname:
   get:
