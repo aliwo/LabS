@@ -18,6 +18,6 @@ animal:
             schema:
               type: object
               properties:
-                user:
+                animal:
                   $ref: '../models/animal.yaml#/animal'
 
