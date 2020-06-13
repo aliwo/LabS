@@ -18,7 +18,6 @@ sms_helper = SmsHelper(os.environ.get('SY_TOAST_APP_KEY', ''), os.environ.get('S
 @route
 def send_sms():
     '''
-    TODO: 토스트 계정 만들기
     문자 인증을 보냅니다.
     '''
     auth = afr(SmsAuth(g.user_session.user.id, request.json.get('phone_num')))
@@ -43,10 +42,10 @@ def auth_sms():
     if sms_auth.auth_value != request.json.get('auth_value'):
         raise ClientError('invalid auth')
 
-    if Session().query(User).filter((User.phone == request.json.get('phone_num'))).first():
+    if Session().query(User).filter((User.phone == sms_auth.phone_num)).first():
         raise ClientError('duplicate phone num', Status.HTTP_406_NOT_ACCEPTABLE)
 
-    g.user_session.user.phone = request.json.get('phone_num')
+    g.user_session.user.phone = sms_auth.phone_num
     g.user_session.user.phone_registered = True
 
     Session(changed=True).delete(sms_auth)

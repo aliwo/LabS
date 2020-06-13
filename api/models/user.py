@@ -36,7 +36,7 @@ class User(Base):
     interest = Column(TEXT) # 관심사
     drink = Column(TEXT) # 음주
     cigarette = Column(TEXT) # 흡연
-    personality = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'))
+    animal_id = Column(Integer, ForeignKey('animals.id', ondelete='CASCADE'))
 
     # 이상형 정보
     ideal_age_start = Column(INTEGER)

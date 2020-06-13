@@ -15,8 +15,7 @@ if os.environ.get('SY_STAGE', '') == 'PRODUCTION':
     sentry_sdk.init("https://ff3db8501cc749f194820a7f4719d689@o390454.ingest.sentry.io/5233605")
 
 
-app = connexion.App(__name__, specification_dir='admin/spec/',
-                    options={'swagger_path': swagger_ui_3_path, 'swagger_url': 'admin_ui'})
+app = connexion.App(__name__, specification_dir='admin/spec/', options={'swagger_path': swagger_ui_3_path})
 set_session_destroyer(app.app)
 CORS(app.app)
 
@@ -29,5 +28,7 @@ def get_bundled_specs(main_file: Path) -> Dict[str, Any]:
 
 app.add_api(get_bundled_specs(Path("admin/spec/main.yaml")),
             resolver = connexion.RestyResolver("cms_rest_api"))
+# base path 를 넣으면 GKE 에서도 제대로 될 거 같음!
+# https://connexion.readthedocs.io/en/latest/routing.html
 
 

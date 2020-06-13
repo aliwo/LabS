@@ -14,8 +14,13 @@ user = convert(User, 'user.yaml', {'user':{
             'ideal_type_groups': {
                 'type': 'string',
                 'description': '(comma separated)list of integers'
+            },
+            'body_shape': {
+                'type': 'string',
+                'description': 'slim tan tan :)'
             }
-        }
+        },
+        'hidden': {'password',}
     }
 })
 mbti_question = convert(MbtiQuestion, 'mbti_question.yaml')
