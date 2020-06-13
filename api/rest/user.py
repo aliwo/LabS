@@ -20,6 +20,11 @@ def get_user_profile(user_id):
 
 
 @route
+def get_my_profile():
+    return {'user': g.user_session.user.json()}, Status.HTTP_200_OK
+
+
+@route
 def put_user_profile():
     for key, value in request.json.items():
         if key in User.sensitives:
