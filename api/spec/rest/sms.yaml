@@ -46,9 +46,6 @@ sms_auth:
               auth_value:
                 type: string
                 example: 659852
-              phone_num:
-                type: string
-                example: 01022380476
     responses:
       "200":
         description: Success
