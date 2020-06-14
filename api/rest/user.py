@@ -42,7 +42,7 @@ def check_nick_name(nick_name):
 
 
 @route
-def upload_auth_occupation(nick_name):
+def upload_auth_occupation():
     afr(OccupationAuth(
         user_id=g.user_session.user.id,
         occupation_type=request.json.get('occupation_type'),

@@ -47,5 +47,4 @@ mbti:
               type: object
               properties:
                 animal:
-                  type: integer
-                  example: 3
+                  $ref: '../models/animal.yaml#/animal'
