@@ -16,4 +16,4 @@ def get_animal(animal_id):
     except NoResultFound:
         raise ClientError(f'No Animal Found id #{animal_id}', status_code=Status.HTTP_404_NOT_FOUND)
 
-    return {'user': animal.json()}, Status.HTTP_200_OK
+    return {'animal': animal.json()}, Status.HTTP_200_OK

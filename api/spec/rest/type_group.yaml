@@ -1,0 +1,22 @@
+type_group:
+  get:
+    description: 성격 유형을 가져옵니다.
+    operationId: api.rest.type_group.get_type_group
+    parameters:
+      - in: path
+        name: type_group_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_group:
+                  $ref: '../models/type_group.yaml#/type_group'
