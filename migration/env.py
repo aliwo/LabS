@@ -23,9 +23,12 @@ from libs.database.types import Base
 from api.models import animal
 from api.models import animal_corelation
 from api.models import announcements
-from api.models import heart
 from api.models import blacklist
+from api.models import heart
+from api.models import heart_recharge
+from api.models import item
 from api.models import magazine_category
+from api.models import match
 from api.models import notifications
 from api.models import occupation_auth
 from api.models import report

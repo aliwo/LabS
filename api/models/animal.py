@@ -11,7 +11,7 @@ from libs.datetime_helper import DateTimeHelper
 
 class Animal(Base):
     __tablename__ = 'animals'
-    mbti = Column(CHAR(10))
+    mbti = Column(CHAR(10), unique=True, index=True)
     prefix = Column(TEXT)
     name = Column(TEXT)
     tags = Column(LaboratoryTypes.TextTuple)

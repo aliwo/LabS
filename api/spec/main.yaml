@@ -33,6 +33,18 @@ paths:
   /users/occupation:
     $ref: 'rest/user.yaml#/occupation'
 
+  # Heart
+  /heart:
+    $ref: 'rest/heart.yaml#/heart'
+  /heart/double:
+    $ref: 'rest/heart.yaml#/double_heart'
+  /heart/recharge/google:
+    $ref: 'rest/heart.yaml#/google_recharge'
+
+  # Star
+  /star:
+    $ref: 'rest/star.yaml#/star'
+
   # Sms
   /sms:
     $ref: 'rest/sms.yaml#/sms'
@@ -56,6 +68,10 @@ paths:
   # Image
   /image:
     $ref: 'rest/image.yaml#/image'
+
+  # Image
+  /type_group/{type_group_id}:
+    $ref: 'rest/type_group.yaml#/type_group'
 
   # Magazines
 #  /magazines:

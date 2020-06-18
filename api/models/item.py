@@ -4,13 +4,15 @@ from sqlalchemy.dialects.mysql import CHAR, BOOLEAN, TEXT
 from libs.database.types import Base
 
 
-class Star(Base):
-    __tablename__ = 'stars'
-    user_id = Column(TEXT)
-    rate = Column(TEXT)
+class Item(Base):
+    __tablename__ = 'items'
+
+    symbol = Column(CHAR(10), unique=True, index=True)
+    price = Column(Integer)
 
     def json(self):
         return {
             'id': self.id,
-            'rate': self.rate
+            'symbol': self.symbol,
+            'price': self.price
         }
