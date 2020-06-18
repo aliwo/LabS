@@ -15,8 +15,8 @@ class UserPointTx(Base):
     hp = Column(INTEGER, default='0')
     mp = Column(INTEGER, default='0')
 
-    heart_recharge_id = Column(Integer, ForeignKey('heart_recharges')) # 하트 포인트가 증가하는 경우
-    heart_id = Column(Integer, ForeignKey('hearts')) # 하트를 쏴서 포인트가 감소하는 경우
+    heart_recharge_id = Column(Integer, ForeignKey('heart_recharges.id')) # 하트 포인트가 증가하는 경우
+    heart_id = Column(Integer, ForeignKey('hearts.id')) # 하트를 쏴서 포인트가 감소하는 경우
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
