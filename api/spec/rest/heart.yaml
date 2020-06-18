@@ -54,3 +54,33 @@ double_heart:
                 okay:
                   type: boolean
                   example: true
+
+
+google_recharge:
+  post:
+    security:
+      - Authorization: []
+    description: 구글 영수증을 검증하고 하트를 충전합니다.
+    operationId: api.rest.heart.recharge_heart_google
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+

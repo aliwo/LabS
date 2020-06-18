@@ -38,6 +38,8 @@ paths:
     $ref: 'rest/heart.yaml#/heart'
   /heart/double:
     $ref: 'rest/heart.yaml#/double_heart'
+  /heart/recharge/google:
+    $ref: 'rest/heart.yaml#/google_recharge'
 
   # Star
   /star:
