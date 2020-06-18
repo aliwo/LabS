@@ -1,5 +1,5 @@
 import requests
-from flask import request
+from flask import request, g
 
 from api.models.heart import Heart
 from api.models.heart_recharge import HeartRecharge
@@ -27,6 +27,10 @@ class HeartPrerequisites(Prerequisites):
 
     def accept(self):
         '''
+        자기한테 온 하트가 맞는지 체크합니다.
         더블 하트라면 지나갑니다.
         만약 일반 하트라면 accept 하는 유저가 포인트를 갖고 있는지 체크합니다.
         '''
+        heart = Session().query(Heart).filter((Heart.id == request.json.get('heart_id'))).one()
+        helper.must_mine(g.user_session.user, heart)
+        self.result['heart'] = heart
