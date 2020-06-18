@@ -69,9 +69,25 @@ google_recharge:
           schema:
             type: object
             properties:
-              user_id:
+              amount:
                 type: integer
-                example: 3
+                example: 5000
+              recharge_info:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: GOOGLE
+                  google_purchase_token:
+                    type: string
+                    example: abkhrwouboncv38hfgt093214vhjgrksbv349712bfv8
+                  google_order_id:
+                    type: string
+                    example: 5390-buy8053uv24jklfnlc3n1jkrb3
+                  product:
+                    type: string
+                    example: 1000
+
     responses:
       "200":
         description: Success
