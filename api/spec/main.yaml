@@ -33,6 +33,16 @@ paths:
   /users/occupation:
     $ref: 'rest/user.yaml#/occupation'
 
+  # Heart
+  /heart:
+    $ref: 'rest/heart.yaml#/heart'
+  /heart/double:
+    $ref: 'rest/heart.yaml#/double_heart'
+
+  # Star
+  /star:
+    $ref: 'rest/star.yaml#/star'
+
   # Sms
   /sms:
     $ref: 'rest/sms.yaml#/sms'

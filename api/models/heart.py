@@ -20,6 +20,7 @@ class Heart(Base):
     to_user = Column(Integer)
     double = Column(BOOLEAN)
     hi = Column(BOOLEAN)
+    accpeted = Column(BOOLEAN)
 
     created_at = Column(DATETIME)
 

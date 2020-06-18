@@ -1,0 +1,56 @@
+heart:
+  post:
+    security:
+      - Authorization: []
+    description: 하트를 보냅니다.
+    operationId: api.rest.heart.send_heart
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+
+
+double_heart:
+  post:
+    security:
+      - Authorization: []
+    description: 더블 하트를 보냅니다.
+    operationId: api.rest.heart.send_double_heart
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true

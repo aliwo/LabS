@@ -1,0 +1,30 @@
+star:
+  post:
+    security:
+      - Authorization: []
+    description: 별점 얼평을 합니다.
+    operationId: api.rest.star.rate_star
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+              star:
+                type: integer
+                example: 10
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
