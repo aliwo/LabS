@@ -49,6 +49,7 @@ def accept_heart():
 @prerequisites(HeartRechargePrerequisites, 'google')
 def recharge_heart_google():
     '''
+    TODO: 테스트 필요
     구글 영수증을 검증하고 하트를 충전합니다.
     '''
     heart_recharge = afr(HeartRecharge(**request.json.get('recharge_info')))
