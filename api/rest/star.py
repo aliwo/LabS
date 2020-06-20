@@ -1,10 +1,11 @@
 from flask import g, request
-
 from api.models.star import Star
 from libs.database.engine import Session
+from libs.route.router import route
 from libs.status import Status
 
 
+@route
 def rate_star():
     '''
     TODO: 테스트 필요

@@ -32,9 +32,6 @@ class RandomStrategy(MatchStrategy):
     '''
 
 
-
-
-
 class Match(Base):
     '''
     테이블 상속을 쓸까..? 아니면 strategy 패턴으로 할까? -> 당연히 init_on_load 써서 strategy 로 가는게 더 우아하다.
@@ -45,6 +42,7 @@ class Match(Base):
     to_user_id = Column(Integer, ForeignKey('users.id'), index=True)
 
     matched = Column(BOOLEAN)
+    type_ = Column(CHAR(10)) # SOYEON, PREFER, RANDOM 등이 있습니다.
 
     created_at = Column(DATETIME)
     matched_at = Column(DATETIME)

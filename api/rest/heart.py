@@ -20,7 +20,7 @@ def send_heart():
     heart = Heart(from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'), )
     Session().add(heart)
     Session().commit()
-    return  {'okay': True}, Status.HTTP_200_OK
+    return {'okay': True}, Status.HTTP_200_OK
 
 
 @route
