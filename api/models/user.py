@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
@@ -40,7 +40,7 @@ class User(Base):
     animal_id = Column(Integer, ForeignKey('animals.id', ondelete='CASCADE'))
 
     # el_time
-    el_time = Column(DATETIME) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!
+    el_time = Column(TIMESTAMP) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!
 
     # 이상형 정보
     ideal_age_start = Column(INTEGER)
