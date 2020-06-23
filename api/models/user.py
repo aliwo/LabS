@@ -39,6 +39,9 @@ class User(Base):
     cigarette = Column(TEXT) # 흡연
     animal_id = Column(Integer, ForeignKey('animals.id', ondelete='CASCADE'))
 
+    # el_time
+    el_time = Column(DATETIME) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!
+
     # 이상형 정보
     ideal_age_start = Column(INTEGER)
     ideal_age_end = Column(INTEGER)
@@ -91,8 +94,10 @@ class User(Base):
         :param kwargs:
         '''
         super().__init__(**kwargs)
-        self.registered_at = datetime.now()
-        self.last_access = datetime.now()
+        now =  datetime.now()
+        self.registered_at = now
+        self.last_access = now
+        self.el_time = now
 
     def set_password(self, password):
         self.password = hashlib.sha256(password.encode('utf-8')).hexdigest()
