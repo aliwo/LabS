@@ -46,7 +46,8 @@ class Animal(Base):
                                 {'term': {'sex': not self.user.sex}}
                             ],
                             'must_not': [
-                                {'term': {'animal_id': x }} for x in self.user.get_matched_user_ids()
+                                {'terms': {'animal_id': self.user.get_matched_user_ids() }}
+                                # 정지 당한 계정도 must_not 해야 함. {'terms': {'_id': 정지당한 계정들}}
                             ]
                         }
                     } ,
