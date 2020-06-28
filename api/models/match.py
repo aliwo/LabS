@@ -1,5 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer
-from sqlalchemy.dialects.mysql import CHAR, BOOLEAN, TEXT, DATETIME
+from sqlalchemy.dialects.mysql import CHAR, BOOLEAN, TEXT, DATETIME, TIMESTAMP
 
 from libs.database.types import Base
 
@@ -45,6 +45,7 @@ class Match(Base):
     type_ = Column(CHAR(10)) # SOYEON, PREFER, RANDOM 등이 있습니다.
 
     created_at = Column(DATETIME)
+    el_time = Column(TIMESTAMP)
     matched_at = Column(DATETIME)
 
     def json(self):
