@@ -3,6 +3,7 @@ from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP
+from sqlalchemy.orm import relationship, backref
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
@@ -38,6 +39,7 @@ class User(Base):
     drink = Column(TEXT) # 음주
     cigarette = Column(TEXT) # 흡연
     animal_id = Column(Integer, ForeignKey('animals.id', ondelete='CASCADE'))
+    animal = relationship('Animal', lazy="selectin", uselist=False, backref=backref('user', uselist=False))
 
     # el_time
     el_time = Column(TIMESTAMP) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!

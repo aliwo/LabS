@@ -16,6 +16,9 @@ class Animal(Base):
     name = Column(TEXT)
     tags = Column(LaboratoryTypes.TextTuple)
 
+    # 다음의 backref 가 존재합니다.
+    # user
+
     # profile
     main_profile = Column(TEXT) #
     romance_profile = Column(TEXT) # 사랑과 데이트 설명
@@ -33,4 +36,33 @@ class Animal(Base):
             'so_profile': self.so_profile
         }
 
+    def gen_query_body(self):
+        return {
+            'query': {
+                'function_score': {
+                    'query': {
+                        'bool': {
+                            'must': [
+                                {'term': {'sex': True}}
+                            ],
+                            'must_not': [
+                                {'term': {'animal_id': 2}},
+                                {'term': {'animal_id': 16}}
+                            ]
+                        }
+                    } ,
+                    'boost': '5',
+                    'functions': [
+                        {
+                            'filter': { 'term': {'animal_id': 2} },
+                            'weight': 4
+                        },
+                        {
+                            'filter': { 'term': {'animal_id': 10} },
+                            'weight': 5
+                        }
+                    ]
+                }
+            }
+        }
 
