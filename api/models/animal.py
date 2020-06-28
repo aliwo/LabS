@@ -43,11 +43,10 @@ class Animal(Base):
                     'query': {
                         'bool': {
                             'must': [
-                                {'term': {'sex': True}}
+                                {'term': {'sex': not self.user.sex}}
                             ],
                             'must_not': [
-                                {'term': {'animal_id': 2}},
-                                {'term': {'animal_id': 16}}
+                                {'term': {'animal_id': x }} for x in self.user.get_matched_user_ids()
                             ]
                         }
                     } ,

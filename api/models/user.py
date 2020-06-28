@@ -104,6 +104,12 @@ class User(Base):
     def set_password(self, password):
         self.password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+    def get_matched_user_ids(self):
+        from libs.database.engine import Session
+        from api.models.match import Match
+        return  list(set([x.to_user_id for x in Session().query(Match).filter((Match.from_user_id == self.id))] + \
+        [x.from_user_id for x in Session().query(Match).filter((Match.to_user_id == self.id))]))
+
     def json(self, **kwargs):
         result = {
             'id': self.id,
