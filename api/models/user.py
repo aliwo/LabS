@@ -1,13 +1,51 @@
 import hashlib
 from datetime import datetime
 
-from sqlalchemy import Integer, Column, ForeignKey
+from sqlalchemy import Integer, Column, ForeignKey, orm
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP
 from sqlalchemy.orm import relationship, backref
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
+
+
+class QueryStrategy:
+
+    def __init__(self, user):
+        self.user = user
+
+    def gen_sy_query(self, session):
+        from api.models.match import Match
+
+        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
+        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
+
+        return {
+            'query': {
+                'function_score': {
+                    'query': {
+                        'bool': {
+                            'must': [
+                                {'term': {'sex': not self.user.sex}}
+                            ],
+                            'must_not': [
+                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
+                                # TODO: 정지 당한 계정도 must_not 해야 함. {'lt': {'frozen_until': 현재시각 YYYY-MM-DD }}
+                                # TODO: 자신과 비슷한 티어가 우선순위를 같도록 해야 함.
+                            ]
+                        }
+                    } ,
+                    'boost': '5',
+                    'functions': [
+                        {
+                            'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
+                            'weight': x.weight
+                        } for x in self.user.animal.correlations
+                    ]
+                }
+            }
+        }
 
 
 class User(Base):
@@ -81,6 +119,10 @@ class User(Base):
     # put 으로 변경할 수 없는 컬럼 들입니다.
     sensitives = {'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access'}
 
+    @orm.reconstructor
+    def init_on_load(self):
+        self.strategy = QueryStrategy(self)
+
     @property
     def oauth(self):
         if self.oauth_google_id:
@@ -102,39 +144,11 @@ class User(Base):
         self.last_access = now
         self.el_time = now
 
-    def gen_query_body(self, session):
+    def gen_sy_query(self, session):
         '''
         백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
         '''
-        from api.models.match import Match
-
-        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.id))] + \
-        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.id))]))
-
-        return {
-            'query': {
-                'function_score': {
-                    'query': {
-                        'bool': {
-                            'must': [
-                                {'term': {'sex': not self.sex}}
-                            ],
-                            'must_not': [
-                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
-                                # 정지 당한 계정도 must_not 해야 함. {'terms': {'_id': 정지당한 계정들}}
-                            ]
-                        }
-                    } ,
-                    'boost': '5',
-                    'functions': [
-                        {
-                            'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
-                            'weight': x.weight
-                        } for x in self.animal.correlations
-                    ]
-                }
-            }
-        }
+        return self.strategy.gen_sy_query(session)
 
     def json(self, **kwargs):
         result = {

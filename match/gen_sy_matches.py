@@ -26,7 +26,7 @@ def gen_sy_matches():
     # 남자의 카드를 채웁니다.
     men = session.query(User).filter((User.sex == False)).all()
     for man in men:
-        result = es.search(man.gen_query_body(session), index='sy-users')
+        result = es.search(man.gen_sy_query(session), index='sy-users')
         if not result['hits']['hits']:
             continue # 더 이상 매칭할 사람이 없다.
         for target in result['hits']['hits'][:2]: # 우선 순위 2명의 카드를 만듭니다.
@@ -39,7 +39,7 @@ def gen_sy_matches():
     for woman in women:
         if len(memo[woman.id]) >= 2:
             print(f'여자{woman.id}는 2장 찼음!')
-        result = es.search(woman.gen_query_body(session), index='sy-users')
+        result = es.search(woman.gen_sy_query(session), index='sy-users')
         for target in result['hits']['hits'][:2-len(memo[woman.id])]:
             memo[woman.id].append(int(target['_id']))
             memo[int(target['_id'])].append(woman.id)
