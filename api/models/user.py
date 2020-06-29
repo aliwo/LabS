@@ -13,7 +13,8 @@ from libs.datetime_helper import DateTimeHelper
 class User(Base):
     __tablename__ = 'users'
     email = Column(TEXT)
-    password = Column(TEXT) # TODO: 일반 회원가입 없으면 지울 것.
+    frozen_until = Column(DATETIME)
+    frozen_at = Column(DATETIME)
 
     # 신상정보
     name = Column(CHAR(50))
@@ -101,9 +102,6 @@ class User(Base):
         self.last_access = now
         self.el_time = now
 
-    def set_password(self, password):
-        self.password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-
     def get_matched_user_ids(self):
         from libs.database.engine import Session
         from api.models.match import Match
@@ -138,6 +136,8 @@ class User(Base):
             'drink': self.drink,
             'cigarette': self.cigarette,
 
+            # 기타
+            'registration_phase': self.registration_phase,
 
             # 통계 정보
             'last_access': DateTimeHelper.full_datetime(self.last_access),
