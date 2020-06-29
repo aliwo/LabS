@@ -12,7 +12,7 @@ from libs.datetime_helper import DateTimeHelper
 class AnimalCorrelation(Base):
     __tablename__ = 'animal_correlations'
 
-    from_animal_id = Column(INTEGER)
+    from_animal_id = Column(Integer, ForeignKey('animals.id'))
     to_animal_ids = Column(LaboratoryTypes.IntTuple)
     weight = Column(Integer) # 1 ~ 5
 

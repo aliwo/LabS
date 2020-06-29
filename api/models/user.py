@@ -102,11 +102,39 @@ class User(Base):
         self.last_access = now
         self.el_time = now
 
-    def get_matched_user_ids(self):
-        from libs.database.engine import Session
+    def gen_query_body(self, session):
+        '''
+        백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
+        '''
         from api.models.match import Match
-        return  list(set([x.to_user_id for x in Session().query(Match).filter((Match.from_user_id == self.id))] + \
-        [x.from_user_id for x in Session().query(Match).filter((Match.to_user_id == self.id))]))
+
+        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.id))] + \
+        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.id))]))
+
+        return {
+            'query': {
+                'function_score': {
+                    'query': {
+                        'bool': {
+                            'must': [
+                                {'term': {'sex': not self.sex}}
+                            ],
+                            'must_not': [
+                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
+                                # 정지 당한 계정도 must_not 해야 함. {'terms': {'_id': 정지당한 계정들}}
+                            ]
+                        }
+                    } ,
+                    'boost': '5',
+                    'functions': [
+                        {
+                            'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
+                            'weight': x.weight
+                        } for x in self.animal.correlations
+                    ]
+                }
+            }
+        }
 
     def json(self, **kwargs):
         result = {

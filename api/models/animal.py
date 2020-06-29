@@ -3,6 +3,7 @@ from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER
+from sqlalchemy.orm import relationship
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
@@ -24,6 +25,8 @@ class Animal(Base):
     romance_profile = Column(TEXT) # 사랑과 데이트 설명
     so_profile = Column(TEXT) # 상대에게 조언
 
+    correlations = relationship('AnimalCorrelation')
+
     def json(self):
         return {
             'id': self.id,
@@ -36,33 +39,5 @@ class Animal(Base):
             'so_profile': self.so_profile
         }
 
-    def gen_query_body(self):
-        return {
-            'query': {
-                'function_score': {
-                    'query': {
-                        'bool': {
-                            'must': [
-                                {'term': {'sex': not self.user.sex}}
-                            ],
-                            'must_not': [
-                                {'terms': {'animal_id': self.user.get_matched_user_ids() }}
-                                # 정지 당한 계정도 must_not 해야 함. {'terms': {'_id': 정지당한 계정들}}
-                            ]
-                        }
-                    } ,
-                    'boost': '5',
-                    'functions': [
-                        {
-                            'filter': { 'term': {'animal_id': 2} },
-                            'weight': 4
-                        },
-                        {
-                            'filter': { 'term': {'animal_id': 10} },
-                            'weight': 5
-                        }
-                    ]
-                }
-            }
-        }
+
 
