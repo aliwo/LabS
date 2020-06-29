@@ -22,9 +22,6 @@ def afr(*args):
     return args
 
 def gen_sy_matches():
-    '''
-    TODO: 추후에는 남자 모두를 한 번에 쿼리하는게 아니라 나눠서 배치처리 하도록 해야 함.
-    '''
 
     # 남자의 카드를 채웁니다.
     men = session.query(User).filter((User.sex == False)).all()
