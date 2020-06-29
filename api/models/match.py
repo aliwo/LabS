@@ -4,13 +4,10 @@ from sqlalchemy import Column, ForeignKey, Integer
 from sqlalchemy.dialects.mysql import CHAR, BOOLEAN, TEXT, DATETIME, TIMESTAMP
 
 from libs.database.types import Base
+from libs.datetime_helper import DateTimeHelper
 
 
 class Match(Base):
-    '''
-    테이블 상속을 쓸까..? 아니면 strategy 패턴으로 할까? -> 당연히 init_on_load 써서 strategy 로 가는게 더 우아하다.
-
-    '''
     __tablename__ = 'matches'
     from_user_id = Column(Integer, ForeignKey('users.id'), index=True)
     to_user_id = Column(Integer, ForeignKey('users.id'), index=True)
@@ -33,5 +30,8 @@ class Match(Base):
     def json(self):
         return {
             'id': self.id,
-            'rate': self.rate
+            'from_user_id': self.from_user_id,
+            'to_user_id': self.to_user_id,
+            'matched': self.matched,
+            'created_at': DateTimeHelper.full_datetime(self.created_at),
         }
