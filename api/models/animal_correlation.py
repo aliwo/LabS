@@ -9,8 +9,8 @@ from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 
-class AnimalCorelation(Base):
-    __tablename__ = 'animal_corelations'
+class AnimalCorrelation(Base):
+    __tablename__ = 'animal_correlations'
 
     from_animal_id = Column(INTEGER)
     to_animal_ids = Column(LaboratoryTypes.IntTuple)
