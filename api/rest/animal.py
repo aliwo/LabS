@@ -2,6 +2,7 @@ from flask import request, g
 from sqlalchemy.orm.exc import NoResultFound
 
 from api.models.animal import Animal
+from api.models.animal_correlation import AnimalCorrelation
 from api.models.user import User
 from libs.database.engine import Session
 from libs.route.errors import ClientError
