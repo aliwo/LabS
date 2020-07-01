@@ -17,8 +17,8 @@ spec:
     spec:
       volumes:
         - name: elastic-ca
-          configMap:
-            name: quickstart-es-http-certs-public
+          secret:
+            secretName: quickstart-es-http-certs-public
         - name: alembic
           secret:
             secretName: sy-prod-alembic
