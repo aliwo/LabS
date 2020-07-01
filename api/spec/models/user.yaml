@@ -1,6 +1,8 @@
 user:
   description: end users
   properties:
+    age:
+      type: integer
     animal_id:
       type: integer
     bio:
@@ -16,9 +18,15 @@ user:
       type: string
     education:
       type: string
+    el_time:
+      type: string
     email:
       type: string
     fcm_token:
+      type: string
+    frozen_at:
+      type: string
+    frozen_until:
       type: string
     height:
       type: integer
@@ -73,5 +81,7 @@ user:
       type: string
     religion:
       type: string
+    sex:
+      type: boolean
     speciality:
       type: string
