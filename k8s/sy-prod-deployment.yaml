@@ -16,6 +16,9 @@ spec:
         run: sy-prod
     spec:
       volumes:
+        - name: elastic-ca
+          configMap:
+            name: quickstart-es-http-certs-public
         - name: alembic
           secret:
             secretName: sy-prod-alembic
@@ -27,6 +30,14 @@ spec:
             - name: alembic
               mountPath: "/LabS/temp"
               readOnly: true
+            - name: elastic-ca
+              mountPath: "/ca.crt"
+              subPath: "ca.crt"
+          env:
+            - name: "SY_ELASTIC_CA_PATH"
+              value: "/ca.crt"
+            - name: "SY_ELASTIC_HOST"
+              value: "quickstart-es-http"
           envFrom:
             - secretRef:
                 name: sy-prod
