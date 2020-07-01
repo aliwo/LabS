@@ -37,7 +37,7 @@ spec:
             - name: "SY_ELASTIC_CA_PATH"
               value: "/ca.crt"
             - name: "SY_ELASTIC_HOST"
-              value: "quickstart-es-http"
+              value: "quickstart-es-http.sy-elastic.svc"
             - name: "SY_ELASTIC_USER"
               value: "elastic"
             - name: "SY_ELASTIC_PASSWORD"
