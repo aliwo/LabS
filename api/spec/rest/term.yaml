@@ -8,10 +8,10 @@ term:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                term:
-                  $ref: '../models/term.yaml#/term'
+              type: array
+              items:
+                type: object
+                $ref: '../models/term.yaml#/term'
 
   put:
     security:

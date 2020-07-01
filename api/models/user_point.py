@@ -30,6 +30,7 @@ class UserPoint(Base):
     user = relationship('User', foreign_keys=[user_id], uselist=False, backref=backref('point', cascade='all,delete', uselist=False))
     hp = Column(INTEGER, server_default='0')
     mp = Column(INTEGER, server_default='0')
+    # star_point = Column(INTEGER, server_default='0') # 별점을 어딘가에 저장해 둘 필요가 있을 듯. (티어를 위해)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -39,7 +40,8 @@ class UserPoint(Base):
         '''
         hp 는 음수일 수 있습니다. 음수라면 hp 가 감소합니다.
         '''
-        from libs.database.engine import Session
+        from libs.database.engine import Session, afr
+        tx = afr(UserPointTx(user_id=user_id, hp=hp))
         point = Session().query(UserPoint).filter((UserPoint.user_id==user_id)).with_for_update().one()
         point.hp += hp
         Session().flush()
@@ -48,9 +50,10 @@ class UserPoint(Base):
     @classmethod
     def manner_point(cls, user_id, mp):
         '''
-        mp 는 음수일 수 있습니다. 음수라면 hp 가 감소합니다.
+        mp 는 음수일 수 있습니다. 음수라면 mp 가 감소합니다.
         '''
-        from libs.database.engine import Session
+        from libs.database.engine import Session, afr
+        tx = afr(UserPointTx(user_id=user_id, mp=mp))
         point = Session().query(UserPoint).filter((UserPoint.user_id==user_id)).with_for_update().one()
         point.mp += mp
         Session().flush()

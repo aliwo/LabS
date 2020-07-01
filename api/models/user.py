@@ -1,18 +1,58 @@
 import hashlib
 from datetime import datetime
 
-from sqlalchemy import Integer, Column, ForeignKey
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN
+from sqlalchemy import Integer, Column, ForeignKey, orm
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP
+from sqlalchemy.orm import relationship, backref
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
 
 
+class QueryStrategy:
+
+    def __init__(self, user):
+        self.user = user
+
+    def gen_sy_query(self, session):
+        from api.models.match import Match
+
+        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
+        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
+
+        return {
+            'query': {
+                'function_score': {
+                    'query': {
+                        'bool': {
+                            'must': [
+                                {'term': {'sex': not self.user.sex}}
+                            ],
+                            'must_not': [
+                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
+                                # TODO: 정지 당한 계정도 must_not 해야 함. {'lt': {'frozen_until': 현재시각 YYYY-MM-DD }}
+                                # TODO: 자신과 비슷한 티어가 우선순위를 같도록 해야 함.
+                            ]
+                        }
+                    } ,
+                    'boost': '5',
+                    'functions': [
+                        {
+                            'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
+                            'weight': x.weight
+                        } for x in self.user.animal.correlations
+                    ]
+                }
+            }
+        }
+
+
 class User(Base):
     __tablename__ = 'users'
     email = Column(TEXT)
-    password = Column(TEXT) # TODO: 일반 회원가입 없으면 지울 것.
+    frozen_until = Column(DATETIME)
+    frozen_at = Column(DATETIME)
 
     # 신상정보
     name = Column(CHAR(50))
@@ -38,6 +78,10 @@ class User(Base):
     drink = Column(TEXT) # 음주
     cigarette = Column(TEXT) # 흡연
     animal_id = Column(Integer, ForeignKey('animals.id', ondelete='CASCADE'))
+    animal = relationship('Animal', lazy="selectin", uselist=False, backref=backref('user', uselist=False))
+
+    # el_time
+    el_time = Column(TIMESTAMP) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!
 
     # 이상형 정보
     ideal_age_start = Column(INTEGER)
@@ -75,6 +119,10 @@ class User(Base):
     # put 으로 변경할 수 없는 컬럼 들입니다.
     sensitives = {'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access'}
 
+    @orm.reconstructor
+    def init_on_load(self):
+        self.strategy = QueryStrategy(self)
+
     @property
     def oauth(self):
         if self.oauth_google_id:
@@ -91,11 +139,16 @@ class User(Base):
         :param kwargs:
         '''
         super().__init__(**kwargs)
-        self.registered_at = datetime.now()
-        self.last_access = datetime.now()
+        now =  datetime.now()
+        self.registered_at = now
+        self.last_access = now
+        self.el_time = now
 
-    def set_password(self, password):
-        self.password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    def gen_sy_query(self, session):
+        '''
+        백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
+        '''
+        return self.strategy.gen_sy_query(session)
 
     def json(self, **kwargs):
         result = {
@@ -125,6 +178,8 @@ class User(Base):
             'drink': self.drink,
             'cigarette': self.cigarette,
 
+            # 기타
+            'registration_phase': self.registration_phase,
 
             # 통계 정보
             'last_access': DateTimeHelper.full_datetime(self.last_access),

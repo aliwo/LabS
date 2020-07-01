@@ -21,7 +21,7 @@ import sys
 sys.path.append('.')
 from libs.database.types import Base
 from api.models import animal
-from api.models import animal_corelation
+from api.models import animal_correlation
 from api.models import announcements
 from api.models import blacklist
 from api.models import heart

@@ -3,6 +3,7 @@ from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER
+from sqlalchemy.orm import relationship
 
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
@@ -16,10 +17,15 @@ class Animal(Base):
     name = Column(TEXT)
     tags = Column(LaboratoryTypes.TextTuple)
 
+    # 다음의 backref 가 존재합니다.
+    # user
+
     # profile
     main_profile = Column(TEXT) #
     romance_profile = Column(TEXT) # 사랑과 데이트 설명
     so_profile = Column(TEXT) # 상대에게 조언
+
+    correlations = relationship('AnimalCorrelation')
 
     def json(self):
         return {
@@ -32,5 +38,6 @@ class Animal(Base):
             'romance_profile': self.romance_profile,
             'so_profile': self.so_profile
         }
+
 
 

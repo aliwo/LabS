@@ -11,6 +11,9 @@ from libs.status import Status
 
 @route
 def get_type_group(type_group_id):
+    '''
+    TODO: 테스트 필요
+    '''
     try:
         type_group = Session().query(TypeGroup).filter((TypeGroup.id == type_group_id)).one()
     except NoResultFound:

@@ -6,7 +6,8 @@ from libs.database.types import Base
 
 class Star(Base):
     __tablename__ = 'stars'
-    user_id = Column(TEXT)
+    from_user_id = Column(Integer, ForeignKey('users.id'), index=True)
+    to_user_id = Column(Integer, ForeignKey('users.id'), index=True)
     rate = Column(TEXT)
 
     def json(self):
