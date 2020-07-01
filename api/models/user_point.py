@@ -40,7 +40,8 @@ class UserPoint(Base):
         '''
         hp 는 음수일 수 있습니다. 음수라면 hp 가 감소합니다.
         '''
-        from libs.database.engine import Session
+        from libs.database.engine import Session, afr
+        tx = afr(UserPointTx(user_id=user_id, hp=hp))
         point = Session().query(UserPoint).filter((UserPoint.user_id==user_id)).with_for_update().one()
         point.hp += hp
         Session().flush()
@@ -51,7 +52,8 @@ class UserPoint(Base):
         '''
         mp 는 음수일 수 있습니다. 음수라면 mp 가 감소합니다.
         '''
-        from libs.database.engine import Session
+        from libs.database.engine import Session, afr
+        tx = afr(UserPointTx(user_id=user_id, mp=mp))
         point = Session().query(UserPoint).filter((UserPoint.user_id==user_id)).with_for_update().one()
         point.mp += mp
         Session().flush()
