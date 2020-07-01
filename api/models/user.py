@@ -56,6 +56,7 @@ class User(Base):
 
     # 신상정보
     name = Column(CHAR(50))
+    age = Column(INTEGER)
     sex = Column(BOOLEAN) # 0 은 남자 1 은 여자
     nick_name = Column(CHAR(50), unique=True)
     education = Column(TEXT) # 학력
