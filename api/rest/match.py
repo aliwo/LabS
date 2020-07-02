@@ -1,14 +1,28 @@
+from api.models.match import Match
 from libs.database.engine import Session
+from libs.route.router import route
 
 
 @route
-def get_soyeon_match():
+def get_soyeon_matches():
     '''
-    '소연이 제안하는 인연' 을 만들어 냅니다.
+    '소연이 제안하는 인연' 을 조회합니다.
+    '''
 
-    1. match 들을 쿼리해서 아직 due 가 지나지 않았다면 새로 만들지 않고 있는 매치를 리턴합니다.
-    TODO: due 가 지난 카드는 '지난 인연' 에 쌓입니다.
-    2. due 가 지났다면 새로운 match 를 생성합니다.
+    Session().query(Match).filter()
+
+
+@route
+def get_preference_matches():
+    '''
+    '''
+
+    Session().query()
+
+
+@route
+def get_old_matches():
+    '''
     '''
 
     Session().query()
