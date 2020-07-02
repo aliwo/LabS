@@ -158,6 +158,8 @@ class User(Base):
 
             # 신상 정보
             'name': self.name,
+            'age': self.age,
+            'sex': self.sex,
             'nick_name': self.nick_name,
             'education': self.education,
             'occupation': self.occupation,
