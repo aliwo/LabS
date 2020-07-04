@@ -37,7 +37,8 @@ class Animal(Base):
             'tags': self.tags,
             'main_profile': self.main_profile,
             'romance_profile': self.romance_profile,
-            'so_profile': self.so_profile
+            'so_profile': self.so_profile,
+            'type_group_id': self.type_group_id,
         }
 
 

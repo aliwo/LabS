@@ -69,9 +69,11 @@ paths:
   /image:
     $ref: 'rest/image.yaml#/image'
 
-  # Image
-  /type_group/{type_group_id}:
+  # Type Group
+  /type_groups/{type_group_id}:
     $ref: 'rest/type_group.yaml#/type_group'
+  /type_groups:
+    $ref: 'rest/type_group.yaml#/type_groups'
 
   # Magazines
 #  /magazines:
