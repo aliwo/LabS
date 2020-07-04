@@ -20,3 +20,8 @@ def get_type_group(type_group_id):
         raise ClientError(f'No Type group Found id #{type_group_id}', status_code=Status.HTTP_404_NOT_FOUND)
 
     return {'type_group': type_group.json()}, Status.HTTP_200_OK
+
+
+@route
+def get_all_type_groups():
+    return {'type_groups': [x.json() for x in Session().query(TypeGroup).all()]}, Status.HTTP_200_OK

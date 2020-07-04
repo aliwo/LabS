@@ -20,3 +20,21 @@ type_group:
               properties:
                 type_group:
                   $ref: '../models/type_group.yaml#/type_group'
+
+type_groups:
+  get:
+    description: 성격 유형의 모든 리스트를 가져옵니다.
+    operationId: api.rest.type_group.get_all_type_groups
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_groups:
+                  type: array
+                  items:
+                    $ref: '../models/type_group.yaml#/type_group'
