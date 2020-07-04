@@ -154,6 +154,7 @@ class User(Base):
     def json(self, **kwargs):
         result = {
             'id': self.id,
+            'animal_id': self.animal_id,
             'email': self.email,
 
             # 신상 정보
