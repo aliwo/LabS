@@ -16,6 +16,7 @@ class Animal(Base):
     prefix = Column(TEXT)
     name = Column(TEXT)
     tags = Column(LaboratoryTypes.TextTuple)
+    type_group_id = Column(Integer, ForeignKey('type_groups.id'))
 
     # 다음의 backref 가 존재합니다.
     # user
