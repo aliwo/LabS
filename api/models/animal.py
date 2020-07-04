@@ -22,9 +22,11 @@ class Animal(Base):
     # user
 
     # profile
+    summary = Column(TEXT)
     main_profile = Column(TEXT) #
     romance_profile = Column(TEXT) # 사랑과 데이트 설명
     so_profile = Column(TEXT) # 상대에게 조언
+    best_partners = Column(LaboratoryTypes.TextTuple)
 
     correlations = relationship('AnimalCorrelation')
 
@@ -35,9 +37,11 @@ class Animal(Base):
             'prefix': self.prefix,
             'name': self.name,
             'tags': self.tags,
+            'summary': self.summary,
             'main_profile': self.main_profile,
             'romance_profile': self.romance_profile,
             'so_profile': self.so_profile,
+            'best_partners': self.best_partners,
             'type_group_id': self.type_group_id,
         }
 
