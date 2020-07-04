@@ -26,7 +26,7 @@ class Animal(Base):
     main_profile = Column(TEXT) #
     romance_profile = Column(TEXT) # 사랑과 데이트 설명
     so_profile = Column(TEXT) # 상대에게 조언
-    best_partners = Column(LaboratoryTypes.TextTuple)
+    best_partners = Column(LaboratoryTypes.IntTuple)
 
     correlations = relationship('AnimalCorrelation')
 
