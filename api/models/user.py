@@ -3,11 +3,10 @@ from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey, orm, Float
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL
-from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import case
 from sqlalchemy.orm import relationship, backref
 
-from libs.database.engine import SessionMaker
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
