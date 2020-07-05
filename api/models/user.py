@@ -1,10 +1,13 @@
 import hashlib
 from datetime import datetime
 
-from sqlalchemy import Integer, Column, ForeignKey, orm
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP
+from sqlalchemy import Integer, Column, ForeignKey, orm, Float
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL
+from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
+from sqlalchemy import case
 from sqlalchemy.orm import relationship, backref
 
+from libs.database.engine import SessionMaker
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
@@ -98,6 +101,7 @@ class User(Base):
     registration_confirmed_at = Column(DATETIME) # 최종 승인!
 
     # statistics
+    rate = Column(Integer)
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
@@ -117,6 +121,12 @@ class User(Base):
     # oauth_facebook
     # oauth_apple
 
+    TIER_BRONZE = 'BRONZE'
+    TIER_SILVER = 'SILVER'
+    TIER_GOLD = 'GOLD'
+    TIER_RUBY = 'RUBY'
+    TIER_DIAMOND = 'DIAMOND'
+
     # put 으로 변경할 수 없는 컬럼 들입니다.
     sensitives = {'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access'}
 
@@ -134,6 +144,27 @@ class User(Base):
             return self.oauth_naver
         if self.oauth_apple_id:
             return self.oauth_apple
+
+    @hybrid_property
+    def tier(self):
+        if 0 <= self.rate <= 2:
+            return self.TIER_BRONZE
+        elif 2 < self.rate <= 4:
+            return self.TIER_SILVER
+        elif 4 < self.rate <= 6:
+            return self.TIER_GOLD
+        elif 6 < self.rate <= 8:
+            return self.TIER_RUBY
+        elif 8 < self.rate <= 10:
+            return self.TIER_DIAMOND
+
+    @tier.expression
+    def tier(cls):
+        return case([(cls.rate <= 2, cls.TIER_BRONZE),
+                     (cls.rate <= 4, cls.TIER_SILVER),
+                     (cls.rate <= 6, cls.TIER_GOLD),
+                     (cls.rate <= 8, cls.TIER_RUBY),
+                     (cls.rate <= 10, cls.TIER_DIAMOND),])
 
     def __init__(self, **kwargs):
         '''
@@ -198,3 +229,8 @@ class User(Base):
             result['mp'] = self.point.mp
 
         return result
+
+from api.models.animal import Animal
+from api.models.animal_correlation import AnimalCorrelation
+
+print(SessionMaker().query(User).filter((User.tier == 'BRONZE')))
