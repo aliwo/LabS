@@ -101,7 +101,7 @@ class User(Base):
     registration_confirmed_at = Column(DATETIME) # 최종 승인!
 
     # statistics
-    rate = Column(Integer)
+    rate = Column(DECIMAL)
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
