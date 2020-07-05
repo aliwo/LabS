@@ -1,4 +1,5 @@
 from api.models.animal import Animal
+from api.models.match import Match
 from api.models.user import User
 from api.models.user_point import UserPoint
 from api.models.sms_auth import SmsAuth
@@ -28,4 +29,16 @@ term = convert(Term, 'term.yaml')
 terms_agreement = convert(TermsAgreement, 'terms_agreement.yaml')
 type_group = convert(TypeGroup, 'type_group.yaml')
 user_point = convert(UserPoint, 'user_point.yaml')
+match = convert(Match, 'match.yaml', {'match': {
+    'properties': {
+        'from_user': {
+            'type': 'object',
+            'description': '매치 유저'
+        },
+        'to_user': {
+            'type': 'object',
+            'description': '매치 유저'
+        }
+    }
+}})
 

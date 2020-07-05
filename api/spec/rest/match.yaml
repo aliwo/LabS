@@ -1,0 +1,15 @@
+soyeon:
+  get:
+    security:
+      - Authorization: []
+    description: 소연 매칭을 가져옵니다.
+    operationId: api.rest.match.get_soyeon_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'

@@ -1,0 +1,22 @@
+match:
+  properties:
+    created_at:
+      type: string
+    el_time:
+      type: string
+    from_user:
+      type: object
+    from_user_id:
+      type: integer
+    id:
+      type: integer
+    matched:
+      type: boolean
+    matched_at:
+      type: string
+    to_user:
+      type: object
+    to_user_id:
+      type: integer
+    type_:
+      type: string
