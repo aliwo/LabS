@@ -101,7 +101,7 @@ class User(Base):
     registration_confirmed_at = Column(DATETIME) # 최종 승인!
 
     # statistics
-    rate = Column(DECIMAL)
+    rate = Column(DECIMAL(10,3))
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
@@ -230,7 +230,8 @@ class User(Base):
 
         return result
 
-from api.models.animal import Animal
-from api.models.animal_correlation import AnimalCorrelation
-
-print(SessionMaker().query(User).filter((User.tier == 'BRONZE')))
+# from api.models.animal import Animal
+# from api.models.animal_correlation import AnimalCorrelation
+#
+# for x in SessionMaker().query(User).filter((User.tier == User.TIER_GOLD)).all():
+#     print(x.id)
