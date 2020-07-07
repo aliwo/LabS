@@ -44,6 +44,11 @@ class QueryStrategy:
                             'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
                             'weight': x.weight
                         } for x in self.user.animal.correlations
+                    ] + [
+                        {
+                            'filter': {'range': {'rate': {'gt': y.gt, 'lte': 7}}},
+                            'weight': y.weight
+                        } for y in self.user.tier_queries # TODO: tier_queries 만들기
                     ]
                 }
             }
