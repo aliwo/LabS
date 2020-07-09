@@ -25,7 +25,8 @@ def afr(*args):
 def gen_sy_matches():
 
     # 남자의 카드를 채웁니다.
-    men = session.query(User).filter((User.sex == False)).all()
+    men = session.query(User).filter((User.sex == False) &
+                                     (User.animal_id != None)).all()
     for man in men:
         result = es.search(man.gen_sy_query(session), index='sy-users')
         if not result['hits']['hits']:
@@ -37,7 +38,8 @@ def gen_sy_matches():
             print(f'남자{man.id} 와 여자{target["_id"]} 연결')
 
     # 여자의 카드를 채웁니다.
-    women = session.query(User).filter((User.sex == True)).all()
+    women = session.query(User).filter((User.sex == True)&
+                                     (User.animal_id != None)).all()
     for woman in women:
         if len(memo[woman.id]) >= 2:
             continue
