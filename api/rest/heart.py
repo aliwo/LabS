@@ -58,3 +58,13 @@ def recharge_heart_google():
     Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
 
+
+@route
+def heart2me():
+    '''
+    자신이 받은 모든 하트를 조회합니다.
+    '당신에게 관심있는 인연'을 조회할 때 사용
+    '''
+    hearts = Session().query(Heart).filter(Heart.to_user_id == g.user_session.user.id).all()
+    return {'hearts': [x.json(with_users=True) for x in hearts]}, Status.HTTP_200_OK
+

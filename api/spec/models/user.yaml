@@ -71,6 +71,8 @@ user:
       type: boolean
     pictures:
       type: string
+    rate:
+      type: float
     registered_at:
       type: string
     registration_confirmed:

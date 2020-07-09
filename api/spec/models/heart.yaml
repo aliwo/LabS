@@ -1,0 +1,20 @@
+heart:
+  properties:
+    accpeted:
+      type: boolean
+    created_at:
+      type: string
+    double:
+      type: boolean
+    from_user:
+      description: "\uD558\uD2B8 \uC720\uC800"
+      type: object
+    from_user_id:
+      type: integer
+    id:
+      type: integer
+    to_user:
+      description: "\uD558\uD2B8 \uC720\uC800"
+      type: object
+    to_user_id:
+      type: integer

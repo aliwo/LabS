@@ -5,6 +5,7 @@ match:
     el_time:
       type: string
     from_user:
+      description: "\uB9E4\uCE58 \uC720\uC800"
       type: object
     from_user_id:
       type: integer
@@ -15,6 +16,7 @@ match:
     matched_at:
       type: string
     to_user:
+      description: "\uB9E4\uCE58 \uC720\uC800"
       type: object
     to_user_id:
       type: integer

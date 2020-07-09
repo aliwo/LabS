@@ -23,3 +23,12 @@ def rate_star():
 
     Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
+
+
+@route
+def high_star2me():
+    '''
+    '나에게 높은 점수를 준 인연' 조회 용
+    :return:
+    '''
+

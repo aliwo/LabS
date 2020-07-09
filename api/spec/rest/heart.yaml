@@ -100,3 +100,21 @@ google_recharge:
                   type: boolean
                   example: true
 
+heart2me:
+  get:
+    security:
+      - Authorization: []
+    description: 받은 하트를 조회합니다. 내게 하트를 준 모든 사람들을 알 수 있습니다.
+    operationId: api.rest.heart.heart2me
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hearts:
+                  type: array
+                  items:
+                    $ref: '../models/heart.yaml#/heart'
