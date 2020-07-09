@@ -5,6 +5,6 @@ class Tier:
         self.user = user
 
     @property
-    def tier_queries(self):
+    def tier_range(self):
         return []
 

@@ -4,8 +4,7 @@ from api.models.tiers.tier import Tier
 class Bronze(Tier):
 
     @property
-    def tier_queries(self):
-        return [
-            {'gt':2, 'lte':4, 'weight':10} # silver
-        ]
+    def tier_range(self):
+        return {'gte': 0, 'lt': 4} # bronze ~ silver
+
 

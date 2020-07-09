@@ -8,5 +8,4 @@ if os.environ.get('SY_STAGE', '') == 'PRODUCTION':
 
 es = Elasticsearch(**option)
 
-print('es 연결!')
-print(es.info())
+# print(es.info())

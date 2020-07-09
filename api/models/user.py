@@ -30,12 +30,28 @@ class QueryStrategy:
                     'query': {
                         'bool': {
                             'must': [
-                                {'term': {'sex': not self.user.sex}}
+                                {'term': {'sex': not self.user.sex}},
+                                {'range': {'rate': self.user.tier.tier_range}}
                             ],
                             'must_not': [
                                 {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
-                                # TODO: 정지 당한 계정도 must_not 해야 함. {'lt': {'frozen_until': 현재시각 YYYY-MM-DD }}
-                            ]
+                            ],
+                            'should': [{
+                                'bool': {
+                                    'must_not': {
+                                        'exists': {
+                                            'field': 'frozen_until'
+                                        }
+                                    }
+                                }
+                            },{
+                                'range': {
+                                    'frozen_until': {
+                                        'lte': 'now/d',
+                                        'time_zone': '+09:00'
+                                    }
+                                }
+                            }]
                         }
                     } ,
                     'boost': '5',
@@ -44,11 +60,6 @@ class QueryStrategy:
                             'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
                             'weight': x.weight
                         } for x in self.user.animal.correlations
-                    ] + [
-                        {
-                            'filter': {'range': {'rate': {'gt': y.gt, 'lte': 7}}},
-                            'weight': y.weight
-                        } for y in self.user.tier_queries # TODO: tier_queries 만들기
                     ]
                 }
             }
@@ -220,9 +231,9 @@ class User(Base):
 from api.models.animal import Animal
 from api.models.animal_correlation import AnimalCorrelation
 from libs.database.engine import SessionMaker
-from api.models.tiers.tier_utils import TIER_GOLD
+from libs.elastic import es
+from api.models.tiers.tier_utils import TIER_GOLD, TIER_BRONZE
 
-
-for x in SessionMaker().query(User).filter((User.tier == TIER_GOLD)).all():
-    print(x.id)
-    print(x.tier.__class__.__name__)
+session = SessionMaker()
+for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
+    print(es.search(x.gen_sy_query(session), index='sy-users'))
