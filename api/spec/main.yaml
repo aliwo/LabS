@@ -61,6 +61,11 @@ paths:
 #  /questions/love:
 #    $ref: 'rest/question.yaml#/mbti'
 
+  # Matches
+  /matches/soyeon:
+    $ref: 'rest/match.yaml#/soyeon'
+
+
   # Term
   /terms:
     $ref: 'rest/term.yaml#/term'
@@ -100,3 +105,5 @@ components:
       $ref: 'models/mbti_question.yaml#/mbti_question'
     type_group:
       $ref: 'models/type_group.yaml#/type_group'
+    match:
+      $ref: 'models/match.yaml#/match'

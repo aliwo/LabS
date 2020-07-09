@@ -1,4 +1,3 @@
-# TODO: 설정 json 파일을 PVC 로 마운트 해야 하나?
 from flask import request, g
 
 from api.models.oauth.google import OauthGoogle

@@ -1,51 +1,15 @@
-import hashlib
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey, orm
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship, backref
 
+from api.models.tiers.tier_utils import load_tier, tier_case
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
-
-
-class QueryStrategy:
-
-    def __init__(self, user):
-        self.user = user
-
-    def gen_sy_query(self, session):
-        from api.models.match import Match
-
-        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
-        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
-
-        return {
-            'query': {
-                'function_score': {
-                    'query': {
-                        'bool': {
-                            'must': [
-                                {'term': {'sex': not self.user.sex}}
-                            ],
-                            'must_not': [
-                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
-                                # TODO: 정지 당한 계정도 must_not 해야 함. {'lt': {'frozen_until': 현재시각 YYYY-MM-DD }}
-                                # TODO: 자신과 비슷한 티어가 우선순위를 같도록 해야 함.
-                            ]
-                        }
-                    } ,
-                    'boost': '5',
-                    'functions': [
-                        {
-                            'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
-                            'weight': x.weight
-                        } for x in self.user.animal.correlations
-                    ]
-                }
-            }
-        }
+from libs.query_strategy import QueryStrategy
 
 
 class User(Base):
@@ -98,6 +62,7 @@ class User(Base):
     registration_confirmed_at = Column(DATETIME) # 최종 승인!
 
     # statistics
+    rate = Column(DECIMAL(10,3))
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
@@ -117,6 +82,7 @@ class User(Base):
     # oauth_facebook
     # oauth_apple
 
+
     # put 으로 변경할 수 없는 컬럼 들입니다.
     sensitives = {'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access'}
 
@@ -135,6 +101,14 @@ class User(Base):
         if self.oauth_apple_id:
             return self.oauth_apple
 
+    @hybrid_property
+    def tier(self):
+        return load_tier(self, self.rate)
+
+    @tier.expression
+    def tier(cls):
+        return tier_case(cls.rate)
+
     def __init__(self, **kwargs):
         '''
         :param kwargs:
@@ -150,6 +124,12 @@ class User(Base):
         백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
         '''
         return self.strategy.gen_sy_query(session)
+
+    def gen_preference_query(self, session):
+        '''
+        백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
+        '''
+        return self.strategy.gen_preference_query(session)
 
     def json(self, **kwargs):
         result = {
@@ -198,3 +178,15 @@ class User(Base):
             result['mp'] = self.point.mp
 
         return result
+
+
+from api.models.animal import Animal
+from api.models.animal_correlation import AnimalCorrelation
+
+from libs.database.engine import SessionMaker
+from libs.elastic import es
+from api.models.tiers.tier_utils import TIER_BRONZE
+
+session = SessionMaker()
+for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
+    print(es.search(x.gen_preference_query(session), index='sy-users'))
