@@ -129,7 +129,7 @@ class User(Base):
         '''
         백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
         '''
-        return self.strategy.gen_preference_match(session)
+        return self.strategy.gen_preference_query(session)
 
     def json(self, **kwargs):
         result = {
@@ -180,13 +180,13 @@ class User(Base):
         return result
 
 
-# from api.models.animal import Animal
-# from api.models.animal_correlation import AnimalCorrelation
-#
-# from libs.database.engine import SessionMaker
-# from libs.elastic import es
-# from api.models.tiers.tier_utils import TIER_BRONZE
-#
-# session = SessionMaker()
-# for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
-#     print(es.search(x.gen_sy_query(session), index='sy-users'))
+from api.models.animal import Animal
+from api.models.animal_correlation import AnimalCorrelation
+
+from libs.database.engine import SessionMaker
+from libs.elastic import es
+from api.models.tiers.tier_utils import TIER_BRONZE
+
+session = SessionMaker()
+for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
+    print(es.search(x.gen_preference_query(session), index='sy-users'))
