@@ -1,16 +1,14 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath('..'))
 from collections import defaultdict
-
 from libs.database.engine import SessionMaker
 from api.models.animal import Animal
 from api.models.animal_correlation import AnimalCorrelation
 from api.models.user import User
 from api.models.match import Match
 from libs.elastic import es
-import sys
-import os
 
-
-sys.path.insert(0, os.path.abspath('..'))
 session = SessionMaker()
 memo = defaultdict(lambda: [])
 
