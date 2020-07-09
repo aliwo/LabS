@@ -7,7 +7,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import case
 from sqlalchemy.orm import relationship, backref
 
-from api.models.tiers.tier_utils import load_tier
+from api.models.tiers.tier_utils import load_tier, tier_case
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
@@ -35,7 +35,6 @@ class QueryStrategy:
                             'must_not': [
                                 {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
                                 # TODO: 정지 당한 계정도 must_not 해야 함. {'lt': {'frozen_until': 현재시각 YYYY-MM-DD }}
-                                # TODO: 자신과 비슷한 티어가 우선순위를 같도록 해야 함.
                             ]
                         }
                     } ,
@@ -126,11 +125,6 @@ class User(Base):
     # oauth_facebook
     # oauth_apple
 
-    TIER_BRONZE = 'BRONZE'
-    TIER_SILVER = 'SILVER'
-    TIER_GOLD = 'GOLD'
-    TIER_RUBY = 'RUBY'
-    TIER_DIAMOND = 'DIAMOND'
 
     # put 으로 변경할 수 없는 컬럼 들입니다.
     sensitives = {'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access'}
@@ -152,24 +146,11 @@ class User(Base):
 
     @hybrid_property
     def tier(self):
-        if 0 <= self.rate <= 2:
-            return load_tier(self, self.TIER_BRONZE)
-        elif 2 < self.rate <= 4:
-            return load_tier(self, self.TIER_SILVER)
-        elif 4 < self.rate <= 6:
-            return load_tier(self, self.TIER_GOLD)
-        elif 6 < self.rate <= 8:
-            return load_tier(self, self.TIER_RUBY)
-        elif 8 < self.rate <= 10:
-            return load_tier(self, self.TIER_DIAMOND)
+        return load_tier(self, self.rate)
 
     @tier.expression
     def tier(cls):
-        return case([(cls.rate <= 2, cls.TIER_BRONZE),
-                     (cls.rate <= 4, cls.TIER_SILVER),
-                     (cls.rate <= 6, cls.TIER_GOLD),
-                     (cls.rate <= 8, cls.TIER_RUBY),
-                     (cls.rate <= 10, cls.TIER_DIAMOND),])
+        return tier_case(cls.rate)
 
     def __init__(self, **kwargs):
         '''
@@ -235,10 +216,13 @@ class User(Base):
 
         return result
 
+
 from api.models.animal import Animal
 from api.models.animal_correlation import AnimalCorrelation
 from libs.database.engine import SessionMaker
+from api.models.tiers.tier_utils import TIER_GOLD
 
-for x in SessionMaker().query(User).filter((User.tier == User.TIER_GOLD)).all():
+
+for x in SessionMaker().query(User).filter((User.tier == TIER_GOLD)).all():
     print(x.id)
     print(x.tier.__class__.__name__)

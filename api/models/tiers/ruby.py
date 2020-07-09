@@ -2,4 +2,7 @@ from api.models.tiers.tier import Tier
 
 
 class Ruby(Tier):
-    pass
+
+    @property
+    def tier_queries(self):
+        return []
