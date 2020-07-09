@@ -3,6 +3,7 @@ from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN
+from sqlalchemy.orm import relationship
 
 from api.models.user_point import UserPoint
 from libs.database.types import LaboratoryTypes
@@ -17,7 +18,9 @@ class Heart(Base):
     __tablename__ = 'hearts'
 
     from_user_id = Column(Integer, ForeignKey('users.id'), index=True)
+    from_user = relationship('User', foreign_keys=[from_user_id])
     to_user_id = Column(Integer, ForeignKey('users.id'), index=True)
+    to_user = relationship('User', foreign_keys=[to_user_id])
     double = Column(BOOLEAN)
     accpeted = Column(BOOLEAN)
 
@@ -39,3 +42,19 @@ class Heart(Base):
             UserPoint.heart_point(self.to_user_id, accept.price if accept else 3000)
 
         self.accpeted = True
+
+    def json(self, **kwargs):
+        result = {
+            'id': self.id,
+            'from_user_id': self.from_user_id,
+            'to_user_id': self.to_user_id,
+            'double': self.double,
+            'accpeted': self.accpeted,
+            'created_at': DateTimeHelper.full_datetime(self.created_at),
+        }
+
+        if kwargs.get('with_users'):
+            result['from_user'] = self.from_user.json()
+            result['to_user'] = self.to_user.json()
+
+        return result
