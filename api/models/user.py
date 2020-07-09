@@ -1,69 +1,15 @@
-import hashlib
 from datetime import datetime
 
-from sqlalchemy import Integer, Column, ForeignKey, orm, Float
+from sqlalchemy import Integer, Column, ForeignKey, orm
 from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy import case
 from sqlalchemy.orm import relationship, backref
 
 from api.models.tiers.tier_utils import load_tier, tier_case
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
-
-
-class QueryStrategy:
-
-    def __init__(self, user):
-        self.user = user
-
-    def gen_sy_query(self, session):
-        from api.models.match import Match
-
-        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
-        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
-
-        return {
-            'query': {
-                'function_score': {
-                    'query': {
-                        'bool': {
-                            'must': [
-                                {'term': {'sex': not self.user.sex}},
-                                {'range': {'rate': self.user.tier.tier_range}}
-                            ],
-                            'must_not': [
-                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
-                            ],
-                            'should': [{
-                                'bool': {
-                                    'must_not': {
-                                        'exists': {
-                                            'field': 'frozen_until'
-                                        }
-                                    }
-                                }
-                            },{
-                                'range': {
-                                    'frozen_until': {
-                                        'lte': 'now/d',
-                                        'time_zone': '+09:00'
-                                    }
-                                }
-                            }]
-                        }
-                    } ,
-                    'boost': '5',
-                    'functions': [
-                        {
-                            'filter': { 'terms': {'animal_id': list(x.to_animal_ids)} },
-                            'weight': x.weight
-                        } for x in self.user.animal.correlations
-                    ]
-                }
-            }
-        }
+from libs.query_strategy import QueryStrategy
 
 
 class User(Base):
@@ -179,6 +125,12 @@ class User(Base):
         '''
         return self.strategy.gen_sy_query(session)
 
+    def gen_preference_query(self, session):
+        '''
+        백엔드 로직에서 쓸 일이 없습니다. 따라서 session 을 특별히 인자로 전달 받습니다.
+        '''
+        return self.strategy.gen_preference_match(session)
+
     def json(self, **kwargs):
         result = {
             'id': self.id,
@@ -228,12 +180,13 @@ class User(Base):
         return result
 
 
-from api.models.animal import Animal
-from api.models.animal_correlation import AnimalCorrelation
-from libs.database.engine import SessionMaker
-from libs.elastic import es
-from api.models.tiers.tier_utils import TIER_GOLD, TIER_BRONZE
-
-session = SessionMaker()
-for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
-    print(es.search(x.gen_sy_query(session), index='sy-users'))
+# from api.models.animal import Animal
+# from api.models.animal_correlation import AnimalCorrelation
+#
+# from libs.database.engine import SessionMaker
+# from libs.elastic import es
+# from api.models.tiers.tier_utils import TIER_BRONZE
+#
+# session = SessionMaker()
+# for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
+#     print(es.search(x.gen_sy_query(session), index='sy-users'))
