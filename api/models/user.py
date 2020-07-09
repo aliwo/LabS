@@ -180,13 +180,14 @@ class User(Base):
         return result
 
 
-from api.models.animal import Animal
-from api.models.animal_correlation import AnimalCorrelation
+# from api.models.animal import Animal
+# from api.models.animal_correlation import AnimalCorrelation
+#
+# from libs.database.engine import SessionMaker
+# from libs.elastic import es
+# from api.models.tiers.tier_utils import TIER_BRONZE
+#
+# session = SessionMaker()
+# for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
+#     print(es.search(x.gen_preference_query(session), index='sy-users'))
 
-from libs.database.engine import SessionMaker
-from libs.elastic import es
-from api.models.tiers.tier_utils import TIER_BRONZE
-
-session = SessionMaker()
-for x in session.query(User).filter((User.tier == TIER_BRONZE)).all():
-    print(es.search(x.gen_preference_query(session), index='sy-users'))
