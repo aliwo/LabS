@@ -7,6 +7,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import case
 from sqlalchemy.orm import relationship, backref
 
+from api.models.tiers.tier_utils import load_tier
 from libs.database.types import LaboratoryTypes
 from libs.database.types import Base
 from libs.datetime_helper import DateTimeHelper
@@ -152,15 +153,15 @@ class User(Base):
     @hybrid_property
     def tier(self):
         if 0 <= self.rate <= 2:
-            return self.TIER_BRONZE
+            return load_tier(self, self.TIER_BRONZE)
         elif 2 < self.rate <= 4:
-            return self.TIER_SILVER
+            return load_tier(self, self.TIER_SILVER)
         elif 4 < self.rate <= 6:
-            return self.TIER_GOLD
+            return load_tier(self, self.TIER_GOLD)
         elif 6 < self.rate <= 8:
-            return self.TIER_RUBY
+            return load_tier(self, self.TIER_RUBY)
         elif 8 < self.rate <= 10:
-            return self.TIER_DIAMOND
+            return load_tier(self, self.TIER_DIAMOND)
 
     @tier.expression
     def tier(cls):
@@ -234,8 +235,10 @@ class User(Base):
 
         return result
 
-# from api.models.animal import Animal
-# from api.models.animal_correlation import AnimalCorrelation
-#
-# for x in SessionMaker().query(User).filter((User.tier == User.TIER_GOLD)).all():
-#     print(x.id)
+from api.models.animal import Animal
+from api.models.animal_correlation import AnimalCorrelation
+from libs.database.engine import SessionMaker
+
+for x in SessionMaker().query(User).filter((User.tier == User.TIER_GOLD)).all():
+    print(x.id)
+    print(x.tier.__class__.__name__)
