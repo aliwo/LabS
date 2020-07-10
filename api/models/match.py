@@ -36,8 +36,8 @@ class Match(Base):
     @classmethod
     def same_sex_query(cls, session, user):
         if user.sex == False:
-            return session.filter((cls.man_id == user.id))
-        return session.filter((cls.woman_id == user.id))
+            return session.query(cls).filter((cls.man_id == user.id))
+        return session.query(cls).filter((cls.woman_id == user.id))
 
     @classmethod
     def query_matched_users(cls, session, user):
