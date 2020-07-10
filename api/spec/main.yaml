@@ -32,6 +32,8 @@ paths:
     $ref: 'rest/user.yaml#/nickname'
   /users/occupation:
     $ref: 'rest/user.yaml#/occupation'
+  /users/random:
+    $ref: 'rest/user.yaml#/random'
 
   # Heart
   /heart:
