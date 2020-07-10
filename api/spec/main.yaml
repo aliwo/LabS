@@ -66,6 +66,14 @@ paths:
   # Matches
   /matches/soyeon:
     $ref: 'rest/match.yaml#/soyeon'
+  /matches/prefer:
+    $ref: 'rest/match.yaml#/prefer'
+  /matches/old:
+    $ref: 'rest/match.yaml#/old'
+  /matches/random:
+    $ref: 'rest/match.yaml#/random'
+  /matches/matched:
+    $ref: 'rest/match.yaml#/matched'
 
 
   # Term

@@ -13,3 +13,67 @@ soyeon:
               type: array
               items:
                 $ref: '../models/match.yaml#/match'
+
+prefer:
+  get:
+    security:
+      - Authorization: []
+    description: 선호 매칭을 가져옵니다. '당신이 선택한 인연'
+    operationId: api.rest.match.get_preference_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'
+
+old:
+  get:
+    security:
+      - Authorization: []
+    description: 지난 인연을 가져옵니다.
+    operationId: api.rest.match.get_old_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'
+
+random:
+  get:
+    security:
+      - Authorization: []
+    description: 우연히 만난 인연을 가져옵니다.
+    operationId: api.rest.match.get_random_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'
+
+matched:
+  get:
+    security:
+      - Authorization: []
+    description: 매칭 성공한 매치를 가져옵니다.
+    operationId: api.rest.match.get_matched_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'
