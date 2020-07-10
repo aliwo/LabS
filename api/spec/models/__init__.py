@@ -46,11 +46,11 @@ type_group = convert(TypeGroup, 'type_group.yaml')
 user_point = convert(UserPoint, 'user_point.yaml')
 match = convert(Match, 'match.yaml', {'match': {
     'properties': {
-        'from_user': {
+        'man': {
             'type': 'object',
             'description': '매치 유저'
         },
-        'to_user': {
+        'woman': {
             'type': 'object',
             'description': '매치 유저'
         }
