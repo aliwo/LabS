@@ -4,3 +4,6 @@ from api.models.match import Match
 
 def gen_sy_matches():
     rolling_match('gen_sy_query', Match.TYPE_SOYEON)
+
+if __name__ == '__main__':
+    gen_sy_matches()
