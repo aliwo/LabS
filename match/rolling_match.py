@@ -35,7 +35,7 @@ def rolling_match(query_name, match_type):
         for target in result['hits']['hits'][:2]: # 우선 순위 2명의 카드를 만듭니다.
             memo[man.id].append(int(target['_id']))
             memo[int(target['_id'])].append(man.id)
-            afr(Match(from_user_id=man.id, to_user_id=target['_id'], type_=Match.TYPE_SOYEON))
+            afr(Match(from_user_id=man.id, to_user_id=target['_id'], type_=match_type))
             print(f'남자{man.id} 와 여자{target["_id"]} 연결')
 
     # 여자의 카드를 채웁니다.
@@ -48,7 +48,7 @@ def rolling_match(query_name, match_type):
         for target in result['hits']['hits'][:2-len(memo[woman.id])]:
             memo[woman.id].append(int(target['_id']))
             memo[int(target['_id'])].append(woman.id)
-            afr(Match(from_user_id=woman.id, to_user_id=target['_id'], type_=Match.TYPE_SOYEON))
+            afr(Match(from_user_id=woman.id, to_user_id=target['_id'], type_=match_type))
             print(f'여자{woman.id} 와 남자{target["_id"]} 연결')
 
     session.commit()

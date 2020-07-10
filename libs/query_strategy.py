@@ -6,9 +6,6 @@ class QueryStrategy:
     def gen_sy_query(self, session):
         from api.models.match import Match
 
-        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
-        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
-
         return {
             'query': {
                 'function_score': {
@@ -19,7 +16,7 @@ class QueryStrategy:
                                 {'range': {'rate': self.user.tier.tier_range}}
                             ],
                             'must_not': [
-                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
+                                {'terms': {'_id': Match.query_matched_users(session, self.user)}} # 빈 배열이어도 정상동작 확인 2020-06-29
                             ],
                             'should': [{
                                 'bool': {
@@ -54,9 +51,6 @@ class QueryStrategy:
     def gen_preference_query(self, session):
         from api.models.match import Match
 
-        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
-        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
-
         return {
             'query': {
                 'function_score': {
@@ -67,7 +61,7 @@ class QueryStrategy:
                                 {'terms': {'type_group_id': list(self.user.ideal_type_groups)}}
                             ],
                             'must_not': [
-                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
+                                {'terms': {'_id': Match.query_matched_users(session, self.user)}} # 빈 배열이어도 정상동작 확인 2020-06-29
                             ],
                             'should': [{
                                 'bool': {
