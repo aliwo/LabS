@@ -14,7 +14,7 @@ star:
               user_id:
                 type: integer
                 example: 3
-              star:
+              rate:
                 type: integer
                 example: 10
     responses:

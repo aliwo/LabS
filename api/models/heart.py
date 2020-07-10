@@ -17,6 +17,7 @@ from libs.datetime_helper import DateTimeHelper
 class Heart(Base):
     __tablename__ = 'hearts'
 
+    match_id = Column(Integer, ForeignKey('matches.id'), nullable=False)
     from_user_id = Column(Integer, ForeignKey('users.id'), index=True)
     from_user = relationship('User', foreign_keys=[from_user_id])
     to_user_id = Column(Integer, ForeignKey('users.id'), index=True)

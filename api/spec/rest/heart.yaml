@@ -14,6 +14,9 @@ heart:
               user_id:
                 type: integer
                 example: 3
+              match_id:
+                type: integer
+                example: 4
     responses:
       "200":
         description: Success
@@ -43,6 +46,9 @@ double_heart:
               user_id:
                 type: integer
                 example: 3
+              match_id:
+                type: integer
+                example: 4
     responses:
       "200":
         description: Success
