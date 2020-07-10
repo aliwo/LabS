@@ -1,7 +1,9 @@
 from flask import request, g
+from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound
 
 from api.models.occupation_auth import OccupationAuth
+from api.models.star import Star
 from api.models.user import User
 from libs.database.engine import Session, afr
 from libs.route.errors import ClientError
@@ -55,12 +57,20 @@ def upload_auth_occupation():
 @route
 def get_random_user():
     '''
-    TODO 별점평가를 위한 랜덤 유저를 가져옵니다.
     1. 자기 자신 제외
     2. 자신이 한 번이라도 평가했던 사람은 제외
     3. 자신과 같은 성별 제외
     '''
-    return {'okay': True}, Status.HTTP_200_OK
+
+    rated_user_ids = [x.to_user_id for x in Session().query(Star).filter((Star.from_user_id == g.user_session.user.id)).all()]
+
+    user = Session().query(User).filter(
+        (User.sex != g.user_session.user.sex)
+        & (User.id.notin_(rated_user_ids))
+        & (User.id != g.user_session.user.id)
+    ).order_by(func.random()).first()
+
+    return {'okay': True, 'user': user.json()}, Status.HTTP_200_OK
 
 # FM 대로 하자면, 이상형 정보를 입력하는 라우트를 만들어야 함. (put_user 와 똑같이)
 # 그리고 여기서 mp 50 을 늘려 줘야 하는데... 그냥 mp 증가 경로를 만들어 버릴까 ^^

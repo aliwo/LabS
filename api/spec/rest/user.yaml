@@ -121,3 +121,20 @@ occupation:
                 okay:
                   type: boolean
                   example: true
+
+random:
+  get:
+    security:
+      - Authorization: []
+    description: 별점 평가를 위해 유저정보를 가져옵니다.
+    operationId: api.rest.user.get_random_user
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '../models/user.yaml#/user'
