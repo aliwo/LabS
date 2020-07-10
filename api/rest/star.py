@@ -9,7 +9,6 @@ from libs.status import Status
 @route
 def rate_star():
     '''
-    TODO: 테스트 필요
     1. 이미 존재하는 스타가 있는지 체크합니다.
     2. 있다면 해당 스타의 별점을 바꿉니다.
     3. 없다면 새로운 스타를 만듭니다.

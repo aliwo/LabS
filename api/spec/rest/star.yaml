@@ -15,7 +15,7 @@ star:
                 type: integer
                 example: 3
               rate:
-                type: integer
+                type: number
                 example: 10
     responses:
       "200":
