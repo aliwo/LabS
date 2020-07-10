@@ -17,7 +17,7 @@ def send_heart():
     '''
     하트를 보냅니다.
     '''
-    heart = Heart(from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'), )
+    heart = Heart(match_id=request.json.get('match_id'), from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'))
     Session().add(heart)
     Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
@@ -29,7 +29,7 @@ def send_double_heart():
     '''
     더블하트를 보냅니다.
     '''
-    heart = Heart(from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'), double=True)
+    heart = Heart(match_id=request.json.get('match_id'), from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'), double=True)
     Session().add(heart)
     Session().commit()
     return  {'okay': True}, Status.HTTP_200_OK
