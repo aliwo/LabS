@@ -52,6 +52,16 @@ def upload_auth_occupation():
     return {'okay': True}, Status.HTTP_200_OK
 
 
+@route
+def get_random_user():
+    '''
+    TODO 별점평가를 위한 랜덤 유저를 가져옵니다.
+    1. 자기 자신 제외
+    2. 자신이 한 번이라도 평가했던 사람은 제외
+    3. 자신과 같은 성별 제외
+    '''
+    return {'okay': True}, Status.HTTP_200_OK
+
 # FM 대로 하자면, 이상형 정보를 입력하는 라우트를 만들어야 함. (put_user 와 똑같이)
 # 그리고 여기서 mp 50 을 늘려 줘야 하는데... 그냥 mp 증가 경로를 만들어 버릴까 ^^
 # 솔직히 베타 때는 생각 안 해도 됨
