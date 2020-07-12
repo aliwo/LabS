@@ -49,6 +49,10 @@ paths:
   /star:
     $ref: 'rest/star.yaml#/star'
 
+  # Report
+  /report:
+    $ref: 'rest/report.yaml#/report'
+
   # Sms
   /sms:
     $ref: 'rest/sms.yaml#/sms'

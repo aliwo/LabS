@@ -44,6 +44,13 @@ def check_nick_name(nick_name):
 
 
 @route
+def del_phone():
+    g.user_session.user.phone = None
+    g.user_session.user.phone_registered = False
+    return {'okay': True}, Status.HTTP_200_OK
+
+
+@route
 def upload_auth_occupation():
     afr(OccupationAuth(
         user_id=g.user_session.user.id,
