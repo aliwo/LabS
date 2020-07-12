@@ -10,10 +10,10 @@ def route(func):
     def wrapper(*args, **kwargs):
         try:
             request_at = datetime.now()
-            response_msg, status_code = func(*args, **kwargs)
-            log_route(func.__name__, request_at, response_msg)
+            result = func(*args, **kwargs)
+            log_route(func.__name__, request_at, result[0])
         except BaseError as e:
-            response_msg, status_code = e.json(), e.status_code
-        return response_msg, status_code
+            return e.json(), e.status_code
+        return result
     return wrapper
 

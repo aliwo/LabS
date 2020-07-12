@@ -14,6 +14,8 @@ from libs.status import Status
 
 @route
 def get_users():
-    return [{'id': 1, 'name': 'sw'}, {'id': 2, 'name': 'kimchi'}], Status.HTTP_200_OK, {'X-Total-Count': Session().query(User).count()}
+    return [x.json(with_animal=False) for x in Session().query(User).all()], Status.HTTP_200_OK, \
+           {'X-Total-Count': Session().query(User).count(),
+            'access-control-expose-headers': 'X-Total-Count'}
 
 

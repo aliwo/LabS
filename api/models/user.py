@@ -131,11 +131,10 @@ class User(Base):
         '''
         return self.strategy.gen_preference_query(session)
 
-    def json(self, **kwargs):
+    def json(self, with_animal=True, **kwargs):
         result = {
             'id': self.id,
             'animal_id': self.animal_id,
-            'animal':self.animal.json(),
             'email': self.email,
 
             # 신상 정보
@@ -173,6 +172,10 @@ class User(Base):
 
         if self.phone:
             result['phone'] = self.phone
+
+        if with_animal:
+            result['animal'] = self.animal.json()
+
 
         if kwargs.get('with_point'):
             result['hp'] = self.point.hp
