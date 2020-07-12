@@ -162,6 +162,14 @@ class User(Base):
             'drink': self.drink,
             'cigarette': self.cigarette,
 
+            # 이상형 정보
+            'ideal_age_start': self.ideal_age_start,
+            'ideal_age_end': self.ideal_age_end,
+            'ideal_body_shape': self.ideal_body_shape,
+            'ideal_type_groups': self.ideal_type_groups,
+            'ideal_height_start': self.ideal_height_start,
+            'ideal_height_end': self.ideal_height_end,
+
             # 기타
             'registration_phase': self.registration_phase,
 
@@ -175,7 +183,6 @@ class User(Base):
 
         if with_animal:
             result['animal'] = self.animal.json()
-
 
         if kwargs.get('with_point'):
             result['hp'] = self.point.hp
