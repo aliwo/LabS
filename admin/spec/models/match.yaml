@@ -1,0 +1,24 @@
+match:
+  properties:
+    created_at:
+      type: string
+    el_time:
+      type: string
+    id:
+      type: integer
+    man:
+      description: "\uB9E4\uCE58 \uC720\uC800"
+      type: object
+    man_id:
+      type: integer
+    matched:
+      type: boolean
+    matched_at:
+      type: string
+    type_:
+      type: string
+    woman:
+      description: "\uB9E4\uCE58 \uC720\uC800"
+      type: object
+    woman_id:
+      type: integer

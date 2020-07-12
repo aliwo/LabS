@@ -1,0 +1,11 @@
+user_point:
+  description: ''
+  properties:
+    hp:
+      type: integer
+    id:
+      type: integer
+    mp:
+      type: integer
+    user_id:
+      type: integer

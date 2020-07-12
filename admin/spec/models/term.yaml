@@ -1,0 +1,11 @@
+term:
+  description: ''
+  properties:
+    body:
+      type: string
+    id:
+      type: integer
+    required:
+      type: boolean
+    title:
+      type: string

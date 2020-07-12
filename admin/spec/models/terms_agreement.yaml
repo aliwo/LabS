@@ -1,0 +1,11 @@
+terms_agreement:
+  description: ''
+  properties:
+    agreed_at:
+      type: string
+    id:
+      type: integer
+    term_id:
+      type: integer
+    user_id:
+      type: integer

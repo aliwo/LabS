@@ -1,0 +1,15 @@
+animal:
+  get:
+    description: 동물 정보를 조회합니다.
+    operationId: admin.rest.animal.get_animal
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                animal:
+                  $ref: '../models/animal.yaml#/animal'
+

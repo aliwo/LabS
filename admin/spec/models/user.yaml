@@ -1,0 +1,91 @@
+user:
+  description: end users
+  properties:
+    age:
+      type: integer
+    animal:
+      type: object
+    animal_id:
+      type: integer
+    bio:
+      type: string
+    body_shape:
+      description: slim tan tan :)
+      type: string
+    cigarette:
+      type: string
+    company:
+      type: string
+    drink:
+      type: string
+    education:
+      type: string
+    el_time:
+      type: string
+    email:
+      type: string
+    fcm_token:
+      type: string
+    frozen_at:
+      type: string
+    frozen_until:
+      type: string
+    height:
+      type: integer
+    hobby:
+      type: string
+    id:
+      type: integer
+    ideal_age_end:
+      type: integer
+    ideal_age_start:
+      type: integer
+    ideal_body_shape:
+      type: string
+    ideal_height_end:
+      type: integer
+    ideal_height_start:
+      type: integer
+    ideal_type_groups:
+      description: (comma separated)list of integers
+      type: string
+    interest:
+      type: string
+    last_access:
+      type: string
+    location1:
+      type: string
+    location2:
+      type: string
+    name:
+      type: string
+    nick_name:
+      type: string
+    occupation:
+      type: string
+    occupation_confirmed:
+      type: boolean
+    occupation_confirmed_at:
+      type: string
+    phone:
+      type: string
+    phone_registered:
+      type: boolean
+    pictures:
+      type: string
+    rate:
+      type: float
+    registered_at:
+      type: string
+    registration_confirmed:
+      type: boolean
+    registration_confirmed_at:
+      type: string
+    registration_phase:
+      type: string
+    religion:
+      type: string
+    sex:
+      type: boolean
+    speciality:
+      type: string
