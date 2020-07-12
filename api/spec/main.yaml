@@ -34,6 +34,8 @@ paths:
     $ref: 'rest/user.yaml#/occupation'
   /users/random:
     $ref: 'rest/user.yaml#/random'
+  /users/phone:
+    $ref: 'rest/user.yaml#/phone'
 
   # Heart
   /heart:
@@ -48,6 +50,10 @@ paths:
   # Star
   /star:
     $ref: 'rest/star.yaml#/star'
+
+  # Report
+  /report:
+    $ref: 'rest/report.yaml#/report'
 
   # Sms
   /sms:

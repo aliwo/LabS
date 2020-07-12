@@ -1,0 +1,30 @@
+report:
+  post:
+    security:
+      - Authorization: []
+    description: 신고를 때립니다.
+    operationId: api.rest.report.report
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+              memo:
+                type: string
+                example: 넘나 기분 나쁜 사진이에요!
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true

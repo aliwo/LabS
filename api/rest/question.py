@@ -7,6 +7,7 @@ from libs.database.engine import Session, afr
 from libs.route.router import route
 from libs.status import Status
 
+
 @route
 def get_mbti_questions():
     '''

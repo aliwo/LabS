@@ -12,6 +12,12 @@ servers:
 paths:
   /:
     $ref: 'rest/health.yaml#/hi'
+
+  # Users
+  /users:
+    $ref: 'rest/user.yaml#/users'
+
+  # Admin
   /admin/auth:
     $ref: 'rest/admin.yaml#/auth'
   /admin/info:

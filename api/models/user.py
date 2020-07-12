@@ -135,6 +135,7 @@ class User(Base):
         result = {
             'id': self.id,
             'animal_id': self.animal_id,
+            'animal':self.animal.json(),
             'email': self.email,
 
             # 신상 정보

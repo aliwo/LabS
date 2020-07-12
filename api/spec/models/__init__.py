@@ -22,6 +22,9 @@ user = convert(User, 'user.yaml', {'user':{
             'body_shape': {
                 'type': 'string',
                 'description': 'slim tan tan :)'
+            },
+            'animal': {
+                'type': 'object'
             }
         },
     }
