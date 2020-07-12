@@ -1,7 +1,7 @@
 hi:
   get:
     description: health check
-    operationId: api.rest.health.hi
+    operationId: admin.rest.health.hi
     responses:
       "200":
         description: Success
