@@ -47,6 +47,7 @@ def check_nick_name(nick_name):
 def del_phone():
     g.user_session.user.phone = None
     g.user_session.user.phone_registered = False
+    Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
 
 
