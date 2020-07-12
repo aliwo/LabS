@@ -3,6 +3,8 @@ user:
   properties:
     age:
       type: integer
+    animal:
+      type: object
     animal_id:
       type: integer
     bio:
