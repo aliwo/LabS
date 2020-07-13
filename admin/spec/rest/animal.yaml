@@ -1,7 +1,7 @@
-animal:
+animals:
   get:
     description: 동물 정보를 조회합니다.
-    operationId: admin.rest.animal.get_animal
+    operationId: admin.rest.components.animal_view.AnimalView.list
     responses:
       "200":
         description: Success
@@ -13,3 +13,21 @@ animal:
                 animal:
                   $ref: '../models/animal.yaml#/animal'
 
+animal:
+  get:
+    description: get animal by id
+    operationId: admin.rest.components.animal_view.AnimalView.get
+    parameters:
+      - in: path
+        name: id_
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array

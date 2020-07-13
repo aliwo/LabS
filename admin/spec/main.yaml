@@ -28,6 +28,8 @@ paths:
 
   # Animals
   /animals:
+    $ref: 'rest/animal.yaml#/animals'
+  /animal:
     $ref: 'rest/animal.yaml#/animal'
 
 
