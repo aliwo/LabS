@@ -181,7 +181,7 @@ class User(Base):
         if self.phone:
             result['phone'] = self.phone
 
-        if with_animal:
+        if with_animal and self.animal_id:
             result['animal'] = self.animal.json()
 
         if kwargs.get('with_point'):
