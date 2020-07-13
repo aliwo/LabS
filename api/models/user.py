@@ -172,6 +172,8 @@ class User(Base):
 
             # 기타
             'registration_phase': self.registration_phase,
+            'registration_confirmed': self.registration_confirmed,
+            'registration_confirmed_at': self.registration_confirmed_at,
 
             # 통계 정보
             'last_access': DateTimeHelper.full_datetime(self.last_access),
