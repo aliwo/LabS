@@ -23,6 +23,8 @@ paths:
   # Users
   /users:
     $ref: 'rest/user.yaml#/users'
+  /users/{id_}:
+    $ref: 'rest/user.yaml#/user'
 
   # Animals
   /animals:

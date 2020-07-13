@@ -1,7 +1,26 @@
 users:
   get:
     description: get users
-    operationId: admin.rest.user.get_users
+    operationId: admin.rest.components.user_view.UserView.list
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+
+user:
+  get:
+    description: get user by id
+    operationId: admin.rest.components.user_view.UserView.get
+    parameters:
+      - in: path
+        name: id_
+        required: true
+        schema:
+          type: integer
+          minimum: 1
     responses:
       "200":
         description: Success
