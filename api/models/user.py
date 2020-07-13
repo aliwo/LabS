@@ -131,11 +131,10 @@ class User(Base):
         '''
         return self.strategy.gen_preference_query(session)
 
-    def json(self, **kwargs):
+    def json(self, with_animal=True, **kwargs):
         result = {
             'id': self.id,
             'animal_id': self.animal_id,
-            'animal':self.animal.json(),
             'email': self.email,
 
             # 신상 정보
@@ -163,6 +162,14 @@ class User(Base):
             'drink': self.drink,
             'cigarette': self.cigarette,
 
+            # 이상형 정보
+            'ideal_age_start': self.ideal_age_start,
+            'ideal_age_end': self.ideal_age_end,
+            'ideal_body_shape': self.ideal_body_shape,
+            'ideal_type_groups': self.ideal_type_groups,
+            'ideal_height_start': self.ideal_height_start,
+            'ideal_height_end': self.ideal_height_end,
+
             # 기타
             'registration_phase': self.registration_phase,
 
@@ -173,6 +180,9 @@ class User(Base):
 
         if self.phone:
             result['phone'] = self.phone
+
+        if with_animal:
+            result['animal'] = self.animal.json()
 
         if kwargs.get('with_point'):
             result['hp'] = self.point.hp

@@ -13,15 +13,26 @@ paths:
   /:
     $ref: 'rest/health.yaml#/hi'
 
-  # Users
-  /users:
-    $ref: 'rest/user.yaml#/users'
 
   # Admin
   /admin/auth:
     $ref: 'rest/admin.yaml#/auth'
   /admin/info:
     $ref: 'rest/admin.yaml#/info'
+
+  # Users
+  /users:
+    $ref: 'rest/user.yaml#/users'
+  /users/{id_}:
+    $ref: 'rest/user.yaml#/user'
+
+  # Animals
+  /animals:
+    $ref: 'rest/animal.yaml#/animals'
+  /animal:
+    $ref: 'rest/animal.yaml#/animal'
+
+
 
 components:
   securitySchemes:

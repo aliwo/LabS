@@ -1,0 +1,9 @@
+mbti_question:
+  description: ''
+  properties:
+    id:
+      type: integer
+    question:
+      type: string
+    trait:
+      type: string

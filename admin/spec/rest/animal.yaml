@@ -1,19 +1,22 @@
-users:
+animals:
   get:
-    description: get users
-    operationId: admin.rest.components.user_view.UserView.list
+    description: 동물 정보를 조회합니다.
+    operationId: admin.rest.components.animal_view.AnimalView.list
     responses:
       "200":
         description: Success
         content:
           application/json:
             schema:
-              type: array
+              type: object
+              properties:
+                animal:
+                  $ref: '../models/animal.yaml#/animal'
 
-user:
+animal:
   get:
-    description: get user by id
-    operationId: admin.rest.components.user_view.UserView.get
+    description: get animal by id
+    operationId: admin.rest.components.animal_view.AnimalView.get
     parameters:
       - in: path
         name: id_
