@@ -9,7 +9,6 @@ from libs.datetime_helper import DateTimeHelper
 
 
 class Match(Base):
-    # TODO 페어로 만들기. from_id, to_id 를 갖는 2개 한 세트의 페어
     __tablename__ = 'matches'
     from_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
     to_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
