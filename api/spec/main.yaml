@@ -13,6 +13,9 @@ paths:
   /:
     $ref: 'rest/health.yaml#/hi'
 
+  /test/match:
+    $ref: 'rest/test.yaml#/test'
+
   # Oauth
   /oauth/google:
     $ref: 'rest/oauth.yaml#/google'

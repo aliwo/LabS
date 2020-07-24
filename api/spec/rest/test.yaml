@@ -1,0 +1,15 @@
+test:
+  get:
+    description: 테스트용 경로 (배포 전에 지워!) match 들을 생성합니다.
+    operationId: api.rest.test.gen_match
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
