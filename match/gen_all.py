@@ -10,4 +10,6 @@ def gen_all():
     gen_sy_matches()
     gen_preference_matches()
 
+if __name__ == '__main__':
+    gen_all()
 
