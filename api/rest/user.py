@@ -94,7 +94,7 @@ def delete_user():
     1. 블랙리스트 명부에 올리고
     2. 모든 부모 댓글과의 연결 관계를 끊습니다.
     '''
-    Session().add(Blacklist(g.user_session.user.oauth,
+    Session().add(Blacklist(g.user_session.user,
                             kind=Blacklist.KIND_RESIGN, until=datetime.now() + timedelta(days=90)))
     Session().flush()
 

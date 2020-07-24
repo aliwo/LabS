@@ -17,6 +17,9 @@ def login_google():
     is_new = True if oauth is None else False
 
     if is_new:
+
+        # TODO 여기서 블랙리스트 조회에서 에러 리턴.
+
         user = afr(User(email=g.info.get('email')))
         oauth = afr(OauthGoogle(user, g.info))
         user.oauth_google_id = oauth.id

@@ -26,6 +26,9 @@ def rolling_match(query_name, match_type):
     남자를 먼저 순회하고, 여자를 순회하는 방식의 매칭입니다.
     sy_match 와 preference_match 가 이에 해당합니다.
     '''
+    print()
+    print(f'rolling match {query_name}')
+    print('---------------------------')
     men = session.query(User).filter((User.sex == False) &
                                      (User.animal_id != None)).all()
     for man in men:
