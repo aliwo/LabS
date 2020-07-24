@@ -84,15 +84,13 @@ def get_random_user():
     return {'okay': True, 'user': user.json()}, Status.HTTP_200_OK
 
 # FM 대로 하자면, 이상형 정보를 입력하는 라우트를 만들어야 함. (put_user 와 똑같이)
-# 그리고 여기서 mp 50 을 늘려 줘야 하는데... 그냥 mp 증가 경로를 만들어 버릴까 ^^
-# 솔직히 베타 때는 생각 안 해도 됨
 
 @route
 def delete_user():
     '''
     회원 탈퇴합니다.
     1. 블랙리스트 명부에 올리고
-    2. 모든 부모 댓글과의 연결 관계를 끊습니다.
+    2. 삭제.
     '''
     Session().add(Blacklist(g.user_session.user,
                             kind=Blacklist.KIND_RESIGN, until=datetime.now() + timedelta(days=90)))
