@@ -13,19 +13,17 @@ class Blacklist(Base):
     PARTY_GOOGLE = 'GOOGLE'
     PARTY_KAKAO = 'KAKAO'
     PARTY_NAVER = 'NAVER'
-    PARTY_FACEBOOK = 'FACEBOOK'
 
     KIND_BAN = 'BAN'
     KIND_RESIGN = 'RESIGN'
 
     def __init__(self, oauth, **kwargs):
+        # TODO: 핸드폰 번호도 저장하도록 해야 할 듯.
         super().__init__(**kwargs)
         if oauth.__tablename__.endswith('google'):
             self.party_name = self.PARTY_GOOGLE
         elif oauth.__tablename__.endswith('kakao'):
             self.party_name = self.PARTY_KAKAO
-        elif oauth.__tablename__.endswith('facebook'):
-            self.party_name = self.PARTY_FACEBOOK
         elif oauth.__tablename__.endswith('naver'):
             self.party_name = self.PARTY_NAVER
 

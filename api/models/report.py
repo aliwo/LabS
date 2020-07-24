@@ -8,8 +8,8 @@ from libs.datetime_helper import DateTimeHelper
 class Report(Base):
     __tablename__ = 'reports'
 
-    from_user_id = Column(Integer, ForeignKey('users.id'), index=True)
-    to_user_id = Column(Integer, ForeignKey('users.id'), index=True)
+    from_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
+    to_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
 
     memo = Column(TEXT)
     created_at = Column(DATETIME)
