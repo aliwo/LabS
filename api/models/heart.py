@@ -17,10 +17,10 @@ from libs.datetime_helper import DateTimeHelper
 class Heart(Base):
     __tablename__ = 'hearts'
 
-    match_id = Column(Integer, ForeignKey('matches.id'), nullable=False)
-    from_user_id = Column(Integer, ForeignKey('users.id'), index=True)
+    match_id = Column(Integer, ForeignKey('matches.id', ondelete='SET NULL'))
+    from_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
     from_user = relationship('User', foreign_keys=[from_user_id])
-    to_user_id = Column(Integer, ForeignKey('users.id'), index=True)
+    to_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
     to_user = relationship('User', foreign_keys=[to_user_id])
     double = Column(BOOLEAN)
     accpeted = Column(BOOLEAN)

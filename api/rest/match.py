@@ -13,7 +13,8 @@ def get_soyeon_matches():
     '''
     '소연이 제안하는 인연' 을 조회합니다.
     '''
-    matches = Match.same_sex_query(Session(), g.user_session.user).filter((Match.type_ == Match.TYPE_SOYEON)
+    matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                  & (Match.type_ == Match.TYPE_SOYEON)
                                   & (Match.matched == False)
                                   & (Match.created_at >= (datetime.now() - timedelta(days=2)).date())
                                   ).all()
@@ -22,7 +23,18 @@ def get_soyeon_matches():
 
 @route
 def get_preference_matches():
-    matches = Match.same_sex_query(Session(), g.user_session.user).filter((Match.type_ == Match.TYPE_PREFER)
+    matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                  & (Match.type_ == Match.TYPE_PREFER)
+                                  & (Match.matched == False)
+                                  & (Match.created_at >= (datetime.now() - timedelta(days=2)).date())
+                                  ).all()
+    return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
+
+
+@route
+def get_random_matches():
+    matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                  & (Match.type_ == Match.TYPE_RANDOM)
                                   & (Match.matched == False)
                                   & (Match.created_at >= (datetime.now() - timedelta(days=2)).date())
                                   ).all()
@@ -31,21 +43,14 @@ def get_preference_matches():
 
 @route
 def get_old_matches():
-    matches = Match.same_sex_query(Session(), g.user_session.user).filter((Match.created_at <= (datetime.now() - timedelta(days=2)).date())).all()
-    return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
-
-
-@route
-def get_random_matches():
-    matches = Match.same_sex_query(Session(), g.user_session.user).filter((Match.type_ == Match.TYPE_RANDOM)
-                                  & (Match.matched == False)
-                                  & (Match.created_at >= (datetime.now() - timedelta(days=2)).date())
-                                  ).all()
+    matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                        & (Match.created_at <= (datetime.now() - timedelta(days=2)).date())).all()
     return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
 
 
 @route
 def get_matched_matches():
-    matches = Match.same_sex_query(Session(), g.user_session.user).filter((Match.matched == True)).all()
+    matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                            & (Match.matched == True)).all()
     return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
 

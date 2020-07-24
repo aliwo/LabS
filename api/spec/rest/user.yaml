@@ -66,6 +66,22 @@ me:
               properties:
                 user:
                   $ref: '../models/user.yaml#/user'
+  delete:
+    security:
+      - Authorization: []
+    description: 회원 탈퇴합니다. 블랙리스트에 이름을 올립니다.
+    operationId: api.rest.user.delete_user
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
 
 nickname:
   get:

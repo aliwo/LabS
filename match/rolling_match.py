@@ -26,6 +26,9 @@ def rolling_match(query_name, match_type):
     남자를 먼저 순회하고, 여자를 순회하는 방식의 매칭입니다.
     sy_match 와 preference_match 가 이에 해당합니다.
     '''
+    print()
+    print(f'rolling match {query_name}')
+    print('---------------------------')
     men = session.query(User).filter((User.sex == False) &
                                      (User.animal_id != None)).all()
     for man in men:
@@ -35,7 +38,8 @@ def rolling_match(query_name, match_type):
         for target in result['hits']['hits'][:2]: # 우선 순위 2명의 카드를 만듭니다.
             memo[man.id].append(int(target['_id']))
             memo[int(target['_id'])].append(man.id)
-            afr(Match(man_id=man.id, woman_id=target['_id'], type_=match_type))
+            afr(Match(from_id=man.id, to_id=target['_id'], type_=match_type))
+            afr(Match(to_id=man.id, from_id=target['_id'], type_=match_type))
             print(f'남자{man.id} 와 여자{target["_id"]} 연결')
 
     # 여자의 카드를 채웁니다.
@@ -48,7 +52,8 @@ def rolling_match(query_name, match_type):
         for target in result['hits']['hits'][:2-len(memo[woman.id])]:
             memo[woman.id].append(int(target['_id']))
             memo[int(target['_id'])].append(woman.id)
-            afr(Match(man_id=target['_id'], woman_id=woman.id, type_=match_type))
+            afr(Match(from_id=target['_id'], to_id=woman.id, type_=match_type))
+            afr(Match(to_id=target['_id'], from_id=woman.id, type_=match_type))
             print(f'여자{woman.id} 와 남자{target["_id"]} 연결')
 
     session.commit()
