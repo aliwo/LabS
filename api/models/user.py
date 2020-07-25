@@ -73,7 +73,6 @@ class User(Base):
     oauth_google_id = Column(Integer, ForeignKey('oauth_google.id'))
     oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id'))
     oauth_naver_id = Column(Integer, ForeignKey('oauth_naver.id'))
-    oauth_apple_id = Column(Integer, ForeignKey('oauth_apple.id'))
 
     # 다음 backref 가 존재합니다.
     # point
@@ -98,8 +97,6 @@ class User(Base):
             return self.oauth_kakao
         if self.oauth_naver_id:
             return self.oauth_naver
-        if self.oauth_apple_id:
-            return self.oauth_apple
 
     @hybrid_property
     def tier(self):
