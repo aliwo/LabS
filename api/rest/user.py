@@ -36,6 +36,7 @@ def put_user_profile():
             continue
         setattr(g.user_session.user, key, value)
         Session(changed=True)
+    g.user_session.user.el_time = datetime.now()
     Session().commit()
     return {'user': g.user_session.user.json()}, Status.HTTP_200_OK
 
