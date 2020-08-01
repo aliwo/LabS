@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey, orm
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL, JSON
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship, backref
 
@@ -47,6 +47,10 @@ class User(Base):
 
     # el_time
     el_time = Column(TIMESTAMP) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!
+
+    # 아는 사람 매칭 하지 않기
+    acquaintance_shy = Column(BOOLEAN)
+    acquaintance = Column(JSON)
 
     # 이상형 정보
     ideal_age_start = Column(INTEGER)
