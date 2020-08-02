@@ -163,6 +163,9 @@ class User(Base):
             'drink': self.drink,
             'cigarette': self.cigarette,
 
+            # 아는 사람
+            'acquaintance': self.acquaintance,
+
             # 이상형 정보
             'ideal_age_start': self.ideal_age_start,
             'ideal_age_end': self.ideal_age_end,
