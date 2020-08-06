@@ -67,7 +67,7 @@ class User(Base):
 
     # statistics
     rate = Column(DECIMAL(10,3))
-    rating_required = Column(BOOLEAN)
+    rating_required = Column(BOOLEAN, server_default='1')
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
