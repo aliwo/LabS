@@ -67,6 +67,7 @@ class User(Base):
 
     # statistics
     rate = Column(DECIMAL(10,3))
+    rating_required = Column(BOOLEAN)
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
@@ -180,6 +181,8 @@ class User(Base):
             'registration_confirmed_at': self.registration_confirmed_at,
 
             # 통계 정보
+            'rate': float(self.rate),
+            'rating_required': self.rating_required,
             'last_access': DateTimeHelper.full_datetime(self.last_access),
             'registered_at': DateTimeHelper.full_datetime(self.registered_at),
         }
