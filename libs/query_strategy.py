@@ -9,6 +9,8 @@ class QueryStrategy:
         matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
         [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
 
+        acquaintance = self.user.acquaintance if self.user.acquaintance_shy else []
+
         return {
             'query': {
                 'function_score': {
@@ -19,7 +21,7 @@ class QueryStrategy:
                                 {'range': {'rate': self.user.tier.tier_range}}
                             ],
                             'must_not': [
-                                {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
+                                {'terms': {'_id': matched_user_ids + acquaintance}}, # 빈 배열이어도 정상동작 확인 2020-06-29
                             ],
                             'should': [{
                                 'bool': {
