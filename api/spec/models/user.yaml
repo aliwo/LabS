@@ -1,6 +1,10 @@
 user:
   description: end users
   properties:
+    acquaintance:
+      type: object
+    acquaintance_shy:
+      type: boolean
     age:
       type: integer
     animal:
@@ -61,6 +65,12 @@ user:
       type: string
     nick_name:
       type: string
+    oauth_google_id:
+      type: integer
+    oauth_kakao_id:
+      type: integer
+    oauth_naver_id:
+      type: integer
     occupation:
       type: string
     occupation_confirmed:
@@ -74,7 +84,9 @@ user:
     pictures:
       type: string
     rate:
-      type: float
+      type: number
+    rating_required:
+      type: boolean
     registered_at:
       type: string
     registration_confirmed:

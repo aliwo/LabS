@@ -25,6 +25,9 @@ user = convert(User, 'user.yaml', {'user':{
             },
             'animal': {
                 'type': 'object'
+            },
+            'acquaintance': {
+                'type': 'array'
             }
         },
     }
