@@ -17,7 +17,7 @@ def map_sqltypes(column_type):
     elif isinstance(column_type, sqltypes.Time):
         return 'string'
     elif isinstance(column_type, sqltypes.DECIMAL):
-        return 'float'
+        return 'number'
     elif isinstance(column_type, LaboratoryTypes.TextTuple):
         return 'string'
     elif isinstance(column_type, LaboratoryTypes.IntTuple):

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Integer, Column, ForeignKey, orm
-from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL
+from sqlalchemy.dialects.mysql import TEXT, DATETIME, CHAR, INTEGER, BOOLEAN, TIMESTAMP, DECIMAL, JSON
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship, backref
 
@@ -48,6 +48,10 @@ class User(Base):
     # el_time
     el_time = Column(TIMESTAMP) # elasticsearch 에 수정사항을 반영해야 한다면 이 컬럼을 갱신 하세요!
 
+    # 아는 사람 매칭 하지 않기
+    acquaintance_shy = Column(BOOLEAN)
+    acquaintance = Column(JSON)
+
     # 이상형 정보
     ideal_age_start = Column(INTEGER)
     ideal_age_end = Column(INTEGER)
@@ -63,6 +67,7 @@ class User(Base):
 
     # statistics
     rate = Column(DECIMAL(10,3))
+    rating_required = Column(BOOLEAN, server_default='1')
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
 
@@ -159,6 +164,9 @@ class User(Base):
             'drink': self.drink,
             'cigarette': self.cigarette,
 
+            # 아는 사람
+            'acquaintance': self.acquaintance,
+
             # 이상형 정보
             'ideal_age_start': self.ideal_age_start,
             'ideal_age_end': self.ideal_age_end,
@@ -173,6 +181,8 @@ class User(Base):
             'registration_confirmed_at': self.registration_confirmed_at,
 
             # 통계 정보
+            'rate': float(self.rate),
+            'rating_required': self.rating_required,
             'last_access': DateTimeHelper.full_datetime(self.last_access),
             'registered_at': DateTimeHelper.full_datetime(self.registered_at),
         }

@@ -15,6 +15,7 @@ def rate_star():
     4. 스타의 rate 를 set
     5. flush
     6. 유저의 새로운 rate 를 결정합니다.
+    TODO: 7. 만약 10 명 이상의 유저로 부터 평가를 받았다면 rating_required 를 false 로 합니다.
     '''
     star = Session().query(Star).filter((Star.from_user_id == g.user_session.user.id)
                                         & (Star.to_user_id == request.json.get('user_id'))).one_or_none()
