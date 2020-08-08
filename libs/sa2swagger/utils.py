@@ -22,6 +22,8 @@ def map_sqltypes(column_type):
         return 'string'
     elif isinstance(column_type, LaboratoryTypes.IntTuple):
         return 'string'
+    elif isinstance(column_type, sqltypes.JSON):
+        return 'object'
     else:
         raise TypeError(f'Mapping failed: Unknown Column Type: {column_type}')
 

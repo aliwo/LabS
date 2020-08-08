@@ -4,21 +4,21 @@ match:
       type: string
     el_time:
       type: string
+    from_user_id:
+      type: integer
     id:
       type: integer
     man:
       description: "\uB9E4\uCE58 \uC720\uC800"
       type: object
-    man_id:
-      type: integer
     matched:
       type: boolean
     matched_at:
       type: string
+    to_user_id:
+      type: integer
     type_:
       type: string
     woman:
       description: "\uB9E4\uCE58 \uC720\uC800"
       type: object
-    woman_id:
-      type: integer
