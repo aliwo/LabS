@@ -3,6 +3,10 @@ from libs.database.engine import SessionMaker
 from api.models.animal import Animal
 from api.models.animal_correlation import AnimalCorrelation
 from api.models.user import User
+from api.models.oauth.google import OauthGoogle
+from api.models.oauth.apple import OauthApple
+from api.models.oauth.kakao import OauthKakao
+from api.models.oauth.naver import OauthNaver
 from api.models.match import Match
 from libs.elastic import es
 

@@ -1,0 +1,35 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: prod-match-job
+spec:
+  schedule: "10 12 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: sy-prod
+              image: gcr.io/soyeon-275107/sy-image:e54b161705bcbbb14ba87b25e8e5b19372ec0f8d
+              volumeMounts:
+                - name: alembic
+                  mountPath: "/LabS/temp"
+                  readOnly: true
+                - name: elastic-ca
+                  mountPath: "/ca.crt"
+                  subPath: "ca.crt"
+              env:
+                - name: "SY_ELASTIC_CA_PATH"
+                  value: "/ca.crt"
+                - name: "SY_ELASTIC_HOST"
+                  value: "quickstart-es-http.sy-elastic.svc"
+                - name: "SY_ELASTIC_USER"
+                  value: "elastic"
+                - name: "SY_ELASTIC_PASSWORD"
+                  value: "yr820bU85Z83ueBPF93cc0sg"
+              envFrom:
+                - secretRef:
+                    name: sy-prod
+              command: ["python3"]
+              args: ["match/gen_all.py"]
