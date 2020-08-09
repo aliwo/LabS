@@ -21,7 +21,8 @@ class QueryStrategy:
                                 {'range': {'rate': self.user.tier.tier_range}}
                             ],
                             'must_not': [
-                                {'terms': {'_id': matched_user_ids + acquaintance}}, # 빈 배열이어도 정상동작 확인 2020-06-29
+                                {'terms': {'_id': matched_user_ids }}, # 빈 배열이어도 정상동작 확인 2020-06-29
+                                {'terms': {'phone': acquaintance }}
                             ],
                             'should': [{
                                 'bool': {
