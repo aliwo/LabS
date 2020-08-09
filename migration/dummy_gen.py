@@ -25,7 +25,7 @@ for elem in mbtis:
 
     for i, m in enumerate([1,3,5,7,9]):
         print(f"INSERT INTO users(nick_name, registration_confirmed, registration_confirmed_at, registration_phase, "
-              f"animal_id, sex, rate,  el_time) VALUES ('남_{elem['mbti']}_rate_{m}', 1, NOW(), 'done', {elem['id']}, {1}, {m}, NOW());")
+              f"animal_id, sex, rate,  el_time) VALUES ('남_{elem['mbti']}_rate_{m}', 1, NOW(), 'done', {elem['id']}, {0}, {m}, NOW());")
 
 
 
