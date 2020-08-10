@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer, UniqueConstraint
 from sqlalchemy.dialects.mysql import CHAR, BOOLEAN, TEXT, DATETIME, TIMESTAMP
 from sqlalchemy.orm import relationship
 
@@ -10,9 +10,13 @@ from libs.datetime_helper import DateTimeHelper
 
 class Match(Base):
     __tablename__ = 'matches'
+    __table_args__ = (UniqueConstraint('from_user_id', 'to_user_id', name='from_to_user_id'), )
+
+    heart_id = Column(Integer, ForeignKey('hearts.id', ondelete='SET NULL'))
     from_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
     to_user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True)
 
+    heart = relationship('Heart', lazy='selectin')
     from_user = relationship('User', foreign_keys=[from_user_id], lazy='selectin')
     to_user = relationship('User', foreign_keys=[to_user_id])
 
@@ -42,4 +46,5 @@ class Match(Base):
             'to_user_id': self.to_user_id,
             'matched': self.matched,
             'created_at': DateTimeHelper.full_datetime(self.created_at),
+            'heart': self.heart.json()
         }

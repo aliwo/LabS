@@ -2,6 +2,7 @@ from flask import request, g
 
 from api.models.heart import Heart
 from api.models.heart_recharge import HeartRecharge
+from api.models.match import Match
 from api.models.prerequisites.heart_prerequisites import HeartPrerequisites
 from api.models.prerequisites.heart_recharge_prerequisites import HeartRechargePrerequisites
 from api.models.user_point import UserPointTx, UserPoint
@@ -16,8 +17,20 @@ from libs.status import Status
 def send_heart():
     '''
     하트를 보냅니다.
+    단 방향 매치의 경우, 상대방을 향한 매치도 생성합니다.
     '''
-    heart = Heart(match_id=request.json.get('match_id'), from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'))
+    to_match = Session().query(Match).filter((Match.from_user_id==g.user_session.user.id)
+                                             & (Match.to_user_id==request.json.get('user_id')))\
+        .one_or_none()
+    if not to_match:
+        to_match = Match(from_user_id=g.user_session.user.id,
+                         to_user_id=request.json.get('user_id'),
+                         type_=g.pr_result['from_match'].type_)
+
+    heart = afr(Heart(from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id')))
+    to_match.heart_id = heart.id
+    g.pr_result['from_match'].heart_id = heart.id
+
     Session().add(heart)
     Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
