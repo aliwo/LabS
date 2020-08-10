@@ -17,6 +17,7 @@ class Match(Base):
     to_user = relationship('User', foreign_keys=[to_user_id])
 
     matched = Column(BOOLEAN, server_default='0')
+    opened = Column(BOOLEAN, server_default='0')
     type_ = Column(CHAR(10)) # SOYEON, PREFER, RANDOM 등이 있습니다.
 
     created_at = Column(DATETIME)

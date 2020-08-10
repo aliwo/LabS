@@ -2,8 +2,9 @@ from datetime import datetime, timedelta
 
 from api.models.match import Match
 from libs.database.engine import Session
+from libs.route.errors import ClientError
 from libs.route.router import route
-from flask import g
+from flask import g, request
 
 from libs.status import Status
 
@@ -53,4 +54,16 @@ def get_matched_matches():
     matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
                                             & (Match.matched == True)).all()
     return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
+
+
+@route
+def open_match():
+    try:
+        match = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                            & (Match.id == request.json.get('match_id'))).one()
+    except:
+        raise ClientError('match not found or not your match', status_code=Status.HTTP_404_NOT_FOUND)
+    match.opened = True
+    Session().commit()
+    return {'okay': True}, Status.HTTP_200_OK
 

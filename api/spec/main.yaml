@@ -89,6 +89,8 @@ paths:
     $ref: 'rest/match.yaml#/random'
   /matches/matched:
     $ref: 'rest/match.yaml#/matched'
+  /matches/open:
+    $ref: 'rest/match.yaml#/open'
 
   # Term
   /terms:
