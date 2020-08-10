@@ -6,6 +6,8 @@ match:
       type: string
     from_user_id:
       type: integer
+    heart_id:
+      type: integer
     id:
       type: integer
     man:
@@ -15,6 +17,8 @@ match:
       type: boolean
     matched_at:
       type: string
+    opened:
+      type: boolean
     to_user_id:
       type: integer
     type_:

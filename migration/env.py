@@ -30,6 +30,7 @@ from api.models import heart_recharge
 from api.models import item
 from api.models import magazine_category
 from api.models import match
+from api.models import mbti_indicators
 from api.models import notifications
 from api.models import occupation_auth
 from api.models import report

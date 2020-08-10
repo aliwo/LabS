@@ -1,0 +1,11 @@
+mbti_indicator:
+  properties:
+    description:
+      type: string
+    id:
+      type: integer
+    synonym:
+      example: "\uC11C\uB85C \uB2E4\uB978 \uC5D0\uB108\uC9C0\uB97C \uAC00\uC9C0\uACE0\
+        \ \uC788\uC5B4, \uC11C\uB85C\uC5D0\uAC8C \uC88B\uC740 \uC790\uADF9\uC774 \uB420\
+        \uC218\uC788\uC2B5\uB2C8\uB2E4"
+      type: string

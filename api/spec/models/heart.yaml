@@ -13,8 +13,6 @@ heart:
       type: integer
     id:
       type: integer
-    match_id:
-      type: integer
     to_user:
       description: "\uD558\uD2B8 \uC720\uC800"
       type: object

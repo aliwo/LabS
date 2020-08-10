@@ -19,6 +19,7 @@ def get_trait_template():
         'F': 0,
         'J': 0,
         'P': 0,
+        'total': 20, # 하드코딩~
     }
 
 
@@ -28,6 +29,7 @@ class MbtiResult(Base):
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     raw = Column(JSON) # 테스트 결과 json 을 raw 로 저장합니다.
     result_mbti = Column(CHAR(10))
+    result_rate = Column(JSON)
     # result_animal_id 를 result_mbti 와 통합해도 되긴 함! animal 이 mbti aronym 을 가지고 있으니까.
     animal_id = Column(Integer, ForeignKey('animals.id'))
     created_at = Column(DATETIME)
@@ -40,7 +42,8 @@ class MbtiResult(Base):
         '''
         super().__init__(**kwargs)
         self.raw = test_results
-        self.result_mbti = self.calc_mbti(test_results)
+        self.result_rate = self.calc_rate(test_results)
+        self.result_mbti = self.calc_mbti()
         self.animal_id = self.animal.id
         self.created_at = datetime.now()
 
@@ -56,11 +59,11 @@ class MbtiResult(Base):
     def calc_identity(self, J, P):
         return 'J' if J - P > 2 else 'P'
 
-    def calc_mbti(self, test_results):
+    def calc_rate(self, test_results):
         '''
-            1. mbti_question 을 전부 쿼리
-            2. test_result 를 id 순으로 정렬.
-            3. zip 해서 순회
+        1. mbti_question 을 전부 쿼리
+        2. test_result 를 id 순으로 정렬.
+        3. zip 해서 순회
         '''
         from libs.database.engine import Session
         from api.models.mbti_questions import MbtiQuestion
@@ -72,11 +75,13 @@ class MbtiResult(Base):
             if result.get('mbti_id') != question.id:
                 raise ClientError(f'invalid question_id: client:{result.get("mbti_id")} server:{question.id}')
             template[question.trait] += result.get('point')
+        return template
 
-        return f'{self.calc_mind(template["E"], template["I"])}' \
-               f'{self.calc_energy(template["S"], template["N"])}' \
-               f'{self.calc_nature(template["T"], template["F"])}' \
-               f'{self.calc_identity(template["J"], template["P"])}'
+    def calc_mbti(self):
+        return f'{self.calc_mind(self.result_rate["E"], self.result_rate["I"])}' \
+               f'{self.calc_energy(self.result_rate["S"], self.result_rate["N"])}' \
+               f'{self.calc_nature(self.result_rate["T"], self.result_rate["F"])}' \
+               f'{self.calc_identity(self.result_rate["J"], self.result_rate["P"])}'
 
     @property
     def animal(self):
@@ -89,6 +94,8 @@ class MbtiResult(Base):
     def json(self):
         return {
             'id': self.id,
+            'result_rate': self.result_rate,
+            'result_mbti': self.result_mbti,
             'user_id': self.user_id,
             'animal_id': self.animal_id,
             'created_at': DateTimeHelper.full_datetime(self.created_at),

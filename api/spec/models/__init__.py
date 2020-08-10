@@ -1,5 +1,7 @@
 from api.models.animal import Animal
 from api.models.match import Match
+from api.models.mbti_indicators import MbtiIndicator
+from api.models.mbti_result import MbtiResult
 from api.models.user import User
 from api.models.heart import Heart
 from api.models.user_point import UserPoint
@@ -33,6 +35,18 @@ user = convert(User, 'user.yaml', {'user':{
     }
 })
 mbti_question = convert(MbtiQuestion, 'mbti_question.yaml')
+mbti_result = convert(MbtiResult, 'mbti_result.yaml', {'mbti_result': {
+    'properties': {
+        'result_rate': {
+            'type': 'object',
+            'description': 'mbti 결과'
+        },
+        'result_mbti': {
+            'type': 'object',
+            'description': 'mbti 결과'
+        }
+    }
+}})
 sms_auth = convert(SmsAuth, 'sms_auth.yaml')
 term = convert(Term, 'term.yaml')
 heart = convert(Heart, 'heart.yaml', {'heart': {
@@ -59,6 +73,14 @@ match = convert(Match, 'match.yaml', {'match': {
         'woman': {
             'type': 'object',
             'description': '매치 유저'
+        }
+    }
+}})
+indicator = convert(MbtiIndicator, 'indicator.yaml', {'mbti_indicator': {
+    'properties': {
+        'synonym': {
+            'type': 'string',
+            'example': '서로 다른 에너지를 가지고 있어, 서로에게 좋은 자극이 될수있습니다'
         }
     }
 }})

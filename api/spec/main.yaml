@@ -76,6 +76,10 @@ paths:
   /animals/{animal_id}:
     $ref: 'rest/animal.yaml#/animal'
 
+  # indicator
+  /indicator/{synonym}:
+    $ref: 'rest/animal.yaml#/mbti_indicator'
+
   # Questions
   /questions/mbti:
     $ref: 'rest/question.yaml#/mbti'

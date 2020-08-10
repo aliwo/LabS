@@ -36,8 +36,19 @@ INSERT INTO animals(id, mbti, prefix, name) VALUES (14, 'INTJ', '인텔리한 �
 INSERT INTO animals(id, mbti, prefix, name) VALUES (15, 'INFP', '별을세는 예술가', '햄스터');
 INSERT INTO animals(id, mbti, prefix, name) VALUES (16, 'INTP', '호기심 많은 인텔리', '올빼미');
 
-
-
+-- mbti indicator --
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(1, 'II'	,'비슷한 내향적 에너지를 가지고 있어, 편안한 만남이 될수있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(2, 'IE'	,'서로 다른 에너지를 가지고 있어, 서로에게 좋은 자극이 될수있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(3, 'EE'	,'비슷한 외향적 에너지를 가지고 있어, 에너지 넘치는 즐거운 만남이 될수있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(4, 'NN'	,'서로의 철학적인 사고에 귀기울일 수 있는, 깊은 내면을 가지고 있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(5, 'NS'	,'다른 내면을 가지고 있어 서로의 생각에 귀를 기울인다면, 서로에게 발전이 있는 좋은 보완관계가 될수있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(6, 'SS'	,'비슷한 현실적인 사고를 가지고 있어, 편안한 만남이 될 수 있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(7, 'FF'	,'공감능력이 좋아 따뜻한 공감대를 잘 형성할 수 있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(8, 'TF'	,'서로 다른 공감 포인트를 이해하고 노력한다면, 서로에게 발전이 있는 좋은 보완관계가 될수있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(9, 'TT'	,'이성적이고 논리적인 공감대를 가지고 있어, 공감대를 잘 형성할 수 있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(10, 'PP'	,'비슷한 여유롭고 관용적인 생활방식을 가지고 있어 편안한 관계가 될 수 있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(11, 'PJ'	,'서로 다른 생활방식을 가지고 있어 이해하고 노력한다면, 서로에게 발전이 있는 좋은 보완관계가 될수있습니다');
+INSERT INTO mbti_indicators(id, synonym, description) VALUES(12, 'JJ'	,'비슷한 철저하고 계획적인 생활방식을 가지고 있어 편안한 관계가 될 수 있습니다');
 
 
 

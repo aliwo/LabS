@@ -21,3 +21,25 @@ animal:
                 animal:
                   $ref: '../models/animal.yaml#/animal'
 
+mbti_indicator:
+  get:
+    description: mbti indicator 를 조회합니다.
+    operationId: api.rest.animal.get_mbti_indicator
+    parameters:
+      - in: path
+        name: synonym
+        required: true
+        schema:
+          type: string
+          minimum: 1
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                animal:
+                  $ref: '../models/indicator.yaml#/mbti_indicator'
