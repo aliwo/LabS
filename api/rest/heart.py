@@ -19,30 +19,23 @@ def send_heart():
     하트를 보냅니다.
     단 방향 매치의 경우, 상대방을 향한 매치도 생성합니다.
     '''
-    to_match = Session().query(Match).filter((Match.from_user_id==g.user_session.user.id)
-                                             & (Match.to_user_id==request.json.get('user_id')))\
-        .one_or_none()
-    if not to_match:
-        to_match = Match(from_user_id=g.user_session.user.id,
-                         to_user_id=request.json.get('user_id'),
-                         type_=g.pr_result['from_match'].type_)
-
     heart = afr(Heart(from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id')))
-    to_match.heart_id = heart.id
+    g.pr_result['to_match'].heart_id = heart.id
     g.pr_result['from_match'].heart_id = heart.id
-
     Session().add(heart)
     Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
 
 
 @route
-@prerequisites(HeartPrerequisites, 'double_heart')
+@prerequisites(HeartPrerequisites, 'heart')
 def send_double_heart():
     '''
     더블하트를 보냅니다.
     '''
-    heart = Heart(match_id=request.json.get('match_id'), from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'), double=True)
+    heart = afr(Heart(from_user_id=g.user_session.user.id, to_user_id=request.json.get('user_id'), double=True))
+    g.pr_result['to_match'].heart_id = heart.id
+    g.pr_result['from_match'].heart_id = heart.id
     Session().add(heart)
     Session().commit()
     return  {'okay': True}, Status.HTTP_200_OK
