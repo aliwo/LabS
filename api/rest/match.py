@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 
+from sqlalchemy.orm import aliased
 from api.models.match import Match
+from api.models.star import Star
 from libs.database.engine import Session
 from libs.route.errors import ClientError
 from libs.route.router import route
@@ -53,6 +55,36 @@ def get_old_matches():
 def get_matched_matches():
     matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
                                             & (Match.matched == True)).all()
+    return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
+
+
+@route
+def get_hearted_matches():
+    '''
+    당신에게 관심 있는 인연
+    나 혹은 상대가 하트를 쏜 매치만 조회합니다.
+    '''
+    matches = Session().query(Match).filter((Match.to_user_id == g.user_session.user.id)
+                                            & (Match.heart_id != None)).all()
+    return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
+
+
+@route
+def get_high_rated_matches():
+    '''
+    당신에게 높은 점수를 준 인연
+    1. to_user_id 가 자신인 모든 Match 를 쿼리해서
+    2. LEFT JOIN star ON star.to_user_id == Match.to_user_id
+    3. WHERE star.rate >= 4.0
+    4. 만약 내가 그 사람을 별 3개 이하로 줬다면 걸러야 한다.
+    '''
+    their_star = aliased(Star)
+    my_star = aliased(Star)
+    matches = Session().query(Match).join(their_star, their_star.to_user_id == Match.to_user_id)\
+        .join(my_star, my_star.from_user_id == Match.to_user_id)\
+        .filter((Match.to_user_id == g.user_session.user.id)
+                & (their_star.rate >= 4.)
+                & (my_star.rate >= 3.)).all()
     return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
 
 
