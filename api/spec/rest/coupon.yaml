@@ -1,0 +1,29 @@
+coupon:
+  get:
+    security:
+      - Authorization: []
+    description: 쿠폰을 해금 합니다.
+    operationId: api.rest.coupon.redeem
+    parameters:
+      - in: path
+        name: code
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+                hp:
+                  type: integer
+                  example: 10
+                mp:
+                  type: integer
+                  example: 10
