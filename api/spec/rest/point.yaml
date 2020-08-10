@@ -1,0 +1,17 @@
+stay:
+  post:
+    security:
+      - Authorization: []
+    description: 한 번, 회원 탈퇴 유저를 붙잡습니다.
+    operationId: api.rest.point.stay
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true

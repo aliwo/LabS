@@ -54,6 +54,10 @@ paths:
   /star:
     $ref: 'rest/star.yaml#/star'
 
+  # Point
+  /point/stay:
+    $ref: 'rest/point.yaml#/stay'
+
   # Report
   /report:
     $ref: 'rest/report.yaml#/report'
@@ -85,7 +89,6 @@ paths:
     $ref: 'rest/match.yaml#/random'
   /matches/matched:
     $ref: 'rest/match.yaml#/matched'
-
 
   # Term
   /terms:

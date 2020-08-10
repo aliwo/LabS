@@ -17,7 +17,7 @@ class OccupationAuth(Base):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.registered_at = datetime.now()
+        self.created_at = datetime.now()
 
     def confirm(self):
         self.confirmed = True
