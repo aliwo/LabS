@@ -78,6 +78,38 @@ matched:
               items:
                 $ref: '../models/match.yaml#/match'
 
+hearted:
+  get:
+    security:
+      - Authorization: []
+    description: 하트를 주거나 받은 매치를 가져옵니다.
+    operationId: api.rest.match.get_hearted_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'
+
+high_rate:
+  get:
+    security:
+      - Authorization: []
+    description: 상대방이 나에게 높은 점수를 준 매치를 가져옵니다.
+    operationId: api.rest.match.get_high_rated_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../models/match.yaml#/match'
+
 open:
   put:
     security:

@@ -24,14 +24,17 @@ class HeartPrerequisites(Prerequisites):
         '''
         from_match = helper.must_one(Session().query(Match).filter((Match.id == request.json.get('match_id'))))
         helper.must_mine(g.user_session.user, from_match, foreign_value=from_match.to_user_id)
-        self.result['from_match'] = from_match
 
-    def double_heart(self):
-        '''
-        '''
-        from_match = helper.must_one(Session().query(Match).filter((Match.id == request.json.get('match_id'))))
-        helper.must_mine(g.user_session.user, from_match, foreign_value=from_match.to_user_id)
+        to_match = Session().query(Match).filter((Match.from_user_id == g.user_session.user.id)
+                                                 & (Match.to_user_id == request.json.get('user_id'))) \
+            .one_or_none()
+        if not to_match:
+            to_match = Match(from_user_id=g.user_session.user.id,
+                             to_user_id=request.json.get('user_id'),
+                             type_=g.pr_result['from_match'].type_)
+
         self.result['from_match'] = from_match
+        self.result['to_match'] = to_match
 
     def accept(self):
         '''

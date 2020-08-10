@@ -89,6 +89,10 @@ paths:
     $ref: 'rest/match.yaml#/random'
   /matches/matched:
     $ref: 'rest/match.yaml#/matched'
+  /matches/hearted:
+    $ref: 'rest/match.yaml#/hearted'
+  /matches/highrated:
+    $ref: 'rest/match.yaml#/high_rate'
   /matches/open:
     $ref: 'rest/match.yaml#/open'
 
