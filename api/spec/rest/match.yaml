@@ -77,3 +77,32 @@ matched:
               type: array
               items:
                 $ref: '../models/match.yaml#/match'
+
+open:
+  put:
+    security:
+      - Authorization: []
+    description: 매치를 개봉합니다. (사진 블러처리 해제)
+    operationId: api.rest.match.open_match
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              match_id:
+                type: integer
+                example: 3
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+
