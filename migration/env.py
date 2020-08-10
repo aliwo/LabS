@@ -24,6 +24,7 @@ from api.models import animal
 from api.models import animal_correlation
 from api.models import announcements
 from api.models import blacklist
+from api.models import coupon
 from api.models import heart
 from api.models import heart_recharge
 from api.models import item

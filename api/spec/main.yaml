@@ -40,6 +40,10 @@ paths:
   /users/phone:
     $ref: 'rest/user.yaml#/phone'
 
+  # Coupon
+  /coupons/{code}:
+    $ref: 'rest/coupon.yaml#/coupon'
+
   # Heart
   /heart:
     $ref: 'rest/heart.yaml#/heart'
