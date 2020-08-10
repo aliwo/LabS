@@ -7,6 +7,13 @@ spec:
   schedule: "10 12 * * *"
   jobTemplate:
     spec:
+      volumes:
+        - name: elastic-ca
+          secret:
+            secretName: quickstart-es-http-certs-public
+        - name: alembic
+          secret:
+            secretName: sy-prod-alembic
       template:
         spec:
           restartPolicy: OnFailure
