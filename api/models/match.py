@@ -39,12 +39,15 @@ class Match(Base):
         self.matched = False
 
     def json(self):
-        return {
+        result = {
             'id': self.id,
             'from_user_id': self.from_user_id,
             'from_user': self.from_user.json(),
             'to_user_id': self.to_user_id,
             'matched': self.matched,
+            'heart_id': self.heart_id,
             'created_at': DateTimeHelper.full_datetime(self.created_at),
-            'heart': self.heart.json()
         }
+        if self.heart:
+            result['heart'] = self.heart.json()
+        return result
