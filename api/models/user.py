@@ -66,7 +66,7 @@ class User(Base):
     registration_confirmed_at = Column(DATETIME) # 최종 승인!
 
     # statistics
-    rate = Column(DECIMAL(10,3))
+    rate = Column(DECIMAL(10,3), server_default='0')
     rating_required = Column(BOOLEAN, server_default='1')
     registered_at = Column(DATETIME)  # 회원가입 통계낼 때 유용
     last_access = Column(DATETIME)  # 통계낼 때 유용
@@ -147,7 +147,7 @@ class User(Base):
             'education': self.education,
             'occupation': self.occupation,
             'occupation_confirmed': self.occupation_confirmed,
-            'occupation_confirmed_at': self.occupation_confirmed_at,
+            'occupation_confirmed_at': DateTimeHelper.full_datetime(self.occupation_confirmed_at),
             'company': self.company,
             'pictures': self.pictures,
             'bio': self.bio,
@@ -178,7 +178,7 @@ class User(Base):
             # 기타
             'registration_phase': self.registration_phase,
             'registration_confirmed': self.registration_confirmed,
-            'registration_confirmed_at': self.registration_confirmed_at,
+            'registration_confirmed_at': DateTimeHelper.full_datetime(self.registration_confirmed_at),
 
             # 통계 정보
             'rate': float(self.rate),
