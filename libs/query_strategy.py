@@ -6,9 +6,7 @@ class QueryStrategy:
     def gen_sy_query(self, session):
         from api.models.match import Match
 
-        matched_user_ids = list(set([x.to_user_id for x in session.query(Match).filter((Match.from_user_id == self.user.id))] + \
-        [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]))
-
+        matched_user_ids = Match.matched_user_ids(self.user.id, session)
         acquaintance = self.user.acquaintance if self.user.acquaintance_shy else []
 
         return {
@@ -58,7 +56,7 @@ class QueryStrategy:
     def gen_preference_query(self, session):
         from api.models.match import Match
 
-        matched_user_ids = [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == self.user.id))]
+        matched_user_ids = Match.matched_user_ids(self.user.id, session)
 
         return {
             'query': {

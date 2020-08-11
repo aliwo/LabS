@@ -61,6 +61,19 @@ random:
               type: array
               items:
                 $ref: '../models/match.yaml#/match'
+  post:
+    security:
+      - Authorization: []
+    description: 랜덤 매칭을 생성합니다.
+    operationId: api.rest.match.generate_random_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '../models/match.yaml#/match'
 
 matched:
   get:

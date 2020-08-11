@@ -38,6 +38,10 @@ class Match(Base):
         self.el_time = datetime.now()
         self.matched = False
 
+    @classmethod
+    def matched_user_ids(cls, user_id, session):
+        return [x.from_user_id for x in session.query(Match).filter((Match.to_user_id == user_id))]
+
     def json(self):
         result = {
             'id': self.id,

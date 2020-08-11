@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
 
 from sqlalchemy.orm import aliased
+from sqlalchemy.sql.expression import func
 from api.models.match import Match
 from api.models.star import Star
-from libs.database.engine import Session
+from api.models.user import User
+from libs.database.engine import Session, afr
 from libs.route.errors import ClientError
 from libs.route.router import route
 from flask import g, request
@@ -42,6 +44,16 @@ def get_random_matches():
                                   & (Match.created_at >= (datetime.now() - timedelta(days=2)).date())
                                   ).all()
     return {'matches': [x.json() for x in matches]}, Status.HTTP_200_OK
+
+
+@route
+def generate_random_matches():
+    user = Session().query(User).filter(
+        (User.sex != g.user_session.user.sex)
+        & (User.id.notin_(Match.matched_user_ids(g.user_session.user.id, Session())))).order_by(func.random()).limit(1).one()
+    match = afr(Match(from_user_id=user.id, to_user_id=g.user_session.user.id, type_=Match.TYPE_RANDOM))
+    Session().commit()
+    return {'match': match.json()}, Status.HTTP_200_OK
 
 
 @route
