@@ -18,6 +18,7 @@ class QueryStrategy:
                         'bool': {
                             'must': [
                                 {'term': {'sex': not self.user.sex}},
+                                {'terms': {'location': [self.user.location1, self.user.location2]}},
                                 {'range': {'rate': self.user.tier.tier_range}}
                             ],
                             'must_not': [
