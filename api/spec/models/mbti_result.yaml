@@ -1,0 +1,18 @@
+mbti_result:
+  properties:
+    animal_id:
+      type: integer
+    created_at:
+      type: string
+    id:
+      type: integer
+    raw:
+      type: object
+    result_mbti:
+      description: "mbti \uACB0\uACFC"
+      type: string
+    result_rate:
+      description: "mbti \uACB0\uACFC"
+      type: object
+    user_id:
+      type: integer

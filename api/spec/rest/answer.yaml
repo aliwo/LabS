@@ -1,0 +1,22 @@
+mbti:
+  get:
+    description: 특정 user의 mbti 결과를 가져옵니다.
+    operationId: api.rest.question.get_mbti_result
+    parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result:
+                  type: object
+                  $ref: '../models/mbti_result.yaml#/mbti_result'

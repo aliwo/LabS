@@ -83,6 +83,8 @@ paths:
   # Questions
   /questions/mbti:
     $ref: 'rest/question.yaml#/mbti'
+  /results/mbti/{user_id}:
+    $ref: 'rest/answer.yaml#/mbti'
 #  /questions/love:
 #    $ref: 'rest/question.yaml#/mbti'
 
@@ -133,6 +135,8 @@ components:
       $ref: 'models/animal.yaml#/animal'
     user:
       $ref: 'models/user.yaml#/user'
+    user_point:
+      $ref: 'models/user_point.yaml#/user_point'
     term:
       $ref: 'models/term.yaml#/term'
     terms_agreement:
@@ -141,6 +145,12 @@ components:
       $ref: 'models/sms_auth.yaml#/sms_auth'
     mbti_question:
       $ref: 'models/mbti_question.yaml#/mbti_question'
+    mbti_result:
+      $ref: 'models/mbti_result.yaml#/mbti_result'
+    indicator:
+      $ref: 'models/indicator.yaml#/mbti_indicator'
+    heart:
+      $ref: 'models/heart.yaml#/heart'
     type_group:
       $ref: 'models/type_group.yaml#/type_group'
     match:
