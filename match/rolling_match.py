@@ -8,6 +8,7 @@ from api.models.oauth.apple import OauthApple
 from api.models.oauth.kakao import OauthKakao
 from api.models.oauth.naver import OauthNaver
 from api.models.match import Match
+from api.models.heart import Heart
 from libs.elastic import es
 
 
