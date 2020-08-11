@@ -67,7 +67,8 @@ class QueryStrategy:
                         'bool': {
                             'must': [
                                 {'term': {'sex': not self.user.sex}},
-                                {'terms': {'type_group_id': list(self.user.ideal_type_groups)}}
+                                {'terms': {'type_group_id': list(self.user.ideal_type_groups)}},
+                                {'terms': {'location': [self.user.location1, self.user.location2]}}
                             ],
                             'must_not': [
                                 {'terms': {'_id': matched_user_ids}} # 빈 배열이어도 정상동작 확인 2020-06-29
