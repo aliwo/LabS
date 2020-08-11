@@ -18,6 +18,8 @@ class DateTimeHelper:
 
     @classmethod
     def full_datetime(cls, dt):
+        if dt is None:
+            return None
         return dt.strftime("%Y-%m-%d %H:%M:%S")
 
     @classmethod
