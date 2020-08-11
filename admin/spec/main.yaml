@@ -25,6 +25,8 @@ paths:
     $ref: 'rest/user.yaml#/users'
   /users/{id_}:
     $ref: 'rest/user.yaml#/user'
+  /users/{user_id}/confirm:
+    $ref: 'rest/user.yaml#/confirm_registration'
 
   # Animals
   /animals:

@@ -28,3 +28,28 @@ user:
           application/json:
             schema:
               type: array
+
+confirm_registration:
+  post:
+    security:
+      - Authorization: []
+    description: 회원가입을 승인합니다.
+    operationId: admin.rest.user.confirm_registration
+    parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
