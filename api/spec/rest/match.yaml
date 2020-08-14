@@ -151,3 +151,27 @@ open:
                   type: boolean
                   example: true
 
+match:
+  get:
+    security:
+      - Authorization: []
+    description: id 로 매치를 조회합니다.
+    operationId: api.rest.match.get_match_by_id
+    parameters:
+      - in: path
+        name: match_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  $ref: '../models/match.yaml#/match'

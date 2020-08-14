@@ -89,6 +89,8 @@ paths:
 #    $ref: 'rest/question.yaml#/mbti'
 
   # Matches
+  /matches/{match_id}:
+    $ref: 'rest/match.yaml#/match'
   /matches/soyeon:
     $ref: 'rest/match.yaml#/soyeon'
   /matches/prefer:

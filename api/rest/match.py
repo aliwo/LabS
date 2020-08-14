@@ -82,6 +82,21 @@ def get_hearted_matches():
 
 
 @route
+def get_match_by_id(match_id):
+    '''
+    id 로 매치를 가져옵니다.
+    '''
+    try:
+        match = Session().query(Match).filter((Match.id == match_id)).one()
+    except:
+        raise ClientError(f'No Match Found ${match_id}', Status.HTTP_404_NOT_FOUND)
+    if match.to_user_id != g.user_session.user.id:
+        raise ClientError('Not Your Match', Status.HTTP_470_NOT_YOURS)
+
+    return {'match': match.json()}, Status.HTTP_200_OK
+
+
+@route
 def get_high_rated_matches():
     '''
     당신에게 높은 점수를 준 인연
