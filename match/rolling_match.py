@@ -1,4 +1,6 @@
 from collections import defaultdict
+from pprint import pprint
+
 from libs.database.engine import SessionMaker
 from api.models.animal import Animal
 from api.models.animal_correlation import AnimalCorrelation
@@ -38,7 +40,10 @@ def rolling_match(query_name, match_type):
     men = session.query(User).filter((User.sex == False) &
                                      (User.animal_id != None)).all()
     for man in men:
-        result = es.search(getattr(man, query_name)(session), index='sy-users')
+        query = getattr(man, query_name)(session)
+        print(f'남자 #{man.id} 쿼리')
+        pprint(query)
+        result = es.search(query, index='sy-users')
         if not result['hits']['hits']:
             print(f'#{man.id} hit 없음')
             continue # 더 이상 매칭할 사람이 없다.
@@ -55,7 +60,10 @@ def rolling_match(query_name, match_type):
     for woman in women:
         if len(memo[woman.id]) >= 2:
             continue
-        result = es.search(getattr(woman, query_name)(session), index='sy-users')
+        query = getattr(woman, query_name)(session)
+        print(f'여자 #{woman.id} 쿼리')
+        pprint(query)
+        result = es.search(query, index='sy-users')
         for target in result['hits']['hits'][:2-len(memo[woman.id])]:
             memo[woman.id].append(int(target['_id']))
             memo[int(target['_id'])].append(woman.id)
