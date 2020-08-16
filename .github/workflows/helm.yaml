@@ -40,51 +40,51 @@ jobs:
       run: |
         pytest tests
 
-  setup-build-publish-deploy:
-    needs: build
-    name: Setup, Build, Publish, and Deploy
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    # Setup gcloud CLI
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GKE_KEY }}
-
-    # Configure docker to use the gcloud command-line tool as a credential helper
-    - run: |
-        # Set up docker to authenticate
-        # via gcloud command-line tool.
-        gcloud auth configure-docker
-
-    # Build the Docker image
-    - name: Build
-      run: |
-        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" .
-
-    # Push the Docker image to Google Container Registry
-    - name: Publish
-      run: |
-        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
-
-
-    - name: Install Helm
-      run: |
-        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-        chmod 700 get_helm.sh
-        ./get_helm.sh
-
-    # Helm Install
-    - name: helm install
-      run: |
-        helm repo add stable https://kubernetes-charts.storage.googleapis.com
-        helm dependency update $CHART_NAME
-        helm lint $CHART_NAME
-        helm upgrade $RELEASE_NAME $CHART_NAME --namespace $K8S_NAMESPACE $HELM_UPGRADE_ARGS --install
+#  setup-build-publish-deploy:
+#    needs: build
+#    name: Setup, Build, Publish, and Deploy
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#
+#    # Setup gcloud CLI
+#    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+#      with:
+#        version: '270.0.0'
+#        service_account_email: ${{ secrets.GKE_EMAIL }}
+#        service_account_key: ${{ secrets.GKE_KEY }}
+#
+#    # Configure docker to use the gcloud command-line tool as a credential helper
+#    - run: |
+#        # Set up docker to authenticate
+#        # via gcloud command-line tool.
+#        gcloud auth configure-docker
+#
+#    # Build the Docker image
+#    - name: Build
+#      run: |
+#        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+#          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+#          --build-arg GITHUB_REF="$GITHUB_REF" .
+#
+#    # Push the Docker image to Google Container Registry
+#    - name: Publish
+#      run: |
+#        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+#
+#
+#    - name: Install Helm
+#      run: |
+#        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+#        chmod 700 get_helm.sh
+#        ./get_helm.sh
+#
+#    # Helm Install
+#    - name: helm install
+#      run: |
+#        helm repo add stable https://kubernetes-charts.storage.googleapis.com
+#        helm dependency update $CHART_NAME
+#        helm lint $CHART_NAME
+#        helm upgrade $RELEASE_NAME $CHART_NAME --namespace $K8S_NAMESPACE $HELM_UPGRADE_ARGS --install
