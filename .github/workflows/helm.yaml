@@ -87,4 +87,4 @@ jobs:
         helm repo add stable https://kubernetes-charts.storage.googleapis.com
         helm dependency update $CHART_NAME
         helm lint $CHART_NAME
-        helm upgrade $INPUT_RELEASE_NAME $CHART_NAME --namespace $K8S_NAMESPACE $HELM_UPGRADE_ARGS --install
+        helm upgrade $RELEASE_NAME $CHART_NAME --namespace $K8S_NAMESPACE $HELM_UPGRADE_ARGS --install
