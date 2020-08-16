@@ -65,7 +65,7 @@ class QueryStrategy:
                         'bool': {
                             'must': [
                                 {'term': {'sex': not self.user.sex}},
-                                {'terms': {'type_group_id': list(self.user.ideal_type_groups)}},
+                                {'terms': {'animal_id': list(self.user.ideal_type_groups)}},
                                 {'terms': {'location': [self.user.location1, self.user.location2]}}
                             ],
                             'must_not': [
