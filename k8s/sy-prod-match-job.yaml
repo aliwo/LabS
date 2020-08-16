@@ -4,7 +4,7 @@ metadata:
   name: prod-match-job
 
 spec:
-  schedule: "10 12 * * *"
+  schedule: "10 3 * * *"
   jobTemplate:
     spec:
       template:
