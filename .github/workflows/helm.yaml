@@ -82,7 +82,7 @@ jobs:
         ./get_helm.sh
 
     # Helm Install
-    - uses: helm install
+    - name: helm install
       run: |
         helm repo add stable https://kubernetes-charts.storage.googleapis.com
         helm dependency update $CHART_NAME

@@ -1,40 +1,40 @@
-#name: GCP publish production
-#
-#on:
-#  push:
-#    branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
-#
-## Environment variables available to all jobs and steps in this workflow
-#env:
-#  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
-#  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-#  GITHUB_SHA: ${{ github.sha }}
-#  GKE_ZONE: asia-northeast3-a
-#  GKE_CLUSTER: sy-cluster
-#  IMAGE: sy-image
-#  REGISTRY_HOSTNAME: gcr.io
-#  PROD_DEPLOYMENT_NAME: sy-prod
-#  PROD_CONSOLE_DEPLOYMENT_NAME: sy-prod-console
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set up Python 3.8
-#      uses: actions/setup-python@v1
-#      with:
-#        python-version: 3.8
-#    - name: Install dependencies
-#      run: |
-#        python -m pip install --upgrade pip
-#        pip install -r requirements.txt
-#    - name: Test with pytest
-#      run: |
-#        pytest tests
-#
+name: GCP publish production
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GITHUB_SHA: ${{ github.sha }}
+  GKE_ZONE: asia-northeast3-a
+  GKE_CLUSTER: sy-cluster
+  IMAGE: sy-image
+  REGISTRY_HOSTNAME: gcr.io
+  PROD_DEPLOYMENT_NAME: sy-prod
+  PROD_CONSOLE_DEPLOYMENT_NAME: sy-prod-console
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Test with pytest
+      run: |
+        pytest tests
+
 #  # retry: 2020-04-26 temp
 #
 #  # 2020-03-24 SW: 현재 github action 은 한 workflow 가 성공했을 때  다른 workflow 들이 trigger 되도록 지원하지
