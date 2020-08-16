@@ -39,7 +39,7 @@ class Heart(Base):
 
         if not self.double:
             accept = Session().query((Item.symbol == 'accept')).one_or_none()
-            UserPoint.heart_point(self.to_user_id, accept.price if accept else 3000)
+            UserPoint.heart_point(self.to_user_id, accept.price if accept else -30)
 
         self.accpeted = True
 

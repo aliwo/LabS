@@ -53,6 +53,8 @@ paths:
     $ref: 'rest/heart.yaml#/google_recharge'
   /heart/2me:
     $ref: 'rest/heart.yaml#/heart2me'
+  /heart/accept:
+    $ref: 'rest/heart.yaml#/accept'
 
   # Star
   /star:
