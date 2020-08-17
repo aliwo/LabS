@@ -51,6 +51,8 @@ def gen_random_matches():
             afr(Match(from_user_id=man.id, to_user_id=woman.id, type_=Match.TYPE_RANDOM))
             afr(Match(to_user_id=man.id, from_user_id=woman.id, type_=Match.TYPE_RANDOM))
 
+    session.commit()
+
 
 if __name__ == '__main__':
-    random_match()
+    gen_random_matches()
