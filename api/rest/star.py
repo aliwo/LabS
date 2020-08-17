@@ -35,9 +35,9 @@ def rate_star():
 
 
 @route
-def high_star2me():
-    '''
-    '나에게 높은 점수를 준 인연' 조회 용
-    :return:
-    '''
+def get_star_by_user_id(user_id):
+    star = Session().query(Star).filter((Star.from_user_id == g.user_session.user.id)
+                                        & (Star.to_user_id == user_id)).one_or_none()
+    return {'okay': True if star else False}, Status.HTTP_200_OK
+
 

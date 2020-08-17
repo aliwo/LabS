@@ -59,6 +59,8 @@ paths:
   # Star
   /star:
     $ref: 'rest/star.yaml#/star'
+  /star/user/{user_id}:
+    $ref: 'rest/star.yaml#/star_user'
 
   # Point
   /point/stay:

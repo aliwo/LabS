@@ -28,3 +28,29 @@ star:
                 okay:
                   type: boolean
                   example: true
+
+star_user:
+  get:
+    security:
+      - Authorization: []
+    description: 내가 해당 유저를 평가한 적 있으면 true, 없으면 false 입니다.
+    operationId: api.rest.star.get_star_by_user_id
+    parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+
