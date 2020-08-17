@@ -89,7 +89,7 @@ class User(Base):
 
 
     # put 으로 변경할 수 없는 컬럼 들입니다.
-    sensitives = {'id', 'email', 'password', 'phone', 'fcm_token', 'registered_at', 'last_access', 'sex'}
+    sensitives = {'id', 'email', 'password', 'phone', 'registered_at', 'last_access', 'sex'}
 
     @orm.reconstructor
     def init_on_load(self):
