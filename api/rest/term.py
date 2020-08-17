@@ -15,6 +15,15 @@ def show_terms():
 
 
 @route
+def show_privacy_term():
+    '''
+    개인 정보 처리 방침만 불러옵니다.
+    '''
+    return {'term': Session().query(Term).filter((Term.symbol=='PRIVACY'))
+        .order_by(Term.id.desc()).first().json()}, Status.HTTP_200_OK
+
+
+@route
 def settle_contract():
     '''
     약관'들'에 동의합니다.

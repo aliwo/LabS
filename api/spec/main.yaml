@@ -115,6 +115,8 @@ paths:
   # Term
   /terms:
     $ref: 'rest/term.yaml#/term'
+  /terms/privacy:
+    $ref: 'rest/term.yaml#/privacy'
 
   # Image
   /image:

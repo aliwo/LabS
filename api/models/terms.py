@@ -8,6 +8,7 @@ from libs.database.types import Base
 class Term(Base):
     __tablename__ = 'terms'
     title = Column(TEXT)
+    symbol = Column(CHAR(10))
     body = Column(TEXT)
     required = Column(BOOLEAN)
 
@@ -15,6 +16,7 @@ class Term(Base):
         return {
             'id': self.id,
             'title': self.title,
+            'symbol': self.symbol,
             'body': self.body,
             'required': self.required
         }

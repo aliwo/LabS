@@ -45,5 +45,18 @@ term:
                 okay:
                   type: boolean
 
-
+privacy:
+  get:
+    description: 개인정보 처리방침만 불러옵니다.
+    operationId: api.rest.term.show_privacy_term
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                term:
+                  $ref: '../models/term.yaml#/term'
 
