@@ -17,6 +17,7 @@ from libs.elastic import es
 
 
 session = SessionMaker()
+memo = defaultdict(lambda: [])
 
 
 def afr(*args):
