@@ -20,6 +20,8 @@ user:
       type: string
     company:
       type: string
+    dormant_at:
+      type: string
     drink:
       type: string
     education:

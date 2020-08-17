@@ -15,6 +15,7 @@ from libs.query_strategy import QueryStrategy
 class User(Base):
     __tablename__ = 'users'
     email = Column(TEXT)
+    dormant_at = Column(DATETIME)
     frozen_until = Column(DATETIME)
     frozen_at = Column(DATETIME)
 
