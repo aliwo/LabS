@@ -1,3 +1,6 @@
+from api.models.animal import Animal
+
+
 class QueryStrategy:
 
     def __init__(self, user):
@@ -68,7 +71,10 @@ class QueryStrategy:
                         'bool': {
                             'must': [
                                 {'term': {'sex': not self.user.sex}},
-                                {'terms': {'animal_id': list(self.user.ideal_type_groups)}},
+                                {'terms': {'animal_id': [x.id for x in
+                                                         session.query(Animal).filter(
+                                                             (Animal.type_group_id.in_(self.user.ideal_type_groups))).all()
+                                                         ]}},
                                 {'terms': {'location': [self.user.location1, self.user.location2]}}
                             ],
                             'must_not': [
