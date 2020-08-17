@@ -10,6 +10,7 @@ class QueryStrategy:
         acquaintance = self.user.acquaintance if self.user.acquaintance_shy else []
 
         return {
+            'size': 2,
             'query': {
                 'function_score': {
                     'query': {
@@ -60,6 +61,7 @@ class QueryStrategy:
         acquaintance = self.user.acquaintance if self.user.acquaintance_shy else []
 
         return {
+            'size': 2,
             'query': {
                 'function_score': {
                     'query': {
@@ -104,6 +106,7 @@ class QueryStrategy:
         acquaintance = self.user.acquaintance if self.user.acquaintance_shy else []
 
         return {
+            'size': 2,
             'query': {
                 'function_score': {
                     'query': {

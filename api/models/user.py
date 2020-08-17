@@ -133,6 +133,9 @@ class User(Base):
         '''
         return self.strategy.gen_preference_query(session)
 
+    def gen_random_query(self, session):
+        return self.strategy.gen_random_query(session)
+
     def json(self, with_animal=True, **kwargs):
         result = {
             'id': self.id,
