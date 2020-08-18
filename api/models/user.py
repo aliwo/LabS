@@ -142,6 +142,9 @@ class User(Base):
             'id': self.id,
             'animal_id': self.animal_id,
             'email': self.email,
+            'frozen_at': DateTimeHelper.full_datetime(self.frozen_at),
+            'frozen_until': DateTimeHelper.full_datetime(self.frozen_until),
+            'dormant_at': DateTimeHelper.full_datetime(self.dormant_at),
 
             # 신상 정보
             'name': self.name,
