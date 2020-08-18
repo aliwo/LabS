@@ -5,6 +5,7 @@ from api.models.animal import Animal
 from api.models.mbti_questions import MbtiQuestion
 from api.models.mbti_result import MbtiResult
 from libs.database.engine import Session, afr
+from libs.route.auth import user_id_or_zero
 from libs.route.errors import ClientError
 from libs.route.router import route
 from libs.status import Status
@@ -26,7 +27,10 @@ def get_love_questions():
 
 @route
 def post_mbti_results():
-    mbti_result = afr(MbtiResult(request.json.get('result'), user_id=g.user_session.user.id))
+    mbti_result = MbtiResult(request.json.get('result'), user_id=user_id_or_zero())
+    if user_id_or_zero():
+        Session().add(mbti_result)
+        Session().commit()
     return {'animal': mbti_result.animal.json()}, Status.HTTP_200_OK
 
 
