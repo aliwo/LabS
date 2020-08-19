@@ -23,6 +23,7 @@ class Heart(Base):
     to_user = relationship('User', foreign_keys=[to_user_id])
     double = Column(BOOLEAN)
     accpeted = Column(BOOLEAN)
+    matches = relationship('Match')
 
     created_at = Column(DATETIME)
 
@@ -42,6 +43,8 @@ class Heart(Base):
             UserPoint.heart_point(self.to_user_id, accept.price if accept else -30)
 
         self.accpeted = True
+        for match in self.matches:
+            match.matched = True
 
     def json(self, **kwargs):
         result = {
