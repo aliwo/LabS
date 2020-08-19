@@ -44,7 +44,7 @@ class Heart(Base):
 
         self.accpeted = True
         for match in self.matches:
-            match.matched = True
+            match.match()
 
     def json(self, **kwargs):
         result = {
