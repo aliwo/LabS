@@ -43,5 +43,5 @@ class HeartPrerequisites(Prerequisites):
         만약 일반 하트라면 accept 하는 유저가 포인트를 갖고 있는지 체크합니다.
         '''
         heart = Session().query(Heart).filter((Heart.id == request.json.get('heart_id'))).one()
-        helper.must_mine(g.user_session.user, heart)
+        helper.must_mine(g.user_session.user, heart, foreign_value=heart.to_user_id)
         self.result['heart'] = heart

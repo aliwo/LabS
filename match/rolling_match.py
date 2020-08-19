@@ -45,7 +45,7 @@ def rolling_match(query_name, match_type):
         pprint(query)
         result = es.search(query, index='sy-users')
         if not result['hits']['hits']:
-            print(f'#{man.id} hit 없음')
+            print(f'남자 #{man.id} hit 없음')
             continue # 더 이상 매칭할 사람이 없다.
         for target in result['hits']['hits'][:2]: # 우선 순위 2명의 카드를 만듭니다.
             memo[man.id].append(int(target['_id']))
