@@ -9,6 +9,7 @@ from api.models.occupation_auth import OccupationAuth
 from api.models.star import Star
 from api.models.user import User
 from libs.database.engine import Session, afr
+from libs.elastic import es
 from libs.route.errors import ClientError
 from libs.route.router import route
 from libs.status import Status
@@ -82,7 +83,7 @@ def get_random_user():
         & (User.id != g.user_session.user.id)
     ).order_by(func.random()).first()
 
-    return {'okay': True, 'user': user.json()}, Status.HTTP_200_OK
+    return {'okay': True, 'user': user.json() if user else None}, Status.HTTP_200_OK
 
 # FM 대로 하자면, 이상형 정보를 입력하는 라우트를 만들어야 함. (put_user 와 똑같이)
 
@@ -96,8 +97,10 @@ def delete_user():
     Session().add(Blacklist(g.user_session.user,
                             kind=Blacklist.KIND_RESIGN, until=datetime.now() + timedelta(days=90)))
     Session().flush()
-
+    user_id = g.user_session.user.id
     Session().delete(g.user_session.user)
-    Session().flush()
+    Session().commit()
+
+    es.delete('sy-users', user_id)
     return {'okay':True}, Status.HTTP_200_OK
 
