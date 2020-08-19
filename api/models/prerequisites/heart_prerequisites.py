@@ -8,7 +8,7 @@ from api.models.user_point import UserPoint
 from libs.database.engine import Session
 from api.models.prerequisites.helper import PrerequisitesHelper
 from api.models.prerequisites.prerequisites import Prerequisites
-
+from libs.route.errors import ClientError
 
 helper = PrerequisitesHelper(UserPoint, 'json')
 
@@ -44,4 +44,6 @@ class HeartPrerequisites(Prerequisites):
         '''
         heart = Session().query(Heart).filter((Heart.id == request.json.get('heart_id'))).one()
         helper.must_mine(g.user_session.user, heart, foreign_value=heart.to_user_id)
+        if heart.accpeted:
+            raise ClientError('already accepted')
         self.result['heart'] = heart
