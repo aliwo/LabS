@@ -76,9 +76,9 @@ class User(Base):
     fcm_token = Column(TEXT)
 
     # oauth
-    oauth_google_id = Column(Integer, ForeignKey('oauth_google.id'))
-    oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id'))
-    oauth_naver_id = Column(Integer, ForeignKey('oauth_naver.id'))
+    oauth_google_id = Column(Integer, ForeignKey('oauth_google.id', ondelete='CASCADE'))
+    oauth_kakao_id = Column(Integer, ForeignKey('oauth_kakao.id', ondelete='CASCADE'))
+    oauth_naver_id = Column(Integer, ForeignKey('oauth_naver.id', ondelete='CASCADE'))
 
     # 다음 backref 가 존재합니다.
     # point
@@ -89,7 +89,8 @@ class User(Base):
 
 
     # put 으로 변경할 수 없는 컬럼 들입니다.
-    sensitives = {'id', 'email', 'password', 'phone', 'registered_at', 'last_access', 'sex'}
+    sensitives = {'id', 'email', 'password', 'phone', 'registered_at', 'last_access'}
+    set_once = {'sex'}
 
     @orm.reconstructor
     def init_on_load(self):

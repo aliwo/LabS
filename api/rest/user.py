@@ -35,6 +35,9 @@ def put_user_profile():
     for key, value in request.json.items():
         if key in User.sensitives:
             continue
+        if key in User.set_once:
+            if getattr(g.user_session.user, key) is not None:
+                continue
         setattr(g.user_session.user, key, value)
         Session(changed=True)
     g.user_session.user.el_time = datetime.now()

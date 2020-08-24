@@ -12,7 +12,7 @@ class Admin(Base):
     password = Column(TEXT)
     avatar = Column(TEXT, default='')
     role = Column(CHAR(30))
-    user_id = Column(ForeignKey('users.id'))
+    user_id = Column(ForeignKey('users.id', ondelete='CASCADE'))
     user = relationship('User', lazy="selectin")
 
     ROLE_MASTER = 'Master'
