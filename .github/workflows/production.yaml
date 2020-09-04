@@ -86,6 +86,6 @@ jobs:
         cd ./k8s
         ../kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
         ../kustomize build . | kubectl apply -n sy -f -
-        kubectl rollout status deployment/$PROD_DEPLOYMENT_NAME
-        kubectl rollout status deployment/$PROD_CONSOLE_DEPLOYMENT_NAME
+        kubectl rollout status deployment/$PROD_DEPLOYMENT_NAME -n sy
+        kubectl rollout status deployment/$PROD_CONSOLE_DEPLOYMENT_NAME -n sy
         kubectl get services -o wide
