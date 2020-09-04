@@ -4,7 +4,7 @@ metadata:
   labels:
     run: sy-prod-admin
   name: sy-prod-admin
-  namespace: default
+  namespace: sy
 spec:
   replicas: 1
   selector:

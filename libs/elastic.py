@@ -8,4 +8,7 @@ if os.environ.get('SY_STAGE', '') == 'PRODUCTION':
 
 es = Elasticsearch(**option)
 
-# print(es.info())
+print(es.info())
+
+
+es.get('sy-users')

@@ -4,7 +4,7 @@ metadata:
   labels:
     run: sy-prod
   name: sy-prod
-  namespace: default
+  namespace: sy
 spec:
   ports:
   - port: 8000

@@ -2,7 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: prod-match-job
-
+  namespace: sy
 spec:
   schedule: "10 3 * * *"
   jobTemplate:
