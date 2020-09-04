@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: sy-ingress
+  namespace: sy
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "sy-ip"
     networking.gke.io/managed-certificates: sy-certificate
