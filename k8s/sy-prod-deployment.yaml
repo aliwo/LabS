@@ -41,7 +41,7 @@ spec:
             - name: "SY_ELASTIC_USER"
               value: "elastic"
             - name: "SY_ELASTIC_PASSWORD"
-              value: "yr820bU85Z83ueBPF93cc0sg"
+              value: "I6UY424EF535qxL3OuI23taS"
           envFrom:
             - secretRef:
                 name: sy-prod
