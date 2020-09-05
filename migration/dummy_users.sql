@@ -1,9 +1,3 @@
-
-SET @user_a_id=0;
-SET @user_b_id=0;
-SET @user_c_id=0;
-SET @user_d_id=0;
-
 -- 각 유형별로 남자 5 여자 5명씩 삽입 --
 -- 각각 rate 는 1, 3, 5, 7, 9 --
 

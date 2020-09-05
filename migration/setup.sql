@@ -4,17 +4,26 @@ INSERT INTO terms(id, title, body) VALUES (1, '동의동의', '동의해');
 INSERT INTO terms(id, title, body) VALUES (2, '의동의동', '정의동');
 
 -- mbti 문제들 --
-INSERT INTO mbti_questions(id, question, trait) VALUES (1, '집 밖에 나가 노는 것을 선호하시나요?', 'E');
-INSERT INTO mbti_questions(id, question, trait) VALUES (2, '사교모임보다 혼자하는 비디오 게임이 즐거울 떄가 많나요?', 'I');
-INSERT INTO mbti_questions(id, question, trait) VALUES (3, '창의적인 것 보다는 실용적인게 좋나요?', 'S');
-INSERT INTO mbti_questions(id, question, trait) VALUES (4, '자주 공상에 빠져 주변 상황을 잊어버리곤 하나요?', 'N');
-INSERT INTO mbti_questions(id, question, trait) VALUES (5, '결정을 내릴때 다른사람의 감정이나 상황보다
-이론이나 사실이 중요한가요?', 'T');
-INSERT INTO mbti_questions(id, question, trait) VALUES (6, '다른 사람에게 싫은 소리 하기를 어려워 하나요?', 'F');
-INSERT INTO mbti_questions(id, question, trait) VALUES (7, '업무를 유연하게 하기보다는 미리 계획해서
-실행하는 편인가요?', 'J');
-INSERT INTO mbti_questions(id, question, trait) VALUES (8, '여행 계획을 구체적으로 짜기 보다는 상황에 맞춰서 여행하는 편 인가요?', 'P');
-
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (1, '나는 누군가와 친해질때 먼저 다가가는 편이다.', 'E');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (2, '나는 토론이나 회의에서 다른 사람의 감정과 관계를 고려하기보다는 맞다고 생각하는 의견을 주장하는 편이다', 'T');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (3, '나는 유명한 맛집 리스트를 알고 있고 다른 사람이 우리동네 맛집을 물어보면 바로 대답할 수 있다', 'S');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (4, '돌발상황에서 나는 나는 순발력있게 대처를 하는 편이다.', 'P');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (5, '나는 모임에 있을때보다 혼자 시간을 보낼때 에너지가 차오르며 편안함을 느낀다.', 'I');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (6, '일을할때 나는 서류작업 보다 독창적인 아이디어를 내는 일을 선호한다.', 'N');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (7, '연인을 찾을때 나는 지적인 대화보단 감정 표현방식이나 정서적 교류를 중요하게 보는 편이다.', 'F');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (8, '나는 일을 할때엔 하나의 일이 끝날때까진 한가지일을 하는것을 선호한다.', 'J');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (9, '데이트할때 주로 듣는 편이며 편안하다 느낄때 말문이 트이는 편이다.', 'I');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (10, '나는 편한 지인들과 일상이야기보다 예술이나 과학적인 이야기또는 이상에대해 이야기하는것을 좋아한다.', 'N');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (11, '다른 사람의 감정적요구보다 논리적인 헛점을 잘 캐치한다', 'T');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (12, '여행을 갈때엔 숙박할 곳 이동시간 교통편 미리 계획을 짜는 것을 선호한다 계획이 없다면 불안해진다.', 'J');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (13, '나는 내 논리가 반박 당했을 때보다 나의 감정이 존중되지 않는다 느꼈을때 화가 나는 편이다.', 'F');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (14, '나는 데이트할때 사람들이 많은 장소나 모임에서 즐기는것을 선호한다.', 'E');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (15, '나는 이론적인 지식보다 다른 사람의 경험을 더 우선시한다', 'S');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (16, '누군가와 관계가 깨졌을때 상처로 느껴지긴 하지만 마음을 정하면 빠른시일내 그사람을 정리할수있다.', 'T');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (17, '사교모임에서 시간이 지날수록 에너지를 얻으며 참석하면 가장 오래 남는 경향이 있다.', 'E');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (18, '상대와의 대화가 지루할때 혼자만의 생각에 빠져들곤 한다.', 'N');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (19, '나를 아는 사람들은 논리적이고 솔직하다 말하곤 한다.', 'T');
+INSERT INTO production.mbti_questions (id, question, trait) VALUES (20, '일상이나 어떤 일을 하든 항상 순서가 정해져있는게 편하다', 'J');
 -- 동물들 --
 INSERT INTO animals(id, mbti, prefix, name) VALUES (1, 'ESFJ', '사교적인 여왕', '공작새');
 INSERT INTO animals(id, mbti, prefix, name) VALUES (2, 'ESTJ', '무리를 이끄는 우두머리', '늑대');
