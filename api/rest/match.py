@@ -11,6 +11,7 @@ from libs.route.router import route
 from flask import g, request
 
 from libs.status import Status
+from match.gen_login_match import gen_login_matches
 
 
 @route
@@ -54,6 +55,16 @@ def generate_random_matches():
     match = afr(Match(from_user_id=user.id, to_user_id=g.user_session.user.id, type_=Match.TYPE_RANDOM))
     Session().commit()
     return {'match': match.json()}, Status.HTTP_200_OK
+
+
+@route
+def generate_signup_matches():
+    '''
+    TODO: 나중에 악용하는 넘 있으면 한 번만 호출 가능하도록 바꾸자 ^^ 2020-09-05
+    '''
+    gen_login_matches(g.user_session.user, Session(), 'gen_sy_query', Match.TYPE_SOYEON)
+    gen_login_matches(g.user_session.user, Session(), 'gen_preference_query', Match.TYPE_PREFER)
+    return {'okay': True}, Status.HTTP_200_OK
 
 
 @route

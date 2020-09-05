@@ -91,6 +91,24 @@ matched:
               items:
                 $ref: '../models/match.yaml#/match'
 
+signup:
+  post:
+    security:
+      - Authorization: []
+    description: 처음 가입 했을 때
+    operationId: api.rest.match.generate_signup_matches
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+
 hearted:
   get:
     security:

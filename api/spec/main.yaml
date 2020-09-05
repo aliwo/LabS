@@ -103,6 +103,8 @@ paths:
     $ref: 'rest/match.yaml#/old'
   /matches/random:
     $ref: 'rest/match.yaml#/random'
+  /matches/signup:
+    $ref: 'rest/match.yaml#/signup'
   /matches/matched:
     $ref: 'rest/match.yaml#/matched'
   /matches/hearted:
