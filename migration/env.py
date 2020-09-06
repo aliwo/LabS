@@ -28,6 +28,8 @@ from api.models import coupon
 from api.models import heart
 from api.models import heart_recharge
 from api.models import item
+from api.models import life_style_answer
+from api.models import life_style_question
 from api.models import magazine_category
 from api.models import match
 from api.models import mbti_indicators

@@ -1,0 +1,65 @@
+question:
+  get:
+    description: 질문 json 을 가져옵니다.
+    operationId: api.rest.life_style.get_life_style_questions
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                questions:
+                  type: array
+
+answer:
+  get:
+    security:
+      - Authorization: []
+    description: 자기가 한 대답을 조회합니다. 없으면 404
+    operationId: api.rest.life_style.get_life_style_answers
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answers:
+                  type: array
+                  example:
+                    - {"id": 1, "answer": 2}
+                    - {"id": 2, "answer": 3}
+
+  post:
+    security:
+      - Authorization: []
+    description: 본인의 대답을 등록합니다.
+    operationId: api.rest.life_style.post_life_style_answers
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              answers:
+                type: array
+                example:
+                  - {"id": 1, "answer": 2}
+                  - {"id": 2, "answer": 3}
+
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+

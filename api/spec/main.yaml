@@ -130,6 +130,12 @@ paths:
   /type_groups:
     $ref: 'rest/type_group.yaml#/type_groups'
 
+  # Type Group
+  /life_style/questions:
+    $ref: 'rest/life_style.yaml#/question'
+  /life_style/answers:
+    $ref: 'rest/life_style.yaml#/answer'
+
   # Magazines
 #  /magazines:
 #    $ref: 'rest/magazine.yaml#/magazines'
