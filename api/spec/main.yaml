@@ -75,6 +75,8 @@ paths:
     $ref: 'rest/sms.yaml#/sms'
   /sms/auth:
     $ref: 'rest/sms.yaml#/sms_auth'
+  /sms/auth/dry:
+    $ref: 'rest/sms.yaml#/sms_auth_dry'
 
   # Animals
   /animals/{animal_id}:

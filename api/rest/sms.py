@@ -50,3 +50,18 @@ def auth_sms():
 
     Session(changed=True).delete(sms_auth)
     return {'okay': True}, Status.HTTP_200_OK
+
+
+@route
+@prerequisites(SmsPrerequisites, 'on_auth')
+def sms_dry_check():
+    sms_auth = g.pr_result.get('sms_auth')
+
+    if sms_auth.auth_value != request.json.get('auth_value'):
+        raise ClientError('invalid auth')
+
+    if Session().query(User).filter((User.phone == sms_auth.phone_num)).first():
+        raise ClientError('duplicate phone num', Status.HTTP_406_NOT_ACCEPTABLE)
+
+    return {'okay': True}, Status.HTTP_200_OK
+

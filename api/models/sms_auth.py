@@ -28,7 +28,6 @@ class SmsAuth(Base):
         self.expiration = datetime.now() +timedelta(minutes=10)
 
 
-
     @classmethod
     def validate_sms_auth(cls, key, value, user_id=None, dry=False):
         from libs.database.engine import Session
