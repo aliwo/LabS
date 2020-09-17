@@ -7,5 +7,7 @@ term:
       type: integer
     required:
       type: boolean
+    symbol:
+      type: string
     title:
       type: string

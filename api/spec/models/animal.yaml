@@ -21,5 +21,7 @@ animal:
       type: string
     tags:
       type: string
+    title:
+      type: string
     type_group_id:
       type: integer

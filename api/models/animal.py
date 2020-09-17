@@ -36,6 +36,7 @@ class Animal(Base):
             'id': self.id,
             'mbti': self.mbti,
             'prefix': self.prefix,
+            'title': self.title,
             'name': self.name,
             'tags': self.tags,
             'summary': self.summary,
