@@ -14,7 +14,7 @@ class Animal(Base):
     __tablename__ = 'animals'
     mbti = Column(CHAR(10), unique=True, index=True)
     prefix = Column(TEXT)
-    title = Column(TEXT, server_default='')
+    title = Column(TEXT)
     name = Column(TEXT)
     tags = Column(LaboratoryTypes.TextTuple)
     type_group_id = Column(Integer, ForeignKey('type_groups.id'))
