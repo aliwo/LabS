@@ -1,0 +1,65 @@
+notify_heart_received:
+  post:
+    security:
+      - Authorization: []
+    description: '하트를 보냈다는 푸쉬를 상대방에게 쏩니다. 다음과 같은 dict 가 body 에 들어있는 푸쉬 메세지를 발송합니다.
+    {
+      "kind": "HEART_RECEIVED",
+      "user_id": 3,
+      "title": "하트가 도착하였습니다!",
+    }'
+    operationId: api.rest.notify.notify_heart_received
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true
+
+notify_heart_accepted:
+  post:
+    security:
+      - Authorization: []
+    description: '하트가 승낙되었다는 푸쉬를 상대방에게 쏩니다. 다음과 같은 dict 가 body 에 들어있는 푸쉬 메세지를 발송합니다.
+    {
+      "kind": "HEART_ACCEPTED",
+      "user_id": 3,
+      "title": "(nick_name) 님이 하트를 수락하셨습니다",
+    }'
+    operationId: api.rest.notify.notify_heart_accepted
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 3
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                okay:
+                  type: boolean
+                  example: true

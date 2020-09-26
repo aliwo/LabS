@@ -33,7 +33,7 @@ from api.models import life_style_question
 from api.models import magazine_category
 from api.models import match
 from api.models import mbti_indicators
-from api.models import notifications
+from api.models import notification
 from api.models import occupation_auth
 from api.models import pic
 from api.models import report

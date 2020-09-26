@@ -138,6 +138,12 @@ paths:
   /life_style/answers:
     $ref: 'rest/life_style.yaml#/answer'
 
+  # Notification
+  /notify/heart_received:
+    $ref: 'rest/notify.yaml#/notify_heart_received'
+  /notify/heart_accepted:
+    $ref: 'rest/notify.yaml#/notify_heart_accepted'
+
   # Magazines
 #  /magazines:
 #    $ref: 'rest/magazine.yaml#/magazines'
