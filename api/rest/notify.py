@@ -14,7 +14,7 @@ def notify_heart_received():
                                     to_user_id=request.json.get('user_id'),
                                     body={
                                         'kind': 'HEART_RECEIVED',
-                                        'user_id': g.user_session.user.id,
+                                        'user_id': str(g.user_session.user.id),
                                         'title': '하트가 도착하였습니다!',
                                     }))
 
@@ -29,8 +29,9 @@ def notify_heart_accepted():
                                     to_user_id=request.json.get('user_id'),
                                     body={
                                         'kind': 'HEART_ACCEPTED',
-                                        'user_id': g.user_session.user.id,
-                                        'title': f'{g.user_session.user.nick_name} 님이 하트를 수락하셨습니다',
+                                        'user_id': str(g.user_session.user.id),
+                                        'title': f'{g.user_session.user.nick_name if g.user_session.user.nick_name else "???"} '
+                                                 f'님이 하트를 수락하셨습니다',
                                     }))
 
     notification.notify()
