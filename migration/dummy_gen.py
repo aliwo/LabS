@@ -37,4 +37,3 @@ for elem in mbtis:
               f"VALUES ('남_{elem['mbti']}_rate_{m}', 1, NOW(), 'done', {elem['id']}, {1}, {m}, NOW(), '{locations[elem['id'] % 4]}', '{locations[(elem['id'] % 4) + 1]}');")
 
 
-

@@ -15,6 +15,7 @@ class Notification(Base):
     from_user_id = Column(Integer, ForeignKey('users.id', onupdate='SET NULL', ondelete='SET NULL'), nullable=True)
     to_user_id = Column(Integer, ForeignKey('users.id', onupdate='SET NULL', ondelete='SET NULL'))
     to_user = relationship('User', foreign_keys=[to_user_id])
+    notification = Column(JSON)
     body = Column(JSON)
     fire = Column(BOOLEAN)
     read = Column(BOOLEAN, server_default='0')
@@ -30,7 +31,8 @@ class Notification(Base):
         to_user 로 부터 fcm_token 을 얻어냅니다. 따라서 flush 이후에 호출해야 합니다.
         '''
         if self.to_user.fcm_token:
-            result = Notifier(token=self.to_user.fcm_token).notify(self.body)
+            result = \
+                Notifier(token=self.to_user.fcm_token).notify(body=self.body, notification=self.notification)
             if result:
                 self.fire = True
             return result

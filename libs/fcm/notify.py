@@ -1,4 +1,5 @@
 from firebase_admin import messaging
+from firebase_admin.messaging import Notification
 
 from libs.route.errors import ServerError
 
@@ -11,9 +12,14 @@ class Notifier:
         self.token = token
         self.topic = topic
 
-    def make_message(self, body):
+    def make_message(self, body=None, notification=None):
         topic_or_token = self.topic if self.topic else self.token
-        return messaging.Message(data=body, token=topic_or_token,
+        body = {} if not body else body
+        notification = {} if not notification else notification
+        return messaging.Message(
+                    data=body,
+                    notification=Notification(**notification),
+                    token=topic_or_token,
                     apns=messaging.APNSConfig(
                     headers={'apns-push-type': 'background', 'apns-priority': '5'},
                     payload=messaging.APNSPayload(
@@ -23,10 +29,10 @@ class Notifier:
                     )
                 ))
 
-    def notify(self, body):
+    def notify(self, body=None, notification=None):
         '''
         body 는 모든 key 와 value 가 string 인 딕셔너리입니다.
         '''
-        response = messaging.send(self.make_message(body))
+        response = messaging.send(self.make_message(body=body, notification=notification))
         return response
 

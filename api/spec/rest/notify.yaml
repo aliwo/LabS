@@ -38,7 +38,7 @@ notify_heart_accepted:
     description: '하트가 승낙되었다는 푸쉬를 상대방에게 쏩니다. 다음과 같은 dict 가 body 에 들어있는 푸쉬 메세지를 발송합니다.
     {
       "kind": "HEART_ACCEPTED",
-      "user_id": 3,
+      "match_id": 3,
       "title": "(nick_name) 님이 하트를 수락하셨습니다",
     }'
     operationId: api.rest.notify.notify_heart_accepted
@@ -49,7 +49,7 @@ notify_heart_accepted:
           schema:
             type: object
             properties:
-              user_id:
+              heart_id:
                 type: integer
                 example: 3
     responses:

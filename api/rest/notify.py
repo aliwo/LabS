@@ -1,4 +1,7 @@
 from flask import g, request
+
+from api.models.heart import Heart
+from api.models.match import Match
 from libs.fcm import firebase_app # 지우지마
 from api.models.notification import Notification
 from libs.database.engine import Session
@@ -25,13 +28,17 @@ def notify_heart_received():
 
 @route
 def notify_heart_accepted():
+    heart = Session().query(Heart).filter((Heart.id == request.json.get('heart_id'))).one()
+    match = Session().query(Match).filter((Match.heart_id == heart.id)
+                                          & (Match.from_user_id == g.user_session.user.id)).one()
     notification = afr(Notification(from_user_id=g.user_session.user.id,
-                                    to_user_id=request.json.get('user_id'),
+                                    to_user_id=match.to_user_id,
+                                    notification={'title': f'{g.user_session.user.nick_name if g.user_session.user.nick_name else "???"} '
+                                                 f'님이 하트를 수락하셨습니다'},
                                     body={
                                         'kind': 'HEART_ACCEPTED',
-                                        'user_id': str(g.user_session.user.id),
-                                        'title': f'{g.user_session.user.nick_name if g.user_session.user.nick_name else "???"} '
-                                                 f'님이 하트를 수락하셨습니다',
+                                        'match_id': str(match.id),
+                                        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
                                     }))
 
     notification.notify()
