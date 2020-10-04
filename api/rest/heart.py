@@ -1,3 +1,4 @@
+import requests
 from flask import request, g
 
 from api.models.heart import Heart
@@ -7,9 +8,11 @@ from api.models.prerequisites.heart_prerequisites import HeartPrerequisites
 from api.models.prerequisites.heart_recharge_prerequisites import HeartRechargePrerequisites
 from api.models.user_point import UserPointTx, UserPoint
 from libs.database.engine import afr, Session
+from libs.route.errors import ClientError
 from libs.route.prerequisite import prerequisites
 from libs.route.router import route
 from libs.status import Status
+from libs.util import retrieve_gat
 
 
 @route
@@ -57,6 +60,18 @@ def recharge_heart_google():
     '''
     TODO: 테스트 필요
     구글 영수증을 검증하고 하트를 충전합니다.
+    '''
+    heart_recharge = afr(HeartRecharge(**request.json.get('recharge_info')))
+    afr(UserPointTx(user_id=g.user_session.user.id, hp=heart_recharge.amount))
+    UserPoint.heart_point(user_id=g.user_session.user.id, hp=heart_recharge.amount)
+    Session().commit()
+    return {'okay': True}, Status.HTTP_200_OK
+
+
+@prerequisites(HeartRechargePrerequisites, 'apple')
+def recharge_heart_apple():
+    '''
+    애플 영수증을 검증하고 하트를 충전합니다.
     '''
     heart_recharge = afr(HeartRecharge(**request.json.get('recharge_info')))
     afr(UserPointTx(user_id=g.user_session.user.id, hp=heart_recharge.amount))

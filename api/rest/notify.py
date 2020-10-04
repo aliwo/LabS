@@ -13,12 +13,17 @@ from libs.status import Status
 
 @route
 def notify_heart_received():
+    heart = Session().query(Heart).filter((Heart.id == request.json.get('heart_id'))).one()
+    match = Session().query(Match).filter((Match.heart_id == heart.id)
+                                          & (Match.from_user_id == g.user_session.user.id)).one()
     notification = afr(Notification(from_user_id=g.user_session.user.id,
                                     to_user_id=request.json.get('user_id'),
+                                    notification={
+                                        'title': f'{g.user_session.user.nick_name if g.user_session.user.nick_name else "???"} '
+                                                 f'님으로부터 하트가 도착하였습니다!'},
                                     body={
                                         'kind': 'HEART_RECEIVED',
-                                        'user_id': str(g.user_session.user.id),
-                                        'title': '하트가 도착하였습니다!',
+                                        'match_id': str(match.id),
                                     }))
 
     notification.notify()
