@@ -24,6 +24,7 @@ class Heart(Base):
     double = Column(BOOLEAN)
     accpeted = Column(BOOLEAN)
     matches = relationship('Match')
+    message = Column(TEXT)
 
     created_at = Column(DATETIME)
 

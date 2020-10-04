@@ -17,6 +17,9 @@ heart:
               match_id:
                 type: integer
                 example: 4
+              message:
+                type: string
+                example: '스키~~'
     responses:
       "200":
         description: Success
@@ -49,6 +52,9 @@ double_heart:
               match_id:
                 type: integer
                 example: 4
+              message:
+                type: string
+                example: '스키~~'
     responses:
       "200":
         description: Success
