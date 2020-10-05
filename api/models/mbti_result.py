@@ -19,7 +19,10 @@ def get_trait_template():
         'F': 0,
         'J': 0,
         'P': 0,
-        'total': 20, # 하드코딩~
+        'EI_TOTAL': 20, # TOTAL은 전부 하드코딩~
+        'SN_TOTAL': 20, # TOTAL은 전부 하드코딩~
+        'TF_TOTAL': 24, # TOTAL은 전부 하드코딩~
+        'JP_TOTAL': 16, # TOTAL은 전부 하드코딩~
     }
 
 
@@ -91,11 +94,24 @@ class MbtiResult(Base):
             self._animal = Session().query(Animal).filter((Animal.mbti ==  self.result_mbti)).one()
         return self._animal
 
+    @property
+    def rates_in_100(self):
+        '''
+        5, 4, 6 등의 "계수" 는 하드코딩
+        '''
+        return {
+            self.result_mbti[0]: self.result_rate[self.result_mbti[0]] * 5,
+            self.result_mbti[1]: self.result_rate[self.result_mbti[1]] * 5,
+            self.result_mbti[2]: self.result_rate[self.result_mbti[2]] * 4,
+            self.result_mbti[3]: self.result_rate[self.result_mbti[3]] * 6,
+        }
+
     def json(self):
         return {
             'id': self.id,
             'result_rate': self.result_rate,
             'result_mbti': self.result_mbti,
+            'rates_in_100': self.rates_in_100,
             'user_id': self.user_id,
             'animal_id': self.animal_id,
             'created_at': DateTimeHelper.full_datetime(self.created_at),

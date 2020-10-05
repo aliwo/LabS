@@ -37,7 +37,8 @@ def post_mbti_results():
 @route
 def get_mbti_result(user_id):
     try:
-        mbti_result = Session().query(MbtiResult).filter((MbtiResult.user_id == user_id)).one()
+        mbti_result = Session().query(MbtiResult).filter((MbtiResult.user_id == user_id))\
+            .order_by(MbtiResult.id.desc()).first()
     except NoResultFound:
         raise ClientError(f'user #{user_id} mbti_result not found', Status.HTTP_404_NOT_FOUND)
     return {'result': mbti_result.json()}, Status.HTTP_200_OK
