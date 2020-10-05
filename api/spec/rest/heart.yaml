@@ -31,6 +31,9 @@ heart:
                 okay:
                   type: boolean
                   example: true
+                heart_id:
+                  type: integer
+                  example: 2
 
 
 double_heart:
@@ -66,7 +69,9 @@ double_heart:
                 okay:
                   type: boolean
                   example: true
-
+                heart_id:
+                  type: integer
+                  example: 2
 
 accept:
   put:

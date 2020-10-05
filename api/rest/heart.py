@@ -27,7 +27,7 @@ def send_heart():
     g.pr_result['from_match'].heart_id = heart.id
     Session().add(heart)
     Session().commit()
-    return {'okay': True}, Status.HTTP_200_OK
+    return {'okay': True, 'heart_id': heart.id}, Status.HTTP_200_OK
 
 
 @route
@@ -44,7 +44,7 @@ def send_double_heart():
     g.pr_result['from_match'].heart_id = heart.id
     Session().add(heart)
     Session().commit()
-    return  {'okay': True}, Status.HTTP_200_OK
+    return  {'okay': True, 'heart_id': heart.id}, Status.HTTP_200_OK
 
 
 @route
