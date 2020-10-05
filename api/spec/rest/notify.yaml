@@ -5,7 +5,7 @@ notify_heart_received:
     description: '하트를 보냈다는 푸쉬를 상대방에게 쏩니다. 다음과 같은 dict 가 body 에 들어있는 푸쉬 메세지를 발송합니다.
     {
       "kind": "HEART_RECEIVED",
-      "user_id": 3,
+      "match_id": 3,
       "title": "하트가 도착하였습니다!",
     }'
     operationId: api.rest.notify.notify_heart_received
@@ -16,7 +16,7 @@ notify_heart_received:
           schema:
             type: object
             properties:
-              user_id:
+              heart_id:
                 type: integer
                 example: 3
     responses:

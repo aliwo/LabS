@@ -17,7 +17,7 @@ def notify_heart_received():
     match = Session().query(Match).filter((Match.heart_id == heart.id)
                                           & (Match.from_user_id == g.user_session.user.id)).one()
     notification = afr(Notification(from_user_id=g.user_session.user.id,
-                                    to_user_id=request.json.get('user_id'),
+                                    to_user_id=match.to_user_id,
                                     notification={
                                         'title': f'{g.user_session.user.nick_name if g.user_session.user.nick_name else "???"} '
                                                  f'님으로부터 하트가 도착하였습니다!'},
