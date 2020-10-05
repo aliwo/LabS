@@ -24,6 +24,7 @@ def notify_heart_received():
                                     body={
                                         'kind': 'HEART_RECEIVED',
                                         'match_id': str(match.id),
+                                        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
                                     }))
 
     notification.notify()
