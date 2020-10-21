@@ -30,8 +30,8 @@ answer:
                 answers:
                   type: array
                   example:
-                    - {"id": 1, "answer": 2}
-                    - {"id": 2, "answer": 3}
+                    - {"id": 1, "answer": [1, 2, 3]}
+                    - {"id": 2, "answer": [1, 2, 3]}
 
   post:
     security:
@@ -48,8 +48,9 @@ answer:
               answers:
                 type: array
                 example:
-                  - {"id": 1, "answer": 2}
-                  - {"id": 2, "answer": 3}
+                  - {"id": 1, "answer": [1, 2, 3]}
+                  - {"id": 1, "answer": [4, 5, 6]}
+
 
     responses:
       "200":
