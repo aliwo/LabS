@@ -59,7 +59,6 @@ class Status:
 
     # 여기서 부터 커스텀
     HTTP_470_NOT_YOURS = 470
-    HTTP_471_NO_WHITESPACE = 471
 
 
     @classmethod
