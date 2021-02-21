@@ -2,7 +2,7 @@ from api.models.pic import Pic
 from libs.database.engine import afr, Session
 from libs.route.router import route
 from libs.status import Status
-from libs.storage import gcs
+from libs.storage import s3
 from flask import request, g
 
 
@@ -13,7 +13,7 @@ def upload_image():
     2020-08-19
     '''
     file = request.files.get('image')
-    url = gcs.upload_file(file.read(), file.filename, file.content_type)
+    url = s3.upload_file(file, file.filename)
     afr(Pic(user_id=g.user_session.user.id, url=url))
     Session().commit()
     return {'url': url}, Status.HTTP_200_OK
