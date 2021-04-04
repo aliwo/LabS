@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import boto3
@@ -6,8 +7,8 @@ from werkzeug.utils import secure_filename
 
 import libs.route.errors
 
-KEY_ID = 'AKIAZ4PPDWSDXN37PFDZ'
-KEY = '+jYoN3ukx2tZ53+qhoNJ1a7VWVCmMHfv2E0eGSWM'
+KEY_ID = os.environ.get('SY_S3_KEY') # 'AKIAZ4PPDWSD5RRDC6LU'
+KEY = os.environ.get('SY_S3_SECRET') # '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'
 BUCKET = 'soyeonlab'
 BUCKET_URL = 'https://soyeonlab.s3.ap-northeast-2.amazonaws.com/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
