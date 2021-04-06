@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 
 import libs.route.errors
 
-KEY_ID = os.environ.get('SY_S3_KEY') # 'AKIAZ4PPDWSD5RRDC6LU'
-KEY = os.environ.get('SY_S3_SECRET') # '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'
+KEY_ID = os.environ.get('SY_S3_KEY')
+KEY = os.environ.get('SY_S3_SECRET')
 BUCKET = 'soyeonlab'
 BUCKET_URL = 'https://soyeonlab.s3.ap-northeast-2.amazonaws.com/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
