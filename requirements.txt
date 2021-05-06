@@ -16,7 +16,7 @@ cryptography==3.0
 elasticsearch==7.6.0
 firebase-admin==4.3.0
 Flask==1.1.1
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 google-api-core==1.17.0
 google-api-python-client==1.10.0
 google-auth==1.14.3
