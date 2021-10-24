@@ -9,6 +9,9 @@ from libs.database.types import Base
 
 
 class Coupon(Base):
+    '''
+    TODO: 2021-01-02 쿠폰에 유효기간이 있다고 하네
+    '''
     __tablename__ = 'coupons'
     code = Column(CHAR(50), unique=True)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'), index=True) # 특정 유저에게만 지급할 때

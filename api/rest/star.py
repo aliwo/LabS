@@ -29,6 +29,9 @@ def rate_star():
     stars = [x.rate for x in Session().query(Star).filter((Star.to_user_id == request.json.get('user_id'))).all()]
     user = Session().query(User).filter((User.id == request.json.get('user_id'))).one()
     user.rate = sum(stars) / len(stars)
+    # 대규모 시스템이라면 매 번 rate 를 새로 조정하는 게 아니라, 배치를 돌릴 거다. star 는 star 대로 쌓이고,
+    # 배치를 돌릴 때만 rate 를 수정한다면 lock 을 걸 필요가 전혀 없다.
+    # 요기요는 별점평가 시스템이 배치로 돌아가나?
 
     Session().commit()
     return {'okay': True}, Status.HTTP_200_OK
