@@ -1,5 +1,7 @@
 type_group:
   get:
+    tags:
+      - type group
     description: 성격 유형을 가져옵니다.
     operationId: api.rest.type_group.get_type_group
     parameters:
@@ -23,6 +25,8 @@ type_group:
 
 type_groups:
   get:
+    tags:
+      - type group
     description: 성격 유형의 모든 리스트를 가져옵니다.
     operationId: api.rest.type_group.get_all_type_groups
 

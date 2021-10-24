@@ -1,5 +1,7 @@
 image:
   post:
+    tags:
+      - image
     security:
       - Authorization: []
     description: imgae 를 cloud storage 에 업로드 한 뒤, url 을 전달 받습니다.

@@ -1,5 +1,7 @@
 sms:
   post:
+    tags:
+      - sms
     security:
       - Authorization: []
     description: sms 인증을 요청합니다. 리턴받은 auth-key 를 인증할 때 전달해 주세요.
@@ -29,6 +31,8 @@ sms:
 
 sms_auth:
   post:
+    tags:
+      - sms
     security:
       - Authorization: []
     description: sms 인증하고, 핸드폰 번호를 등록합니다.
@@ -60,6 +64,8 @@ sms_auth:
 
 sms_auth_dry:
   post:
+    tags:
+      - sms
     security:
       - Authorization: []
     description: sms 인증만 하고, 핸드폰 번호는 입력하지 않습니다.

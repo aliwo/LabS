@@ -1,5 +1,7 @@
 mbti:
   get:
+    tags:
+      - mbti
     description: 특정 user의 mbti 결과를 가져옵니다.
     operationId: api.rest.question.get_mbti_result
     parameters:

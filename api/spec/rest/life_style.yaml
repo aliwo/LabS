@@ -1,5 +1,7 @@
 question:
   get:
+    tags:
+      - life style
     description: 질문 json 을 가져옵니다.
     operationId: api.rest.life_style.get_life_style_questions
     responses:
@@ -15,6 +17,8 @@ question:
 
 answer:
   get:
+    tags:
+      - life style
     security:
       - Authorization: []
     description: 자기가 한 대답을 조회합니다. 없으면 404
@@ -34,6 +38,8 @@ answer:
                     - {"id": 2, "answer": [1, 2, 3]}
 
   post:
+    tags:
+      - life style
     security:
       - Authorization: []
     description: 본인의 대답을 등록합니다.

@@ -1,5 +1,7 @@
 report:
   post:
+    tags:
+      - report
     security:
       - Authorization: []
     description: 신고를 때립니다.

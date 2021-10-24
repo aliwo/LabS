@@ -1,5 +1,7 @@
 notify_heart_received:
   post:
+    tags:
+      - notification
     security:
       - Authorization: []
     description: '하트를 보냈다는 푸쉬를 상대방에게 쏩니다. 다음과 같은 dict 가 body 에 들어있는 푸쉬 메세지를 발송합니다.
@@ -33,6 +35,8 @@ notify_heart_received:
 
 notify_heart_accepted:
   post:
+    tags:
+      - notification
     security:
       - Authorization: []
     description: '하트가 승낙되었다는 푸쉬를 상대방에게 쏩니다. 다음과 같은 dict 가 body 에 들어있는 푸쉬 메세지를 발송합니다.

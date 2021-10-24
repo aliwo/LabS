@@ -1,5 +1,7 @@
 soyeon:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 소연 매칭을 가져옵니다.
@@ -16,6 +18,8 @@ soyeon:
 
 prefer:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 선호 매칭을 가져옵니다. '당신이 선택한 인연'
@@ -32,6 +36,8 @@ prefer:
 
 old:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 지난 인연을 가져옵니다.
@@ -48,6 +54,8 @@ old:
 
 random:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 우연히 만난 인연을 가져옵니다.
@@ -62,6 +70,8 @@ random:
               items:
                 $ref: '../models/match.yaml#/match'
   post:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 랜덤 매칭을 생성합니다.
@@ -77,6 +87,8 @@ random:
 
 matched:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 매칭 성공한 매치를 가져옵니다.
@@ -93,6 +105,8 @@ matched:
 
 signup:
   post:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 처음 가입 했을 때
@@ -111,6 +125,8 @@ signup:
 
 hearted:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 하트를 주거나 받은 매치를 가져옵니다.
@@ -127,6 +143,8 @@ hearted:
 
 high_rate:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 상대방이 나에게 높은 점수를 준 매치를 가져옵니다.
@@ -143,6 +161,8 @@ high_rate:
 
 open:
   put:
+    tags:
+      - match
     security:
       - Authorization: []
     description: 매치를 개봉합니다. (사진 블러처리 해제)
@@ -171,6 +191,8 @@ open:
 
 match:
   get:
+    tags:
+      - match
     security:
       - Authorization: []
     description: id 로 매치를 조회합니다.

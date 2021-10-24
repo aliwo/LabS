@@ -1,5 +1,7 @@
 animal:
   get:
+    tags:
+      - animal
     description: 동물 정보를 조회합니다.
     operationId: api.rest.animal.get_animal
     parameters:
@@ -23,6 +25,8 @@ animal:
 
 mbti_indicator:
   get:
+    tags:
+      - mbti
     description: mbti indicator 를 조회합니다.
     operationId: api.rest.animal.get_mbti_indicator
     parameters:

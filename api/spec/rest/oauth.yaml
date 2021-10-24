@@ -1,5 +1,7 @@
 kakao:
   post:
+    tags:
+    - oauth
     description: ''
     operationId: api.rest.oauth.kakao.login_kakao
     requestBody:
@@ -37,6 +39,8 @@ kakao:
 
 google:
   post:
+    tags:
+    - oauth
     description: ''
     operationId: api.rest.oauth.google.login_google
     requestBody:
@@ -73,6 +77,8 @@ google:
                   description: 토큰의 유통기한입니다.
 naver:
   post:
+    tags:
+    - oauth
     description: ''
     operationId: api.rest.oauth.naver.login_naver
     requestBody:

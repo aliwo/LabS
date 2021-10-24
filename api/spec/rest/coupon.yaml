@@ -1,5 +1,7 @@
 coupon:
   get:
+    tags:
+      - coupon
     security:
       - Authorization: []
     description: 쿠폰을 해금 합니다.

@@ -82,11 +82,11 @@ paths:
   /animals/{animal_id}:
     $ref: 'rest/animal.yaml#/animal'
 
-  # indicator
+  # mbti
   /indicator/{synonym}:
     $ref: 'rest/animal.yaml#/mbti_indicator'
 
-  # Questions
+  # Mbti ... 이거 위에랑 합쳐야 할 듯
   /questions/mbti:
     $ref: 'rest/question.yaml#/mbti'
   /results/mbti/{user_id}:

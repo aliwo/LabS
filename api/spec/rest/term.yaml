@@ -1,5 +1,7 @@
 term:
   get:
+    tags:
+      - term
     description: 이용약관의 리스트를 요청합니다.
     operationId: api.rest.term.show_terms
     responses:
@@ -14,6 +16,8 @@ term:
                 $ref: '../models/term.yaml#/term'
 
   put:
+    tags:
+      - term
     security:
       - Authorization: []
     description: n 개의 이용약관에 동의합니다. term 의 id 를 request_body 에 넣어주세요.
@@ -47,6 +51,8 @@ term:
 
 privacy:
   get:
+    tags:
+      - term
     description: 개인정보 처리방침만 불러옵니다.
     operationId: api.rest.term.show_privacy_term
     responses:
